@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version-string": "1.0.0",
+  "builtin-baseline": "1b2372fdd420185c6f516541b81228c55061dca4",
+  "dependencies": [
+    {
+      "name": "sdl2",
+      "version>=": "2.30.1",
+      "$comment": "    find_package(SDL2 CONFIG REQUIRED)\n\n    target_link_libraries(main\n\n        PRIVATE\n\n        $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>\n\n        $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>\n\n    )\n"
+    },
+    {
+      "name": "sdl2-image",
+      "version>=": "2.8.2#1"
+    },
+    {
+      "name": "sdl2-ttf",
+      "version>=": "2.22.0#1"
+    },
+    {
+      "name": "sdl2-mixer",
+      "version>=": "2.8.0#3"
+    }
+  ]
+}
