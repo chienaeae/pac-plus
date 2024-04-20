@@ -11,66 +11,35 @@
 
 using namespace std;
 
+const int GAME_FRAME = 60;
+const int TICKS_PER_GAME_FRAME = 1000 / GAME_FRAME;
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 960;
 SDL_Window *gWindow = nullptr;
 SDL_Renderer *gRenderer = nullptr;
 TTF_Font *gFont = nullptr;
 
-bool init();
+class Game {
+public:
+    bool init();
 
-void close();
+    void run();
 
-int main(int argc, char *argv[])
-{
-    if (!init())
-    {
-        printf("Failed to initialize!\n");
-        close();
-        return EXIT_FAILURE;
-    }
-    SDL_Color textColor = {0, 0, 0, 255};
-    LTexture gFPSTextTexture;
-    std::stringstream timeText;
+    static void close();
+
+private:
+    void update();
+
+    void eventUpdate(SDL_Event* e);
+
+    void renderUpdate();
+
 
     FPS fps;
-    fps.start();
+    LTimer timer;
+};
 
-    SDL_Event e;
-    bool quit = false;
-    while (!quit)
-    {
-        while (SDL_PollEvent(&e))
-        {
-            if (e.type == SDL_QUIT)
-            {
-                quit = true;
-            }
-        }
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
-
-        // FPS handle every frames
-        fps.handleFrame();
-        // Prepare FPS text to be rendered
-        timeText.str("");
-        timeText << "FPS: " << fps.getFPS();
-        if (!gFPSTextTexture.loadFromRenderedText(timeText.str(), textColor))
-        {
-            printf("Unable to render FPS texture!\n");
-        }
-        // Render textures
-        gFPSTextTexture.render(SCREEN_WIDTH - gFPSTextTexture.getWidth() - 20, 20);
-
-        SDL_RenderPresent(gRenderer);
-        fps.cap();
-    }
-    close();
-    return EXIT_SUCCESS;
-}
-
-bool init()
-{
+bool Game::init() {
     bool success = true;
 
     // Init SDL SubSystems (Video)
@@ -102,10 +71,14 @@ bool init()
         return false;
     }
     gFont = TTF_OpenFont("assets/font/lazy.ttf", 28);
+    if(gFont == nullptr){
+        printf("Global Font could not be created! SDL_Error: %s\n", SDL_GetError());
+        return false;
+    }
 
     // Init SDL Window
     gWindow = SDL_CreateWindow(
-        "Example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+            "Example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (gWindow == nullptr)
     {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -123,8 +96,40 @@ bool init()
     return success;
 }
 
-void close()
-{
+void Game::run() {
+    bool quit = false;
+    Uint64 previous = SDL_GetTicks64();
+    Uint64 lag = 0;
+    fps.init();
+    while(!quit){
+        Uint64 current = SDL_GetTicks64();
+        Uint64 elapsed = current - previous;
+        previous = current;
+        lag += elapsed;
+
+        // Event Loop
+        SDL_Event e;
+        while (SDL_PollEvent(&e))
+        {
+            if (e.type == SDL_QUIT)
+            {
+                quit = true;
+            }
+            eventUpdate(&e);
+        }
+
+        // Logic Loop
+        while (lag >= TICKS_PER_GAME_FRAME){
+            update();
+            lag -= TICKS_PER_GAME_FRAME;
+        }
+
+        // Render Loop
+        renderUpdate();
+    }
+}
+
+void Game::close() {
     SDL_DestroyRenderer(gRenderer);
     SDL_DestroyWindow(gWindow);
     gRenderer = nullptr;
@@ -133,4 +138,37 @@ void close()
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
+}
+
+void Game::update(){
+
+}
+
+void Game::eventUpdate(SDL_Event* e){
+
+}
+
+void Game::renderUpdate(){
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
+
+    // FPS handle each render update
+    fps.update();
+
+    SDL_RenderPresent(gRenderer);
+}
+
+int main(int argc, char *argv[])
+{
+    Game game;
+    if (!game.init())
+    {
+        printf("Failed to initialize!\n");
+        game.close();
+        return EXIT_FAILURE;
+    }
+
+    game.run();
+    game.close();
+    return EXIT_SUCCESS;
 }
