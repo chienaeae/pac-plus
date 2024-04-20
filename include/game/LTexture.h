@@ -24,7 +24,7 @@ public:
 
 #if defined(SDL_TTF_MAJOR_VERSION)
 
-    bool loadFromRenderedText(std::string textureText, SDL_Color textColor);
+    bool loadFromRenderedText(std::string text, SDL_Color color);
 
 #endif
 

@@ -33,7 +33,7 @@ bool LTexture::loadFromFile(std::string path) {
         SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
         newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
         if (newTexture == nullptr) {
-            printf("Unable to create textrue from %s!", path.c_str());
+            printf("Unable to create texture from %s!", path.c_str());
         } else {
             mWidth = loadedSurface->w;
             mHeight = loadedSurface->h;
@@ -45,18 +45,22 @@ bool LTexture::loadFromFile(std::string path) {
     return mTexture != nullptr;
 }
 
-bool LTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor) {
+bool LTexture::loadFromRenderedText(const std::string text, const SDL_Color color) {
     free();
+    if(gFont == nullptr){
+        printf("gFont is NULL pointer! SDL_Error: %s\n", SDL_GetError());
+        return false;
+    }
 
-    SDL_Surface *textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
+    SDL_Surface *textSurface = TTF_RenderText_Solid(gFont, text.c_str(), color);
     if (textSurface == nullptr) {
-        printf("\n");
+        printf("SDL_Surface could not initialized! SDL_Error: %s\n", SDL_GetError());
         return false;
     }
 
     mTexture = SDL_CreateTextureFromSurface(gRenderer, textSurface);
     if (mTexture == nullptr) {
-        printf("\n");
+        printf("SDL_Texture could not initialized! SDL_Error: %s\n", SDL_GetError());
         return false;
     }
     mWidth = textSurface->w;
