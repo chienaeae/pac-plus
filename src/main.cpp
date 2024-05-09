@@ -8,6 +8,8 @@
 #include "game/Core.h"
 #include "game/FPS.h"
 #include "game/LTexture.h"
+#include "game/GameObject.h"
+#include "Square.h"
 
 using namespace std;
 
@@ -18,6 +20,9 @@ const int SCREEN_HEIGHT = 960;
 SDL_Window *gWindow = nullptr;
 SDL_Renderer *gRenderer = nullptr;
 TTF_Font *gFont = nullptr;
+
+LTexture squareTexture;
+SDL_Rect squareClip;
 
 class Game {
 public:
@@ -34,9 +39,9 @@ private:
 
     void renderUpdate();
 
+    GameObject square;
 
     FPS fps;
-    LTimer timer;
 };
 
 bool Game::init() {
@@ -93,6 +98,17 @@ bool Game::init() {
         return false;
     }
 
+    // Init assets
+    squareTexture.loadFromFile("assets/square.png");
+    squareTexture.setColor(0, 0, 255);
+    squareClip.x = 0;
+    squareClip.y = 0;
+    squareClip.w = 300;
+    squareClip.h = 300;
+
+    // Init game objects
+    square.init(0,0,0, &squareTexture, &squareClip);
+
     return success;
 }
 
@@ -141,11 +157,11 @@ void Game::close() {
 }
 
 void Game::update(){
-
+    square.update();
 }
 
 void Game::eventUpdate(SDL_Event* e){
-
+    square.eventUpdate(e);
 }
 
 void Game::renderUpdate(){
@@ -154,6 +170,9 @@ void Game::renderUpdate(){
 
     // FPS handle each render update
     fps.update();
+
+    // test object handle each render update
+    square.render();
 
     SDL_RenderPresent(gRenderer);
 }
@@ -171,4 +190,76 @@ int main(int argc, char *argv[])
     game.run();
     game.close();
     return EXIT_SUCCESS;
+}
+
+
+void GameObject::init(int x, int y, int a, LTexture *texture, SDL_Rect *clip){
+    this->texture = texture;
+    this->clip = clip;
+
+    this->x = x;
+    this->y = y;
+    this->a = a;
+
+    this->velX = 0;
+    this->velY = 0;
+    this->velA = 0;
+}
+
+void GameObject::render() {
+    this->texture->render(this->x, this->y, clip, this->a);
+}
+
+void GameObject::update() {
+    this->x += this->velX;
+    this->y += this->velY;
+    this->a += this->velA;
+
+}
+
+void GameObject::eventUpdate(SDL_Event* e) {
+    if (e->type == SDL_KEYDOWN) {
+        switch (e->key.keysym.sym) {
+            case SDLK_RIGHT:
+                velX = 3;
+                break;
+            case SDLK_LEFT:
+                velX = -3;
+                break;
+            case SDLK_UP:
+                velY = -3;
+                break;
+            case SDLK_DOWN:
+                velY = 3;
+                break;
+            case SDLK_z:
+                velA = -3;
+                break;
+            case SDLK_x:
+                velA = 3;
+                break;
+        }
+    }
+    else if (e->type == SDL_KEYUP) {
+        switch (e->key.keysym.sym) {
+            case SDLK_RIGHT:
+                velX = 0;
+                break;
+            case SDLK_LEFT:
+                velX = 0;
+                break;
+            case SDLK_UP:
+                velY = 0;
+                break;
+            case SDLK_DOWN:
+                velY = 0;
+                break;
+            case SDLK_z:
+                velA = 0;
+                break;
+            case SDLK_x:
+                velA = 0;
+                break;
+        }
+    }
 }
