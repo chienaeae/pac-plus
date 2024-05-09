@@ -10,7 +10,7 @@ find_package(SDL2_mixer CONFIG REQUIRED)
 
 include_directories(include)
 
-add_executable(main src/main.cpp src/FPS.cpp src/LTexture.cpp src/LTimer.cpp)
+add_executable(main src/main.cpp src/FPS.cpp src/LTexture.cpp src/LTimer.cpp src/Square.cpp)
 
 target_compile_features(main PRIVATE cxx_std_20)
 
