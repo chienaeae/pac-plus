@@ -3,18 +3,21 @@
 //
 
 #include "game/FPS.h"
+#include "game/Core.h"
 
 FPS::FPS() {
     mCountedFrames = 0;
     mCountedFramesInSecond = 0;
+
+    textColor = {0, 0, 0, 255};
 }
 
-void FPS::start() {
+void FPS::init() {
     mFPSTimer.start();
 }
 
-void FPS::handleFrame() {
-    mCapTimer.start();
+void FPS::update() {
+    // update frame per second
     mCountedFrames++;
     Uint64 ticks = mFPSTimer.getTicks();
     if (ticks >= 1000) {
@@ -22,16 +25,15 @@ void FPS::handleFrame() {
         mCountedFramesInSecond = mCountedFrames;
         mCountedFrames = 0;
     }
-}
 
-void FPS::cap() {
-    int frameTicks = mCapTimer.getTicks();
-    if (frameTicks < SCREEN_TICKS_PER_FRAME) {
-        //Wait remaining time
-        SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
+    // Render
+    // 1. Prepare FPS text to be rendered
+    timeText.str("");
+    timeText << "FPS: " << mCountedFramesInSecond;
+    if (!textTexture.loadFromRenderedText(timeText.str(), textColor))
+    {
+        printf("Unable to render FPS texture!\n");
     }
-}
-
-int FPS::getFPS() {
-    return mCountedFramesInSecond;
+    // 2. Render textures
+    textTexture.render(SCREEN_WIDTH - textTexture.getWidth() - 20, 20);
 }

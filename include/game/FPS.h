@@ -6,27 +6,25 @@
 #define MAIN_FPS_H
 
 #include "LTimer.h"
+#include "LTexture.h"
 
-const int SCREEN_FPS = 60;
-const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
 class FPS {
 public:
     FPS();
 
-    void start();
+    void init();
 
-    void handleFrame();
-
-    void cap();
-
-    int getFPS();
+    void update();
 
 private:
     LTimer mFPSTimer;
-    LTimer mCapTimer;
     int mCountedFrames;
     int mCountedFramesInSecond;
+
+    SDL_Color textColor;
+    LTexture textTexture;
+    std::stringstream timeText;
 };
 
 #endif //MAIN_FPS_H

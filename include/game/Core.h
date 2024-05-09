@@ -12,7 +12,8 @@
 #include <string>
 #include <sstream>
 
-
+extern const int GAME_FRAME;
+extern const int TICKS_PER_GAME_FRAME;
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
 extern SDL_Window *gWindow;
