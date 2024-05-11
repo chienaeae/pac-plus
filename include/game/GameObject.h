@@ -14,33 +14,26 @@ protected:
     int velX;
     int velY;
     int velA;
-    int x;
-    int y;
-    int a;
+    int posX;
+    int posY;
+    int angle;
 
     SDL_Rect *clip;
 
     LTexture *texture;
 
 public:
-    GameObject() {
-        velX = 0;
-        velY = 0;
-        velA = 0;
-        x = 0;
-        y = 0;
-        a = 0;
-        clip = nullptr;
-        texture = nullptr;
-    }
+    GameObject() : velX(), velY(), velA(), posX(), posY(), angle(), clip(nullptr), texture(nullptr){}
 
-    virtual void init(int x, int y, int a, LTexture *t, SDL_Rect *clip);
+    virtual void init(int x, int y, int a, LTexture *t, SDL_Rect *c) {};
 
-    virtual void render();
+    virtual void render() {};
 
-    virtual void update();
+    virtual void update(float deltaTime) {};
 
-    virtual void eventUpdate(SDL_Event* e);
+    virtual void lateUpdate(float deltaTime) {};
+
+    virtual void eventUpdate(SDL_Event* e) {};
 
 };
 

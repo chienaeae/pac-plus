@@ -17,7 +17,7 @@ public :
 
     void render() override;
 
-    void update() override;
+    void update(float deltaTime) override;
 
     void eventUpdate(SDL_Event* e) override;
 };

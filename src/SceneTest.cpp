@@ -28,10 +28,11 @@ void SceneTest::SetSwitchToScene(unsigned int id) {
     switchToState = id;
 }
 
-void SceneTest::Update() {
-//    currentSeconds += deltaTime;
-    square.update();
+void SceneTest::Update(float deltaTime)  {
+    currentSeconds += deltaTime;
+    square.update(deltaTime);
 }
+
 
 void SceneTest::EventUpdate(SDL_Event *e) {
     square.eventUpdate(e);

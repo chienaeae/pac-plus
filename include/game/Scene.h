@@ -27,7 +27,9 @@ public:
 
     virtual void EventUpdate(SDL_Event *e){};
 
-    virtual void Update() {};
+    virtual void Update(float deltaTime) {};
+
+    virtual void LateUpdate(float deltaTime) {};
 
     virtual void RenderUpdate() {};
 };

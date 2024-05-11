@@ -117,11 +117,11 @@ void Game::Close() {
 }
 
 void Game::update(){
-    sceneStateMachine.Update();
+    sceneStateMachine.Update(deltaTime);
 }
 
 void Game::lateUpdate(){
-
+    sceneStateMachine.LateUpdate(deltaTime);
 }
 
 void Game::eventUpdate(){

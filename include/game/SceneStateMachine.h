@@ -17,7 +17,9 @@ public:
 
     void EventUpdate(SDL_Event *e);
 
-    void Update();
+    void Update(float deltaTime);
+
+    void LateUpdate(float deltaTime);
 
     void RenderUpdate();
 

@@ -9,9 +9,9 @@ void Square::init(int x, int y, int a, LTexture *texture, SDL_Rect *clip){
     this->texture = texture;
     this->clip = clip;
 
-    this->x = x;
-    this->y = y;
-    this->a = a;
+    this->posX = x;
+    this->posY = y;
+    this->angle = a;
 
     this->velX = 0;
     this->velY = 0;
@@ -19,13 +19,13 @@ void Square::init(int x, int y, int a, LTexture *texture, SDL_Rect *clip){
 }
 
 void Square::render() {
-    this->texture->render(this->x, this->y, clip, this->a);
+    this->texture->render(this->posX, this->posY, clip, this->angle);
 }
 
-void Square::update() {
-    this->x += this->velX;
-    this->y += this->velY;
-    this->a += this->velA;
+void Square::update(float deltaTime) {
+    this->posX += this->velX;
+    this->posY += this->velY;
+    this->angle += this->velA;
 
 }
 

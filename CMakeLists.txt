@@ -13,8 +13,7 @@ include_directories(include)
 add_executable(main src/main.cpp src/FPS.cpp src/LTexture.cpp src/LTimer.cpp src/Square.cpp
         src/SceneStateMachine.cpp
         src/SceneTest.cpp
-        src/Game.cpp
-        src/GameObject.cpp)
+        src/Game.cpp)
 
 target_compile_features(main PRIVATE cxx_std_20)
 
