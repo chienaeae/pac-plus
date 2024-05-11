@@ -28,8 +28,15 @@ public:
     void Close();
 
 private:
+    // update: This is where most of the game logic will go;
+    // including: movement, AI, and animation updates
     void update();
 
+    // lateUpdate: Any logic that relies on data calculated
+    // in the Update method will go here, for example: you
+    // could place collision logic here that checks for
+    // collisions once every entities position has been
+    // updated in the Update method
     void lateUpdate();
 
     void eventUpdate();
@@ -41,8 +48,10 @@ private:
     SceneStateMachine sceneStateMachine;
 
     LTimer clock;
-    // deltaTime records the last game loop update as seconds
+
+    // deltaTime: It records the last game loop update as seconds
     float deltaTime;
+
     bool quit;
 };
 
