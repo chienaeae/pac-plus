@@ -10,13 +10,17 @@
 #include "game/LTexture.h"
 #include "game/GameObject.h"
 #include "game/SceneStateMachine.h"
+#include "game/LTimer.h"
 #include "SceneTest.h"
 #include "Square.h"
 
 using namespace std;
 
 const int GAME_FRAME = 60;
-const int TICKS_PER_GAME_FRAME = 1000 / GAME_FRAME;
+
+const int SECOND = 1000;
+const int TICKS_PER_GAME_FRAME = SECOND / GAME_FRAME;
+
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 960;
 SDL_Window *gWindow = nullptr;
@@ -42,6 +46,10 @@ private:
     FPS fps;
 
     SceneStateMachine sceneStateMachine;
+
+    LTimer clock;
+    // deltaTime records the last game loop update as seconds
+    float deltaTime;
 };
 
 bool Game::init() {
@@ -104,18 +112,22 @@ bool Game::init() {
 
     sceneStateMachine.SwitchTo(testSceneID);
 
+    clock.start();
+
     return success;
 }
 
 void Game::run() {
     bool quit = false;
-    Uint64 previous = SDL_GetTicks64();
+    Uint64 previous = clock.getTicks();
     Uint64 lag = 0;
     fps.init();
+
+    float time;
     while(!quit){
-        Uint64 current = SDL_GetTicks64();
+        Uint64 current = clock.getTicks();
         Uint64 elapsed = current - previous;
-        previous = current;
+
         lag += elapsed;
 
         // Event Loop
@@ -131,13 +143,15 @@ void Game::run() {
 
         // Logic Loop
         while (lag >= TICKS_PER_GAME_FRAME){
-            printf("%d\n", elapsed);
             update();
             lag -= TICKS_PER_GAME_FRAME;
         }
 
         // Render Loop
         renderUpdate();
+
+        deltaTime = (float)(current - previous) / SECOND;
+        previous = current;
     }
 }
 
@@ -172,6 +186,7 @@ void Game::renderUpdate(){
 
     SDL_RenderPresent(gRenderer);
 }
+
 
 int main(int argc, char *argv[])
 {
