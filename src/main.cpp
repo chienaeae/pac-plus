@@ -9,6 +9,8 @@
 #include "game/FPS.h"
 #include "game/LTexture.h"
 #include "game/GameObject.h"
+#include "game/SceneStateMachine.h"
+#include "SceneTest.h"
 #include "Square.h"
 
 using namespace std;
@@ -42,6 +44,8 @@ private:
     Square square;
 
     FPS fps;
+
+    SceneStateMachine sceneStateMachine;
 };
 
 bool Game::init() {
@@ -98,6 +102,12 @@ bool Game::init() {
         return false;
     }
 
+    std::shared_ptr<SceneTest> testScene = std::make_shared<SceneTest>(sceneStateMachine);
+
+    unsigned int testSceneID = sceneStateMachine.Add(testScene);
+
+    sceneStateMachine.SwitchTo(testSceneID);
+
     // Init assets
     squareTexture.loadFromFile("assets/square.png");
     squareTexture.setColor(0, 0, 255);
@@ -136,6 +146,7 @@ void Game::run() {
 
         // Logic Loop
         while (lag >= TICKS_PER_GAME_FRAME){
+            printf("%d\n", elapsed);
             update();
             lag -= TICKS_PER_GAME_FRAME;
         }
@@ -157,10 +168,12 @@ void Game::close() {
 }
 
 void Game::update(){
+    sceneStateMachine.Update();
     square.update();
 }
 
 void Game::eventUpdate(SDL_Event* e){
+    sceneStateMachine.EventUpdate(e);
     square.eventUpdate(e);
 }
 
@@ -172,6 +185,7 @@ void Game::renderUpdate(){
     fps.update();
 
     // test object handle each render update
+    sceneStateMachine.RenderUpdate();
     square.render();
 
     SDL_RenderPresent(gRenderer);
