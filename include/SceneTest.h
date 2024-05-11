@@ -17,7 +17,7 @@ public :
     void OnDestroy() override;
     void OnActivate() override;
 
-    void Update() override;
+    void Update(float deltaTime)  override;
     void EventUpdate(SDL_Event *e) override;
     void RenderUpdate() override;
 

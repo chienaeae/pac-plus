@@ -13,9 +13,15 @@ void SceneStateMachine::EventUpdate(SDL_Event *e) {
     }
 }
 
-void SceneStateMachine::Update() {
+void SceneStateMachine::Update(float deltaTime) {
     if(currentScene) {
-        currentScene->Update();
+        currentScene->Update(deltaTime);
+    }
+}
+
+void SceneStateMachine::LateUpdate(float deltaTime) {
+    if(currentScene) {
+        currentScene->Update(deltaTime);
     }
 }
 
