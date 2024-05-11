@@ -9,6 +9,8 @@
 #include "game/FPS.h"
 #include "game/LTexture.h"
 #include "game/GameObject.h"
+#include "game/SceneStateMachine.h"
+#include "SceneTest.h"
 #include "Square.h"
 
 using namespace std;
@@ -21,8 +23,6 @@ SDL_Window *gWindow = nullptr;
 SDL_Renderer *gRenderer = nullptr;
 TTF_Font *gFont = nullptr;
 
-LTexture squareTexture;
-SDL_Rect squareClip;
 
 class Game {
 public:
@@ -39,9 +39,9 @@ private:
 
     void renderUpdate();
 
-    Square square;
-
     FPS fps;
+
+    SceneStateMachine sceneStateMachine;
 };
 
 bool Game::init() {
@@ -98,16 +98,11 @@ bool Game::init() {
         return false;
     }
 
-    // Init assets
-    squareTexture.loadFromFile("assets/square.png");
-    squareTexture.setColor(0, 0, 255);
-    squareClip.x = 0;
-    squareClip.y = 0;
-    squareClip.w = 300;
-    squareClip.h = 300;
+    std::shared_ptr<SceneTest> testScene = std::make_shared<SceneTest>(sceneStateMachine);
 
-    // Init game objects
-    square.init(0,0,0, &squareTexture, &squareClip);
+    unsigned int testSceneID = sceneStateMachine.Add(testScene);
+
+    sceneStateMachine.SwitchTo(testSceneID);
 
     return success;
 }
@@ -136,6 +131,7 @@ void Game::run() {
 
         // Logic Loop
         while (lag >= TICKS_PER_GAME_FRAME){
+            printf("%d\n", elapsed);
             update();
             lag -= TICKS_PER_GAME_FRAME;
         }
@@ -157,11 +153,11 @@ void Game::close() {
 }
 
 void Game::update(){
-    square.update();
+    sceneStateMachine.Update();
 }
 
 void Game::eventUpdate(SDL_Event* e){
-    square.eventUpdate(e);
+    sceneStateMachine.EventUpdate(e);
 }
 
 void Game::renderUpdate(){
@@ -172,7 +168,7 @@ void Game::renderUpdate(){
     fps.update();
 
     // test object handle each render update
-    square.render();
+    sceneStateMachine.RenderUpdate();
 
     SDL_RenderPresent(gRenderer);
 }
