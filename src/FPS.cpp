@@ -2,8 +2,9 @@
 // Created by mac on 2024/4/10.
 //
 
-#include "game/FPS.h"
 #include "game/Core.h"
+#include "game/Game.h"
+#include "game/FPS.h"
 
 FPS::FPS() {
     mCountedFrames = 0;

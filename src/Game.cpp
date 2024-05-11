@@ -12,7 +12,6 @@
 #include "game/SceneStateMachine.h"
 #include "SceneTest.h"
 
-
 SDL_Window *gWindow = nullptr;
 SDL_Renderer *gRenderer = nullptr;
 TTF_Font *gFont = nullptr;
@@ -83,38 +82,26 @@ bool Game::Init() {
 }
 
 void Game::Run() {
-    bool quit = false;
-    Uint64 previous = clock.getTicks();
+    quit = false;
+    Uint64 current = clock.getTicks();
+    Uint64 previous = current;
     Uint64 lag = 0;
     fps.init();
 
     while(!quit){
-        Uint64 current = clock.getTicks();
+        current = clock.getTicks();
         Uint64 elapsed = current - previous;
+        deltaTime = (float)elapsed / MILLISECOND;
 
         lag += elapsed;
-
-        // Event Loop
-        SDL_Event e;
-        while (SDL_PollEvent(&e))
-        {
-            if (e.type == SDL_QUIT)
-            {
-                quit = true;
-            }
-            eventUpdate(&e);
-        }
-
-        // Logic Loop
+        eventUpdate();
         while (lag >= TICKS_PER_GAME_FRAME){
             update();
+            lateUpdate();
             lag -= TICKS_PER_GAME_FRAME;
         }
-
-        // Render Loop
         renderUpdate();
 
-        deltaTime = (float)(current - previous) / SECOND;
         previous = current;
     }
 }
@@ -124,7 +111,6 @@ void Game::Close() {
     SDL_DestroyWindow(gWindow);
     gRenderer = nullptr;
     gWindow = nullptr;
-
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
@@ -134,8 +120,20 @@ void Game::update(){
     sceneStateMachine.Update();
 }
 
-void Game::eventUpdate(SDL_Event* e){
-    sceneStateMachine.EventUpdate(e);
+void Game::lateUpdate(){
+
+}
+
+void Game::eventUpdate(){
+    SDL_Event e;
+    while (SDL_PollEvent(&e))
+    {
+        if (e.type == SDL_QUIT)
+        {
+            quit = true;
+        }
+        sceneStateMachine.EventUpdate(&e);
+    }
 }
 
 void Game::renderUpdate(){

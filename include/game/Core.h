@@ -13,8 +13,9 @@
 #include <sstream>
 
 
-const int SCREEN_WIDTH = 1280;
-const int SCREEN_HEIGHT = 960;
+
+const int MILLISECOND = 1000;
+const int SECOND = 1;
 
 extern SDL_Window *gWindow;
 extern SDL_Renderer *gRenderer;

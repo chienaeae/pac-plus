@@ -7,16 +7,17 @@
 
 #include <SDL.h>
 
+#include "game/Core.h"
 #include "game/FPS.h"
 #include "game/SceneStateMachine.h"
 #include "game/LTimer.h"
 
 
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 960;
+
 const int GAME_FRAME = 60;
-
-const int SECOND = 1000;
-const int TICKS_PER_GAME_FRAME = SECOND / GAME_FRAME;
-
+const int TICKS_PER_GAME_FRAME = SECOND * MILLISECOND / GAME_FRAME;
 
 class Game {
 public:
@@ -29,7 +30,9 @@ public:
 private:
     void update();
 
-    void eventUpdate(SDL_Event* e);
+    void lateUpdate();
+
+    void eventUpdate();
 
     void renderUpdate();
 
@@ -40,6 +43,7 @@ private:
     LTimer clock;
     // deltaTime records the last game loop update as seconds
     float deltaTime;
+    bool quit;
 };
 
 #endif //MAIN_GAME_H
