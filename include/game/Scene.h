@@ -5,6 +5,8 @@
 #ifndef MAIN_SCENE_H
 #define MAIN_SCENE_H
 
+#include "SDL.h"
+
 class Scene {
 
 public:
@@ -23,7 +25,7 @@ public:
     // Can be called many times in a typical game cycle.
     virtual void OnDeactivate() {};
 
-    virtual void EventUpdate(){};
+    virtual void EventUpdate(SDL_Event *e){};
 
     virtual void Update() {};
 

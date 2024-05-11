@@ -23,8 +23,6 @@ SDL_Window *gWindow = nullptr;
 SDL_Renderer *gRenderer = nullptr;
 TTF_Font *gFont = nullptr;
 
-LTexture squareTexture;
-SDL_Rect squareClip;
 
 class Game {
 public:
@@ -40,8 +38,6 @@ private:
     void eventUpdate(SDL_Event* e);
 
     void renderUpdate();
-
-    Square square;
 
     FPS fps;
 
@@ -108,17 +104,6 @@ bool Game::init() {
 
     sceneStateMachine.SwitchTo(testSceneID);
 
-    // Init assets
-    squareTexture.loadFromFile("assets/square.png");
-    squareTexture.setColor(0, 0, 255);
-    squareClip.x = 0;
-    squareClip.y = 0;
-    squareClip.w = 300;
-    squareClip.h = 300;
-
-    // Init game objects
-    square.init(0,0,0, &squareTexture, &squareClip);
-
     return success;
 }
 
@@ -169,12 +154,10 @@ void Game::close() {
 
 void Game::update(){
     sceneStateMachine.Update();
-    square.update();
 }
 
 void Game::eventUpdate(SDL_Event* e){
     sceneStateMachine.EventUpdate(e);
-    square.eventUpdate(e);
 }
 
 void Game::renderUpdate(){
@@ -186,7 +169,6 @@ void Game::renderUpdate(){
 
     // test object handle each render update
     sceneStateMachine.RenderUpdate();
-    square.render();
 
     SDL_RenderPresent(gRenderer);
 }

@@ -9,7 +9,7 @@ SceneStateMachine::SceneStateMachine() :scenes(), currentScene(nullptr), inserte
 
 void SceneStateMachine::EventUpdate(SDL_Event *e) {
     if(currentScene){
-        currentScene->EventUpdate();
+        currentScene->EventUpdate(e);
     }
 }
 
