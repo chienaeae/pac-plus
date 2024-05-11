@@ -12,10 +12,10 @@
 #include <string>
 #include <sstream>
 
-extern const int GAME_FRAME;
-extern const int TICKS_PER_GAME_FRAME;
-extern const int SCREEN_WIDTH;
-extern const int SCREEN_HEIGHT;
+
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 960;
+
 extern SDL_Window *gWindow;
 extern SDL_Renderer *gRenderer;
 extern TTF_Font *gFont;
