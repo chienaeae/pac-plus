@@ -13,36 +13,38 @@
 #include <string>
 #include <sstream>
 
+#include "game/Resource.h"
 
-class LTexture {
+
+class LTexture : public Resource{
 public:
     LTexture();
 
     ~LTexture();
 
-    bool loadFromFile(std::string path);
+    bool LoadFromFile(std::string path) override;
 
 #if defined(SDL_TTF_MAJOR_VERSION)
 
-    bool loadFromRenderedText(std::string text, SDL_Color color);
+    bool LoadFromRenderedText(std::string text, SDL_Color color);
 
 #endif
 
-    void free();
+    void Free() override;
 
-    void setColor(Uint8 red, Uint8 green, Uint8 blue);
+    void SetColor(Uint8 red, Uint8 green, Uint8 blue);
 
-    void setBlendMode(SDL_BlendMode blending);
+    void SetBlendMode(SDL_BlendMode blending);
 
-    void setAlpha(Uint8 alpha);
+    void SetAlpha(Uint8 alpha);
 
-    void render(int x, int y, SDL_Rect *clip = nullptr, double angle = 0.0,
+    void Render(int x, int y, SDL_Rect *clip = nullptr, double angle = 0.0,
                 float scaleX = 1.0f, float scaleY = 1.0f, SDL_Point *center = nullptr,
                 SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-    int getWidth() const;
+    int GetWidth() const;
 
-    int getHeight() const;
+    int GetHeight() const;
 
 private:
     SDL_Texture *mTexture;
