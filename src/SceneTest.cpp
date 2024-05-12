@@ -7,15 +7,20 @@
 #include "game/ComponentKeyboardMovement.h"
 #include "SceneTest.h"
 
-SceneTest::SceneTest(SceneStateMachine &sceneStateMachine) : sceneStateMachine(sceneStateMachine) {}
+SceneTest::SceneTest(SceneStateMachine &sceneStateMachine,
+                     ResourceAllocator<LTexture>& textureAllocator)
+                     : sceneStateMachine(sceneStateMachine),
+                       textureAllocator(textureAllocator) {}
 
 void SceneTest::OnCreate() {
     square = std::make_shared<Object>();
 
     auto sprite = square->AddComponent<ComponentSprite>();
+    sprite->SetTextureAllocator(&textureAllocator);
     sprite->Load("assets/square.png");
     sprite->GetSprite().setScale(5.0f, 5.0f);
-    sprite->GetTexture().setColor(0, 140, 255);
+    sprite->GetTexture()->SetColor(0, 140, 255);
+
     auto movement = square->AddComponent<ComponentKeyboardMovement>();
 }
 

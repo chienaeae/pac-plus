@@ -5,19 +5,38 @@
 #include "game/Object.h"
 #include "game/ComponentSprite.h"
 
-ComponentSprite::ComponentSprite(Object* owner): Component(owner) {}
+ComponentSprite::ComponentSprite(Object* owner):
+    Component(owner), textureID(-1), allocator(nullptr) {}
+
+
+void ComponentSprite::SetTextureAllocator(ResourceAllocator<LTexture>* a){
+    this->allocator = a;
+}
 
 Sprite& ComponentSprite::GetSprite() {
     return sprite;
 }
 
-LTexture& ComponentSprite::GetTexture() {
-    return texture;
+std::shared_ptr<LTexture> ComponentSprite::GetTexture() {
+    return allocator->Get(textureID);
+}
+
+void ComponentSprite::Load(int id) {
+    if(id >= 0){
+        std::shared_ptr<LTexture> texture = allocator->Get(id);
+        sprite.setTexture(*texture, true);
+    }
 }
 
 void ComponentSprite::Load(const std::string &filePath) {
-    texture.loadFromFile(filePath);
-    sprite.setTexture(texture, true);
+    if(allocator){
+        int id = allocator->Add(filePath);
+
+        if(id >= 0){
+            Load(id);
+            textureID = id;
+        }
+    }
 }
 
 void ComponentSprite::RenderUpdate() {

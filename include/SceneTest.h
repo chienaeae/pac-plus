@@ -8,11 +8,14 @@
 #include "game/Scene.h"
 #include "game/SceneStateMachine.h"
 #include "game/Object.h"
+#include "game/ResourceAllocator.h"
+
 #include "Square.h"
 
 class SceneTest: public Scene {
 public :
-    SceneTest(SceneStateMachine& sceneStateMachine);
+    SceneTest(SceneStateMachine& sceneStateMachine,
+              ResourceAllocator<LTexture>& textureAllocator);
 
     void OnCreate() override;
     void OnDestroy() override;
@@ -27,6 +30,8 @@ public :
 
 private:
     SceneStateMachine& sceneStateMachine;
+
+    ResourceAllocator<LTexture>& textureAllocator;
 
     std::shared_ptr<Object> square;
 
