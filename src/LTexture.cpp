@@ -70,23 +70,23 @@ bool LTexture::loadFromRenderedText(const std::string text, const SDL_Color colo
     return true;
 }
 
-void LTexture::render(int x, int y, SDL_Rect *clip,
-                      double angle, SDL_Point *center, SDL_RendererFlip flip) {
+void LTexture::render(int x, int y, SDL_Rect *clip, double angle, float scaleX, float scaleY,
+                      SDL_Point *center, SDL_RendererFlip flip) {
     SDL_Rect renderQuad = {x, y, mWidth, mHeight};
 
     if (clip != nullptr) {
-        renderQuad.w = clip->w;
-        renderQuad.h = clip->h;
+        renderQuad.w = clip->w * scaleX;
+        renderQuad.h = clip->h * scaleY;
     }
 
     SDL_RenderCopyEx(gRenderer, this->mTexture, clip, &renderQuad, angle, center, flip);
 }
 
-int LTexture::getWidth() {
+int LTexture::getWidth() const{
     return mWidth;
 }
 
-int LTexture::getHeight() {
+int LTexture::getHeight() const{
     return mHeight;
 }
 

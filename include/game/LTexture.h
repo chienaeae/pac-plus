@@ -36,12 +36,13 @@ public:
 
     void setAlpha(Uint8 alpha);
 
-    void render(int x, int y, SDL_Rect *clip = nullptr,
-                double angle = 0.0, SDL_Point *center = nullptr, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void render(int x, int y, SDL_Rect *clip = nullptr, double angle = 0.0,
+                float scaleX = 1.0f, float scaleY = 1.0f, SDL_Point *center = nullptr,
+                SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-    int getWidth();
+    int getWidth() const;
 
-    int getHeight();
+    int getHeight() const;
 
 private:
     SDL_Texture *mTexture;
