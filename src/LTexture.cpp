@@ -47,12 +47,12 @@ bool LTexture::loadFromFile(std::string path) {
 
 bool LTexture::loadFromRenderedText(const std::string text, const SDL_Color color) {
     free();
-    if(gFont == nullptr){
+    if(!gFont.isOn()){
         printf("gFont is NULL pointer! SDL_Error: %s\n", SDL_GetError());
         return false;
     }
 
-    SDL_Surface *textSurface = TTF_RenderText_Solid(gFont, text.c_str(), color);
+    SDL_Surface *textSurface = gFont.RenderTextSolid(text.c_str(), color);
     if (textSurface == nullptr) {
         printf("SDL_Surface could not initialized! SDL_Error: %s\n", SDL_GetError());
         return false;

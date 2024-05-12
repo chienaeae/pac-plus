@@ -14,6 +14,7 @@ add_executable(main src/main.cpp src/FPS.cpp src/LTexture.cpp src/LTimer.cpp src
         src/SceneStateMachine.cpp
         src/SceneTest.cpp
         src/Game.cpp
+        src/Font.cpp
         src/Sprite.cpp
         src/Object.cpp
         src/ComponentTransform.cpp

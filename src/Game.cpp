@@ -14,7 +14,7 @@
 
 SDL_Window *gWindow = nullptr;
 SDL_Renderer *gRenderer = nullptr;
-TTF_Font *gFont = nullptr;
+Font gFont = {};
 
 bool Game::Init() {
     bool success = true;
@@ -47,8 +47,8 @@ bool Game::Init() {
         printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
         return false;
     }
-    gFont = TTF_OpenFont("assets/font/lazy.ttf", 28);
-    if(gFont == nullptr){
+    success = gFont.LoadFromFile("assets/font/RedditSans-Regular.ttf");
+    if(!success){
         printf("Global Font could not be created! SDL_Error: %s\n", SDL_GetError());
         return false;
     }
