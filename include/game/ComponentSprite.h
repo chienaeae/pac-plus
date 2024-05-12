@@ -9,7 +9,8 @@
 
 #include "game/LTexture.h"
 #include "game/Sprite.h"
-#include "Component.h"
+#include "game/ResourceAllocator.h"
+#include "game/Component.h"
 
 class ComponentSprite: public Component {
 public:
@@ -17,7 +18,7 @@ public:
 
     Sprite& GetSprite();
 
-    LTexture& GetTexture();
+    std::shared_ptr<LTexture> GetTexture();
 
     void Load(const std::string& filePath);
 
@@ -25,8 +26,13 @@ public:
 
     void LateUpdate(float deltaTime) override;
 
+    void Load(int id);
+
+    void SetTextureAllocator(ResourceAllocator<LTexture>* a);
+
 private:
-    LTexture texture;
+    ResourceAllocator<LTexture> * allocator;
+    int textureID;
     Sprite sprite;
 };
 

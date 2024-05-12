@@ -11,12 +11,10 @@ LTexture::LTexture() {
     mHeight = 0;
 }
 
-LTexture::~LTexture() {
-    free();
-}
+LTexture::~LTexture() = default;
 
-bool LTexture::loadFromFile(std::string path) {
-    free();
+bool LTexture::LoadFromFile(std::string path) {
+    Free();
 
     SDL_Texture *newTexture = nullptr;
 
@@ -45,8 +43,8 @@ bool LTexture::loadFromFile(std::string path) {
     return mTexture != nullptr;
 }
 
-bool LTexture::loadFromRenderedText(const std::string text, const SDL_Color color) {
-    free();
+bool LTexture::LoadFromRenderedText(const std::string text, const SDL_Color color) {
+    Free();
     if(!gFont.isOn()){
         printf("gFont is NULL pointer! SDL_Error: %s\n", SDL_GetError());
         return false;
@@ -70,7 +68,7 @@ bool LTexture::loadFromRenderedText(const std::string text, const SDL_Color colo
     return true;
 }
 
-void LTexture::render(int x, int y, SDL_Rect *clip, double angle, float scaleX, float scaleY,
+void LTexture::Render(int x, int y, SDL_Rect *clip, double angle, float scaleX, float scaleY,
                       SDL_Point *center, SDL_RendererFlip flip) {
     SDL_Rect renderQuad = {x, y, mWidth, mHeight};
 
@@ -82,26 +80,26 @@ void LTexture::render(int x, int y, SDL_Rect *clip, double angle, float scaleX, 
     SDL_RenderCopyEx(gRenderer, this->mTexture, clip, &renderQuad, angle, center, flip);
 }
 
-int LTexture::getWidth() const{
+int LTexture::GetWidth() const{
     return mWidth;
 }
 
-int LTexture::getHeight() const{
+int LTexture::GetHeight() const{
     return mHeight;
 }
 
-void LTexture::free() {
+void LTexture::Free() {
     SDL_DestroyTexture(mTexture);
 }
 
-void LTexture::setColor(Uint8 red, Uint8 green, Uint8 blue) {
+void LTexture::SetColor(Uint8 red, Uint8 green, Uint8 blue) {
     SDL_SetTextureColorMod(mTexture, red, green, blue);
 }
 
-void LTexture::setBlendMode(SDL_BlendMode blending) {
+void LTexture::SetBlendMode(SDL_BlendMode blending) {
     SDL_SetTextureBlendMode(mTexture, blending);
 }
 
-void LTexture::setAlpha(Uint8 alpha) {
+void LTexture::SetAlpha(Uint8 alpha) {
     SDL_SetTextureAlphaMod(mTexture, alpha);
 }

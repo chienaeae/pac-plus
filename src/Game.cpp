@@ -70,7 +70,7 @@ bool Game::Init() {
         return false;
     }
 
-    std::shared_ptr<SceneTest> testScene = std::make_shared<SceneTest>(sceneStateMachine);
+    std::shared_ptr<SceneTest> testScene = std::make_shared<SceneTest>(sceneStateMachine, textureAllocator);
 
     unsigned int testSceneID = sceneStateMachine.Add(testScene);
 

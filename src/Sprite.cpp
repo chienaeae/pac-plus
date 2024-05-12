@@ -40,7 +40,7 @@ void Sprite::setTextureRect(const SDL_Rect &tr){
 
 void Sprite::setTexture(const LTexture &t, bool resetRect){
     if(resetRect){
-        setTextureRect(SDL_Rect {0, 0, t.getWidth(), t.getHeight()});
+        setTextureRect(SDL_Rect {0, 0, t.GetWidth(), t.GetHeight()});
     }
     texture = t;
 }
@@ -74,5 +74,5 @@ void Sprite::rotate(int a){
 }
 
 void Sprite::render(){
-    texture.render(posX, posY, &textureRect, angle, scaleX, scaleY);
+    texture.Render(posX, posY, &textureRect, angle, scaleX, scaleY);
 }

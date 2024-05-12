@@ -10,6 +10,7 @@
 #include "game/Core.h"
 #include "game/FPS.h"
 #include "game/SceneStateMachine.h"
+#include "game/ResourceAllocator.h"
 #include "game/LTimer.h"
 
 
@@ -46,6 +47,8 @@ private:
     FPS fps;
 
     SceneStateMachine sceneStateMachine;
+
+    ResourceAllocator<LTexture> textureAllocator;
 
     LTimer clock;
 

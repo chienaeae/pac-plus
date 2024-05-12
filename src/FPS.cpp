@@ -31,10 +31,10 @@ void FPS::update() {
     // 1. Prepare FPS text to be rendered
     timeText.str("");
     timeText << "FPS: " << mCountedFramesInSecond;
-    if (!textTexture.loadFromRenderedText(timeText.str(), textColor))
+    if (!textTexture.LoadFromRenderedText(timeText.str(), textColor))
     {
         printf("Unable to render FPS texture!\n");
     }
     // 2. Render textures
-    textTexture.render(SCREEN_WIDTH - textTexture.getWidth() - 20, 20);
+    textTexture.Render(SCREEN_WIDTH - textTexture.GetWidth() - 20, 20);
 }
