@@ -28,6 +28,10 @@ public:
 
     void EventUpdate(SDL_Event *e);
 
+    void QueueForRemoval();
+
+    bool IsQueuedForRemoval();
+
     template<typename T> std::shared_ptr<T> AddComponent(){
         // This ensures that we only try to add a class the derives
         // from Component. This is tested at compile time.
@@ -63,6 +67,8 @@ public:
     std::shared_ptr<ComponentTransform> transform;
 private:
     std::vector<std::shared_ptr<Component>> components;
+
+    bool queuedForRemoval;
 };
 
 #endif //MAIN_OBJECT_H
