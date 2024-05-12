@@ -19,7 +19,7 @@ void Square::init(int x, int y, int a, LTexture *texture, SDL_Rect *clip){
 }
 
 void Square::render() {
-    this->texture->render(this->posX, this->posY, clip, this->angle);
+    this->texture->render(this->posX, this->posY, clip,this->angle,  1.0f, 1.0f);
 }
 
 void Square::update(float deltaTime) {

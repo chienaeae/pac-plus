@@ -13,7 +13,12 @@ include_directories(include)
 add_executable(main src/main.cpp src/FPS.cpp src/LTexture.cpp src/LTimer.cpp src/Square.cpp
         src/SceneStateMachine.cpp
         src/SceneTest.cpp
-        src/Game.cpp)
+        src/Game.cpp
+        src/Sprite.cpp
+        src/Object.cpp
+        src/ComponentTransform.cpp
+        src/ComponentSprite.cpp
+        src/ComponentKeyboardMovement.cpp)
 
 target_compile_features(main PRIVATE cxx_std_20)
 
