@@ -1,0 +1,8 @@
+//
+// Created by mac on 2024/5/12.
+//
+
+#ifndef MAIN_RESOURCEALLOCATOR_H
+#define MAIN_RESOURCEALLOCATOR_H
+
+#endif //MAIN_RESOURCEALLOCATOR_H

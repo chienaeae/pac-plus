@@ -9,8 +9,7 @@
 Font::Font(): mFont(nullptr), mFontSize(24), mFontStyle(FONT_STYLE::NORMAL){
 }
 
-Font::~Font(){
-}
+Font::~Font() = default;
 
 SDL_Surface * Font::RenderTextSolid(std::string text, SDL_Color fg) {
     SDL_Surface *textSurface = TTF_RenderText_Solid(mFont, text.c_str(), fg);
@@ -23,6 +22,8 @@ SDL_Surface * Font::RenderTextSolid(std::string text, SDL_Color fg) {
 }
 
 bool Font::LoadFromFile(std::string path) {
+    Free();
+
     bool success = false;
     mFont = TTF_OpenFont(path.c_str(), mFontSize);
     if(mFont == nullptr){
