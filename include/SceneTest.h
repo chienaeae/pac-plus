@@ -7,6 +7,7 @@
 
 #include "game/Scene.h"
 #include "game/SceneStateMachine.h"
+#include "game/Object.h"
 #include "Square.h"
 
 class SceneTest: public Scene {
@@ -18,6 +19,7 @@ public :
     void OnActivate() override;
 
     void Update(float deltaTime)  override;
+    void LateUpdate(float deltaTime) override;
     void EventUpdate(SDL_Event *e) override;
     void RenderUpdate() override;
 
@@ -26,9 +28,7 @@ public :
 private:
     SceneStateMachine& sceneStateMachine;
 
-    LTexture squareTexture;
-    SDL_Rect squareClip;
-    Square square;
+    std::shared_ptr<Object> square;
 
     // How long the scene has currently been visible
     float currentSeconds;

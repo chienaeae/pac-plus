@@ -2,20 +2,21 @@
 // Created by mac on 2024/5/11.
 //
 
+#include "game/Object.h"
+#include "game/ComponentSprite.h"
+#include "game/ComponentKeyboardMovement.h"
 #include "SceneTest.h"
 
 SceneTest::SceneTest(SceneStateMachine &sceneStateMachine) : sceneStateMachine(sceneStateMachine) {}
 
 void SceneTest::OnCreate() {
-    // Init assets
-    squareTexture.loadFromFile("assets/square.png");
-    squareTexture.setColor(0, 0, 255);
-    squareClip.x = 0;
-    squareClip.y = 0;
-    squareClip.w = 300;
-    squareClip.h = 300;
-    // Init game objects
-    square.init(0,0,0, &squareTexture, &squareClip);
+    square = std::make_shared<Object>();
+
+    auto sprite = square->AddComponent<ComponentSprite>();
+    sprite->Load("assets/square.png");
+    sprite->GetSprite().setScale(5.0f, 5.0f);
+    sprite->GetTexture().setColor(0, 140, 255);
+    auto movement = square->AddComponent<ComponentKeyboardMovement>();
 }
 
 void SceneTest::OnActivate() {
@@ -30,14 +31,18 @@ void SceneTest::SetSwitchToScene(unsigned int id) {
 
 void SceneTest::Update(float deltaTime)  {
     currentSeconds += deltaTime;
-    square.update(deltaTime);
+    square->Update(deltaTime);
+}
+
+void SceneTest::LateUpdate(float deltaTime) {
+    square->LateUpdate(deltaTime);
 }
 
 
 void SceneTest::EventUpdate(SDL_Event *e) {
-    square.eventUpdate(e);
+    square->EventUpdate(e);
 }
 
 void SceneTest::RenderUpdate() {
-    square.render();
+    square->RenderUpdate();
 }
