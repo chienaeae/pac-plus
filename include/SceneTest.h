@@ -8,6 +8,7 @@
 #include "game/Scene.h"
 #include "game/SceneStateMachine.h"
 #include "game/Object.h"
+#include "game/ObjectCollection.h"
 #include "game/ResourceAllocator.h"
 
 #include "Square.h"
@@ -33,8 +34,7 @@ private:
 
     ResourceAllocator<LTexture>& textureAllocator;
 
-    std::shared_ptr<Object> square;
-
+    ObjectCollection objects;
     // How long the scene has currently been visible
     float currentSeconds;
 

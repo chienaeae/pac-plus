@@ -13,7 +13,7 @@ SceneTest::SceneTest(SceneStateMachine &sceneStateMachine,
                        textureAllocator(textureAllocator) {}
 
 void SceneTest::OnCreate() {
-    square = std::make_shared<Object>();
+    std::shared_ptr<Object> square = std::make_shared<Object>();
 
     auto sprite = square->AddComponent<ComponentSprite>();
     sprite->SetTextureAllocator(&textureAllocator);
@@ -22,6 +22,8 @@ void SceneTest::OnCreate() {
     sprite->GetTexture()->SetColor(0, 140, 255);
 
     auto movement = square->AddComponent<ComponentKeyboardMovement>();
+
+    objects.Add(square);
 }
 
 void SceneTest::OnActivate() {
@@ -36,18 +38,20 @@ void SceneTest::SetSwitchToScene(unsigned int id) {
 
 void SceneTest::Update(float deltaTime)  {
     currentSeconds += deltaTime;
-    square->Update(deltaTime);
+    objects.ProcessRemovals();
+    objects.ProcessNewObjects();
+    objects.Update(deltaTime);
 }
 
 void SceneTest::LateUpdate(float deltaTime) {
-    square->LateUpdate(deltaTime);
+    objects.LateUpdate(deltaTime);
 }
 
 
 void SceneTest::EventUpdate(SDL_Event *e) {
-    square->EventUpdate(e);
+    objects.EventUpdate(e);
 }
 
 void SceneTest::RenderUpdate() {
-    square->RenderUpdate();
+    objects.RenderUpdate();
 }
