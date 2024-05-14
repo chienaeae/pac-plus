@@ -1,8 +1,12 @@
 {
   "name": "server",
   "version-string": "1.0.0",
-  "builtin-baseline": "1b2372fdd420185c6f516541b81228c55061dca4",
+  "builtin-baseline": "9e1b320a71406d38580833e47bc35545b120dc34",
   "dependencies": [
+    {
+      "name": "gtest",
+      "version>=": "1.14.0#1"
+    },
     {
       "name": "sdl2",
       "version>=": "2.30.1",
