@@ -44,7 +44,7 @@ Format the specified file
 clang-format -i <your_file>
 
 # or you can format the whole project with the command below
-find . -name "*.cpp" -o -name "*.h" | xargs clang-format -i
+find src test include -name "*.cpp" -o -name "*.h" | xargs clang-format -i
 ```
 
 ### clang-tidy
