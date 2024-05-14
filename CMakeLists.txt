@@ -26,7 +26,18 @@ target_compile_features(main PRIVATE cxx_std_20)
 
 add_library(lib STATIC src/lib.cpp)
 
-add_executable(mainTests test/hello_test.cpp)
+file(GLOB TEST_SOURCES "test/*.cpp")
+add_executable(mainTests ${TEST_SOURCES}  src/FPS.cpp src/LTexture.cpp src/LTimer.cpp src/Square.cpp
+        src/SceneStateMachine.cpp
+        src/SceneTest.cpp
+        src/Game.cpp
+        src/Font.cpp
+        src/Sprite.cpp
+        src/Object.cpp
+        src/ComponentTransform.cpp
+        src/ComponentSprite.cpp
+        src/ComponentKeyboardMovement.cpp
+        src/ObjectCollection.cpp)
 
 # Here to find package
 find_package(GTest CONFIG REQUIRED)
@@ -48,6 +59,14 @@ target_link_libraries(
 
 target_link_libraries(mainTests PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main
         lib)
+target_link_libraries(mainTests PRIVATE SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(
+        mainTests
+        PRIVATE
+        $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>
+        $<IF:$<TARGET_EXISTS:SDL2_mixer::SDL2_mixer>,SDL2_mixer::SDL2_mixer,SDL2_mixer::SDL2_mixer-static>
+        $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
+)
 
 include(GoogleTest)
 gtest_discover_tests(mainTests)
