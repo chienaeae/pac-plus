@@ -1,0 +1,101 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+#    types:
+#      - closed
+    branches:
+      - main
+
+env:
+  BUILD_TYPE: Release
+  C_COMPILER: gcc
+  CXX_COMPILER: g++
+  CFLAGS: "--coverage"
+  CXXFLAGS: "--coverage"
+  LDFLAGS: "--coverage"
+
+jobs:
+  build:
+#    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+          sudo apt-get install lcov g++ libgtest-dev
+
+      - name: Set reusable strings
+        # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
+        id: strings
+        shell: bash
+        run: |
+          echo "build-output-dir=${{ github.workspace }}/release" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/cache@v4
+        id: cache-vcpkg
+        with:
+          path: |
+            vcpkg-cache
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('**/vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg-
+
+      - name: Set up vcpkg binary caching
+        run: |
+          echo "VCPKG_FEATURE_FLAGS=manifests,registries,binarycaching" >> $GITHUB_ENV
+          echo "VCPKG_BINARY_SOURCES=clear;files,${{ github.workspace }}/vcpkg-cache,readwrite" >> $GITHUB_ENV
+
+
+      - name: Install vcpkg (Linux/macOS)
+        run: |
+          git submodule update --init --recursive
+          ./vcpkg/bootstrap-vcpkg.sh  -disableMetrics
+          echo "Cache hit: ${{ steps.cache-vcpkg.outputs.cache-hit }}"
+          if [[ "${{ steps.cache-vcpkg.outputs.cache-hit }}" != "true" ]]; then
+            ./vcpkg/vcpkg install --x-install-root=vcpkg_installed
+          fi
+        shell: bash
+
+      - name: Configure CMake
+        # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+        # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+        run: >
+          cmake --preset=release
+          -B ${{ steps.strings.outputs.build-output-dir }}
+          -DCMAKE_CXX_COMPILER=${{ env.CXX_COMPILER }}
+          -DCMAKE_C_COMPILER=${{ env.C_COMPILER }}
+          -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          -DCMAKE_C_FLAGS=${{ env.CFLAGS }}
+          -DCMAKE_CXX_FLAGS=${{ env.CXXFLAGS }}
+          -DCMAKE_EXE_LINKER_FLAGS=${{ env.LDFLAGS }}
+          -S ${{ github.workspace }}
+
+      - name: Build
+        # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ env.BUILD_TYPE }}
+
+      - name: Test
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
+        # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+        run: ctest --build-config ${{ env.BUILD_TYPE }}
+
+      - name: Generate coverage report
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: |
+          lcov --capture --directory . --output-file coverage.info
+          lcov --remove coverage.info '/usr/*' --output-file coverage.info
+          lcov --list coverage.info
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ${{ steps.strings.outputs.build-output-dir }}/coverage.info

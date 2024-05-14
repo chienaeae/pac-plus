@@ -1,3 +1,8 @@
+# Pac plus
+
+[![codecov](https://codecov.io/gh/chienaeae/pac-plus/graph/badge.svg?token=YP2ELJQQJD)](https://codecov.io/gh/chienaeae/pac-plus)
+
+
 ## Development
 
 ### Initial
