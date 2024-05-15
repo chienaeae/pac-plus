@@ -9,22 +9,15 @@
 
 #include "game/Resource.h"
 
-enum FONT_STYLE{
-    NORMAL,
-    BOLD,
-    ITALIC,
-    UNDERLINE,
-    STRIKETHROUGH
-};
+enum FONT_STYLE { NORMAL, BOLD, ITALIC, UNDERLINE, STRIKETHROUGH };
 
 class Font : public Resource {
-
-public:
+   public:
     Font();
 
-    ~Font();
+    ~Font() = default;
 
-    SDL_Surface * RenderTextSolid(std::string text, SDL_Color fg);
+    SDL_Surface* RenderTextSolid(const std::string& text, SDL_Color fg);
 
     bool LoadFromFile(std::string path) override;
 
@@ -34,10 +27,10 @@ public:
 
     void Free() override;
 
-private:
+   private:
     int mFontSize;
     FONT_STYLE mFontStyle;
     TTF_Font* mFont;
 };
 
-#endif //MAIN_FONT_H
+#endif  // MAIN_FONT_H

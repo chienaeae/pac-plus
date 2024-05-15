@@ -7,8 +7,8 @@
 
 #include "Component.h"
 
-class ComponentTransform: public Component {
-public:
+class ComponentTransform : public Component {
+   public:
     ComponentTransform(Object* owner);
 
     void SetPosition(int x, int y);
@@ -18,12 +18,12 @@ public:
     void SetX(int x);
     void SetY(int y);
 
-    const int GetPositionX() const;
-    const int GetPositionY() const;
+    int GetPositionX() const;
+    int GetPositionY() const;
 
-private:
+   private:
     int posX;
     int posY;
 };
 
-#endif //MAIN_COMPONENTTRANSFORM_H
+#endif  // MAIN_COMPONENTTRANSFORM_H

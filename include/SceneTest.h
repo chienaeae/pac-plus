@@ -5,31 +5,29 @@
 #ifndef MAIN_SCENETEST_H
 #define MAIN_SCENETEST_H
 
-#include "game/Scene.h"
-#include "game/SceneStateMachine.h"
+#include "Square.h"
 #include "game/Object.h"
 #include "game/ObjectCollection.h"
 #include "game/ResourceAllocator.h"
+#include "game/Scene.h"
+#include "game/SceneStateMachine.h"
 
-#include "Square.h"
-
-class SceneTest: public Scene {
-public :
-    SceneTest(SceneStateMachine& sceneStateMachine,
-              ResourceAllocator<LTexture>& textureAllocator);
+class SceneTest : public Scene {
+   public:
+    SceneTest(SceneStateMachine& sceneStateMachine, ResourceAllocator<LTexture>& textureAllocator);
 
     void OnCreate() override;
     void OnDestroy() override;
     void OnActivate() override;
 
-    void Update(float deltaTime)  override;
+    void Update(float deltaTime) override;
     void LateUpdate(float deltaTime) override;
-    void EventUpdate(SDL_Event *e) override;
+    void EventUpdate(SDL_Event* e) override;
     void RenderUpdate() override;
 
-    void SetSwitchToScene(unsigned int id );
+    void SetSwitchToScene(unsigned int id);
 
-private:
+   private:
     SceneStateMachine& sceneStateMachine;
 
     ResourceAllocator<LTexture>& textureAllocator;
@@ -41,4 +39,4 @@ private:
     unsigned int switchToState;
 };
 
-#endif //MAIN_SCENETEST_H
+#endif  // MAIN_SCENETEST_H

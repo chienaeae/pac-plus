@@ -3,6 +3,11 @@
 //
 
 #include "game/ComponentKeyboardMovement.h"
+
+#include <SDL_events.h>
+#include <SDL_keycode.h>
+
+#include "game/Component.h"
 #include "game/Object.h"
 
 ComponentKeyboardMovement::ComponentKeyboardMovement(Object *owner)
@@ -12,7 +17,7 @@ void ComponentKeyboardMovement::SetSpeed(int speed) {
     moveSpeed = speed;
 }
 
-void ComponentKeyboardMovement::Update(float deltaTime) {
+void ComponentKeyboardMovement::Update(float /*deltaTime*/) {
     owner->transform->AddPosition(velX, velY);
 }
 
@@ -31,20 +36,20 @@ void ComponentKeyboardMovement::EventUpdate(SDL_Event *e) {
             case SDLK_DOWN:
                 velY = moveSpeed;
                 break;
+            default:
+                break;
         }
-    }else if (e->type == SDL_KEYUP) {
+    } else if (e->type == SDL_KEYUP) {
         switch (e->key.keysym.sym) {
             case SDLK_RIGHT:
-                velX = 0;
-                break;
             case SDLK_LEFT:
                 velX = 0;
                 break;
             case SDLK_UP:
-                velY = 0;
-                break;
             case SDLK_DOWN:
                 velY = 0;
+                break;
+            default:
                 break;
         }
     }

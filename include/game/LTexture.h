@@ -10,23 +10,23 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 #include <stdio.h>
-#include <string>
+
 #include <sstream>
+#include <string>
 
 #include "game/Resource.h"
 
-
-class LTexture : public Resource{
-public:
+class LTexture : public Resource {
+   public:
     LTexture();
 
-    ~LTexture();
+    ~LTexture() = default;
 
     bool LoadFromFile(std::string path) override;
 
 #if defined(SDL_TTF_MAJOR_VERSION)
 
-    bool LoadFromRenderedText(std::string text, SDL_Color color);
+    bool LoadFromRenderedText(const std::string &text, SDL_Color color);
 
 #endif
 
@@ -38,19 +38,19 @@ public:
 
     void SetAlpha(Uint8 alpha);
 
-    void Render(int x, int y, SDL_Rect *clip = nullptr, double angle = 0.0,
-                float scaleX = 1.0f, float scaleY = 1.0f, SDL_Point *center = nullptr,
+    void Render(int x, int y, SDL_Rect *clip = nullptr, double angle = 0.0, float scaleX = 1.0f,
+                float scaleY = 1.0f, SDL_Point *center = nullptr,
                 SDL_RendererFlip flip = SDL_FLIP_NONE);
 
     int GetWidth() const;
 
     int GetHeight() const;
 
-private:
+   private:
     SDL_Texture *mTexture;
 
     int mWidth;
     int mHeight;
 };
 
-#endif //MAIN_LTEXTURE_H
+#endif  // MAIN_LTEXTURE_H

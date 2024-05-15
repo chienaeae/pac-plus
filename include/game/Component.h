@@ -12,23 +12,23 @@ requires a reference to Object; we forward declare Object */
 class Object;
 
 class Component {
-public:
-    explicit Component(Object *owner) : owner(owner){};
+   public:
+    explicit Component(Object *owner) : owner(owner) {};
 
-    virtual void Awake(){};
+    virtual void Awake() {};
 
-    virtual void Start(){};
+    virtual void Start() {};
 
     virtual void Update(float deltaTime) {};
 
-    virtual void LateUpdate(float deltaTime ) {};
+    virtual void LateUpdate(float deltaTime) {};
 
-    virtual void RenderUpdate(){};
+    virtual void RenderUpdate() {};
 
     virtual void EventUpdate(SDL_Event *e) {};
 
-protected:
-    Object * owner;
+   protected:
+    Object *owner;
 };
 
-#endif //MAIN_COMPONENT_H
+#endif  // MAIN_COMPONENT_H

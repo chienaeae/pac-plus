@@ -7,23 +7,22 @@
 
 #include <SDL.h>
 
-
 #include "game/Component.h"
 
-class ComponentKeyboardMovement: public Component {
-public:
+class ComponentKeyboardMovement : public Component {
+   public:
     ComponentKeyboardMovement(Object *owner);
 
     void SetSpeed(int speed);
 
     void Update(float deltaTime) override;
 
-    void EventUpdate(SDL_Event * e) override;
+    void EventUpdate(SDL_Event *e) override;
 
-private :
+   private:
     int moveSpeed;
     int velX;
     int velY;
 };
 
-#endif //MAIN_COMPONENTKEYBOARDMOVEMENT_H
+#endif  // MAIN_COMPONENTKEYBOARDMOVEMENT_H

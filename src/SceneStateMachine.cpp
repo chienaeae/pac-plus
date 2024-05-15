@@ -1,37 +1,41 @@
 //
 // Created by mac on 2024/5/10.
 //
-#include <SDL.h>
-
+#include <SDL_events.h>
 #include <game/SceneStateMachine.h>
 
-SceneStateMachine::SceneStateMachine() :scenes(), currentScene(nullptr), insertedSceneID() {}
+#include <memory>
+#include <utility>
 
-void SceneStateMachine::EventUpdate(SDL_Event *e) {
-    if(currentScene){
+#include "game/Scene.h"
+
+SceneStateMachine::SceneStateMachine() : currentScene(nullptr), insertedSceneID() {}
+
+void SceneStateMachine::EventUpdate(SDL_Event* e) {
+    if (currentScene) {
         currentScene->EventUpdate(e);
     }
 }
 
 void SceneStateMachine::Update(float deltaTime) {
-    if(currentScene) {
+    if (currentScene) {
         currentScene->Update(deltaTime);
     }
 }
 
 void SceneStateMachine::LateUpdate(float deltaTime) {
-    if(currentScene) {
+    if (currentScene) {
         currentScene->LateUpdate(deltaTime);
     }
 }
 
 void SceneStateMachine::RenderUpdate() {
-    if(currentScene) {
+    if (currentScene) {
         currentScene->RenderUpdate();
     }
 }
 
-unsigned int SceneStateMachine::Add(const std::shared_ptr<Scene> scene) {
+unsigned int SceneStateMachine::Add(const std::shared_ptr<Scene>& scene) {
     auto inserted = scenes.insert(std::make_pair(insertedSceneID, scene));
 
     insertedSceneID++;
@@ -43,8 +47,8 @@ unsigned int SceneStateMachine::Add(const std::shared_ptr<Scene> scene) {
 
 void SceneStateMachine::Remove(unsigned int id) {
     auto it = scenes.find(id);
-    if( it != scenes.end()){
-        if(currentScene == it->second){
+    if (it != scenes.end()) {
+        if (currentScene == it->second) {
             currentScene = nullptr;
         }
 
@@ -55,12 +59,9 @@ void SceneStateMachine::Remove(unsigned int id) {
 }
 
 void SceneStateMachine::SwitchTo(unsigned int id) {
-
     auto it = scenes.find(id);
-    if(it != scenes.end())
-    {
-        if(currentScene)
-        {
+    if (it != scenes.end()) {
+        if (currentScene) {
             // If we have a current scene, we call its OnDeactivate method.
             currentScene->OnDeactivate();
         }

@@ -9,11 +9,11 @@
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
-#include <string>
+
 #include <sstream>
+#include <string>
 
 #include "game/Font.h"
-
 
 const int MILLISECOND = 1000;
 const int SECOND = 1;
@@ -22,4 +22,4 @@ extern SDL_Window *gWindow;
 extern SDL_Renderer *gRenderer;
 extern Font gFont;
 
-#endif //MAIN_CORE_H
+#endif  // MAIN_CORE_H

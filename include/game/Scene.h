@@ -8,8 +8,7 @@
 #include "SDL.h"
 
 class Scene {
-
-public:
+   public:
     // Called when scene initially created. Called once.
     virtual void OnCreate() = 0;
 
@@ -25,7 +24,7 @@ public:
     // Can be called many times in a typical game cycle.
     virtual void OnDeactivate() {};
 
-    virtual void EventUpdate(SDL_Event *e){};
+    virtual void EventUpdate(SDL_Event *e) {};
 
     virtual void Update(float deltaTime) {};
 
@@ -34,4 +33,4 @@ public:
     virtual void RenderUpdate() {};
 };
 
-#endif //MAIN_SCENE_H
+#endif  // MAIN_SCENE_H

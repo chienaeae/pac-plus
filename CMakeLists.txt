@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.22)
 
 project(template LANGUAGES CXX)
 
+# The CMAKE_EXPORT_COMPILE_COMMANDS option enables generation of a compile_commands.json file containing the exact
+# compiler calls for all translation units of the project in machine-readable form. This is useful for tools that need
+# to analyze or replicate the build.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # GoogleTest requires at least C++14
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

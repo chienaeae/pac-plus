@@ -11,14 +11,13 @@
 #include "game/LTexture.h"
 
 class Square : public GameObject {
-
-public :
+   public:
     void init(int x, int y, int a, LTexture *texture, SDL_Rect *clip) override;
 
     void render() override;
 
     void update(float deltaTime) override;
 
-    void eventUpdate(SDL_Event* e) override;
+    void eventUpdate(SDL_Event *e) override;
 };
-#endif //MAIN_SQUARE_H
+#endif  // MAIN_SQUARE_H

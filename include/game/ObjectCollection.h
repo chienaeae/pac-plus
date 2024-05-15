@@ -5,20 +5,20 @@
 #ifndef MAIN_OBJECTCOLLECTION_H
 #define MAIN_OBJECTCOLLECTION_H
 
+#include <SDL.h>
+
 #include <memory>
 #include <vector>
-
-#include <SDL.h>
 
 #include "game/Object.h"
 
 class ObjectCollection {
-public:
-    void Add(std::shared_ptr<Object> object);
+   public:
+    void Add(const std::shared_ptr<Object>& object);
 
     void Update(float deltaTime);
     void LateUpdate(float deltaTime);
-    void EventUpdate(SDL_Event *e);
+    void EventUpdate(SDL_Event* e);
     void RenderUpdate();
 
     int Size();
@@ -31,11 +31,12 @@ public:
     void ProcessNewObjects();
 
     void ProcessRemovals();
-private:
+
+   private:
     std::vector<std::shared_ptr<Object>> mObjects;
 
     // mNewObject: It used to temporarily store recently added objects.
     std::vector<std::shared_ptr<Object>> mNewObjects;
 };
 
-#endif //MAIN_OBJECTCOLLECTION_H
+#endif  // MAIN_OBJECTCOLLECTION_H
