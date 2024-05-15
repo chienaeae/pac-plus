@@ -2,7 +2,6 @@
 // Created by mac on 2024/5/13.
 //
 #include <gtest/gtest.h>
-
 #include <lib.h>
 
 TEST(HelloTest, BasicAssertion) {

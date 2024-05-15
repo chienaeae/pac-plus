@@ -8,11 +8,10 @@
 #include <string>
 
 class Resource {
+   public:
+    Resource() : mIsOn(false) {}
 
-public:
-    Resource(): mIsOn(false) {}
-
-    virtual bool LoadFromFile (std::string) {
+    virtual bool LoadFromFile(std::string) {
         return true;
     };
 
@@ -22,8 +21,7 @@ public:
         return mIsOn;
     };
 
-
-protected:
+   protected:
     int mIsOn;
 };
-#endif //MAIN_RESOURCE_H
+#endif  // MAIN_RESOURCE_H

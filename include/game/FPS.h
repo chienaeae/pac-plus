@@ -5,19 +5,18 @@
 #ifndef MAIN_FPS_H
 #define MAIN_FPS_H
 
-#include "LTimer.h"
 #include "LTexture.h"
-
+#include "LTimer.h"
 
 class FPS {
-public:
+   public:
     FPS();
 
     void init();
 
     void update();
 
-private:
+   private:
     LTimer mFPSTimer;
     int mCountedFrames;
     int mCountedFramesInSecond;
@@ -27,4 +26,4 @@ private:
     std::stringstream timeText;
 };
 
-#endif //MAIN_FPS_H
+#endif  // MAIN_FPS_H

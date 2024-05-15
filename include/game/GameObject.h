@@ -10,7 +10,7 @@
 #include "game/LTexture.h"
 
 class GameObject {
-protected:
+   protected:
     int velX;
     int velY;
     int velA;
@@ -22,8 +22,9 @@ protected:
 
     LTexture *texture;
 
-public:
-    GameObject() : velX(), velY(), velA(), posX(), posY(), angle(), clip(nullptr), texture(nullptr){}
+   public:
+    GameObject()
+        : velX(), velY(), velA(), posX(), posY(), angle(), clip(nullptr), texture(nullptr) {}
 
     virtual void init(int x, int y, int a, LTexture *t, SDL_Rect *c) {};
 
@@ -33,8 +34,7 @@ public:
 
     virtual void lateUpdate(float deltaTime) {};
 
-    virtual void eventUpdate(SDL_Event* e) {};
-
+    virtual void eventUpdate(SDL_Event *e) {};
 };
 
-#endif //MAIN_GAMEOBJECT_H
+#endif  // MAIN_GAMEOBJECT_H

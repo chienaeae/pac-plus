@@ -2,10 +2,15 @@
 // Created by mac on 2024/5/9.
 //
 
-#include "game/LTexture.h"
 #include "Square.h"
 
-void Square::init(int x, int y, int a, LTexture *texture, SDL_Rect *clip){
+#include <SDL_events.h>
+#include <SDL_keycode.h>
+#include <SDL_rect.h>
+
+#include "game/LTexture.h"
+
+void Square::init(int x, int y, int a, LTexture *texture, SDL_Rect *clip) {
     this->texture = texture;
     this->clip = clip;
 
@@ -19,17 +24,16 @@ void Square::init(int x, int y, int a, LTexture *texture, SDL_Rect *clip){
 }
 
 void Square::render() {
-    this->texture->Render(this->posX, this->posY, clip,this->angle,  1.0f, 1.0f);
+    this->texture->Render(this->posX, this->posY, clip, this->angle, 1.0f, 1.0f);
 }
 
-void Square::update(float deltaTime) {
+void Square::update(float /*deltaTime*/) {
     this->posX += this->velX;
     this->posY += this->velY;
     this->angle += this->velA;
-
 }
 
-void Square::eventUpdate(SDL_Event* e) {
+void Square::eventUpdate(SDL_Event *e) {
     if (e->type == SDL_KEYDOWN) {
         switch (e->key.keysym.sym) {
             case SDLK_RIGHT:
@@ -50,27 +54,24 @@ void Square::eventUpdate(SDL_Event* e) {
             case SDLK_x:
                 velA = 3;
                 break;
+            default:
+                break;
         }
-    }
-    else if (e->type == SDL_KEYUP) {
+    } else if (e->type == SDL_KEYUP) {
         switch (e->key.keysym.sym) {
             case SDLK_RIGHT:
-                velX = 0;
-                break;
             case SDLK_LEFT:
                 velX = 0;
                 break;
             case SDLK_UP:
-                velY = 0;
-                break;
             case SDLK_DOWN:
                 velY = 0;
                 break;
             case SDLK_z:
-                velA = 0;
-                break;
             case SDLK_x:
                 velA = 0;
+                break;
+            default:
                 break;
         }
     }

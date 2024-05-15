@@ -7,13 +7,13 @@
 
 #include <string>
 
-#include "game/LTexture.h"
-#include "game/Sprite.h"
-#include "game/ResourceAllocator.h"
 #include "game/Component.h"
+#include "game/LTexture.h"
+#include "game/ResourceAllocator.h"
+#include "game/Sprite.h"
 
-class ComponentSprite: public Component {
-public:
+class ComponentSprite : public Component {
+   public:
     ComponentSprite(Object* owner);
 
     Sprite& GetSprite();
@@ -30,10 +30,10 @@ public:
 
     void SetTextureAllocator(ResourceAllocator<LTexture>* a);
 
-private:
-    ResourceAllocator<LTexture> * allocator;
+   private:
+    ResourceAllocator<LTexture>* allocator;
     int textureID;
     Sprite sprite;
 };
 
-#endif //MAIN_COMPONENTSPRITE_H
+#endif  // MAIN_COMPONENTSPRITE_H

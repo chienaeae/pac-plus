@@ -2,8 +2,10 @@
 // Created by mac on 2024/4/10.
 //
 
-#include "game/Core.h"
 #include "game/LTimer.h"
+
+#include <SDL_stdinc.h>
+#include <SDL_timer.h>
 
 LTimer::LTimer() {
     mStartTicks = 0;
@@ -44,7 +46,7 @@ void LTimer::unpause() {
     }
 }
 
-Uint64 LTimer::getTicks() {
+Uint64 LTimer::getTicks() const {
     Uint64 time = 0;
 
     if (mStarted) {
@@ -58,10 +60,10 @@ Uint64 LTimer::getTicks() {
     return time;
 }
 
-bool LTimer::isStarted() {
+bool LTimer::isStarted() const {
     return mStarted;
 }
 
-bool LTimer::isPaused() {
+bool LTimer::isPaused() const {
     return mPaused && mStarted;
 }

@@ -2,18 +2,25 @@
 // Created by mac on 2024/5/11.
 //
 
-#include "game/Object.h"
-#include "game/ComponentSprite.h"
-#include "game/ComponentKeyboardMovement.h"
 #include "SceneTest.h"
 
+#include <SDL_events.h>
+
+#include <memory>
+
+#include "game/ComponentKeyboardMovement.h"
+#include "game/ComponentSprite.h"
+#include "game/LTexture.h"
+#include "game/Object.h"
+#include "game/ResourceAllocator.h"
+#include "game/SceneStateMachine.h"
+
 SceneTest::SceneTest(SceneStateMachine &sceneStateMachine,
-                     ResourceAllocator<LTexture>& textureAllocator)
-                     : sceneStateMachine(sceneStateMachine),
-                       textureAllocator(textureAllocator) {}
+                     ResourceAllocator<LTexture> &textureAllocator)
+    : sceneStateMachine(sceneStateMachine), textureAllocator(textureAllocator) {}
 
 void SceneTest::OnCreate() {
-    std::shared_ptr<Object> square = std::make_shared<Object>();
+    std::shared_ptr<Object> const square = std::make_shared<Object>();
 
     auto sprite = square->AddComponent<ComponentSprite>();
     sprite->SetTextureAllocator(&textureAllocator);
@@ -36,7 +43,7 @@ void SceneTest::SetSwitchToScene(unsigned int id) {
     switchToState = id;
 }
 
-void SceneTest::Update(float deltaTime)  {
+void SceneTest::Update(float deltaTime) {
     currentSeconds += deltaTime;
     objects.ProcessRemovals();
     objects.ProcessNewObjects();
@@ -46,7 +53,6 @@ void SceneTest::Update(float deltaTime)  {
 void SceneTest::LateUpdate(float deltaTime) {
     objects.LateUpdate(deltaTime);
 }
-
 
 void SceneTest::EventUpdate(SDL_Event *e) {
     objects.EventUpdate(e);

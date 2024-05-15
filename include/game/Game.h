@@ -9,10 +9,9 @@
 
 #include "game/Core.h"
 #include "game/FPS.h"
-#include "game/SceneStateMachine.h"
-#include "game/ResourceAllocator.h"
 #include "game/LTimer.h"
-
+#include "game/ResourceAllocator.h"
+#include "game/SceneStateMachine.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 960;
@@ -21,14 +20,14 @@ const int GAME_FRAME = 60;
 const int TICKS_PER_GAME_FRAME = SECOND * MILLISECOND / GAME_FRAME;
 
 class Game {
-public:
+   public:
     bool Init();
 
     void Run();
 
-    void Close();
+    static void Close();
 
-private:
+   private:
     // update: This is where most of the game logic will go;
     // including: movement, AI, and animation updates
     void update();
@@ -58,4 +57,4 @@ private:
     bool quit;
 };
 
-#endif //MAIN_GAME_H
+#endif  // MAIN_GAME_H

@@ -1,3 +1,4 @@
+#include <cstdlib>
 #define SDL_MAIN_HANDLED
 
 #include <cstdio>
@@ -6,17 +7,15 @@
 
 using namespace std;
 
-int main(int argc, char *argv[])
-{
+int main(int /*argc*/, char* /*argv*/[]) {
     Game game;
-    if (!game.Init())
-    {
+    if (!game.Init()) {
         printf("Failed to initialize!\n");
-        game.Close();
+        Game::Close();
         return EXIT_FAILURE;
     }
 
     game.Run();
-    game.Close();
+    Game::Close();
     return EXIT_SUCCESS;
 }

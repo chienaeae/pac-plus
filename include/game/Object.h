@@ -5,15 +5,16 @@
 #ifndef MAIN_OBJECT_H
 #define MAIN_OBJECT_H
 
+#include <SDL.h>
+
 #include <memory>
 #include <vector>
-#include <SDL.h>
 
 #include "game/Component.h"
 #include "game/ComponentTransform.h"
 
 class Object {
-public:
+   public:
     Object();
 
     void Awake();
@@ -26,22 +27,22 @@ public:
 
     void RenderUpdate();
 
-    void EventUpdate(SDL_Event *e);
+    void EventUpdate(SDL_Event* e);
 
     void QueueForRemoval();
 
-    bool IsQueuedForRemoval();
+    bool IsQueuedForRemoval() const;
 
-    template<typename T> std::shared_ptr<T> AddComponent(){
+    template <typename T>
+    std::shared_ptr<T> AddComponent() {
         // This ensures that we only try to add a class the derives
         // from Component. This is tested at compile time.
-        static_assert(std::is_base_of<Component, T>::value,
-                      "T must derive from Component");
+        static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
-        for(auto& existingComponent: components) {
+        for (auto& existingComponent : components) {
             // Currently we prevent adding the same component twice.
             // This may be something we will change in the future.
-            if(std::dynamic_pointer_cast<T>(existingComponent)){
+            if (std::dynamic_pointer_cast<T>(existingComponent)) {
                 return std::dynamic_pointer_cast<T>(existingComponent);
             }
         }
@@ -51,12 +52,12 @@ public:
         return newComponent;
     }
 
-    template<typename T> std::shared_ptr<T> GetComponent() {
-        static_assert(std::is_base_of<Component, T>::value,
-                      "T must derive from Component");
+    template <typename T>
+    std::shared_ptr<T> GetComponent() {
+        static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
-        for(auto & existingComponent: components){
-            if(std::dynamic_pointer_cast<T>(existingComponent)){
+        for (auto& existingComponent : components) {
+            if (std::dynamic_pointer_cast<T>(existingComponent)) {
                 return std::dynamic_pointer_cast<T>(existingComponent);
             }
         }
@@ -65,10 +66,11 @@ public:
     }
 
     std::shared_ptr<ComponentTransform> transform;
-private:
+
+   private:
     std::vector<std::shared_ptr<Component>> components;
 
     bool queuedForRemoval;
 };
 
-#endif //MAIN_OBJECT_H
+#endif  // MAIN_OBJECT_H

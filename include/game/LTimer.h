@@ -10,11 +10,12 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 #include <stdio.h>
-#include <string>
+
 #include <sstream>
+#include <string>
 
 class LTimer {
-public:
+   public:
     LTimer();
 
     void start();
@@ -25,20 +26,20 @@ public:
 
     void unpause();
 
-    Uint64 getTicks();
+    Uint64 getTicks() const;
 
-    bool isStarted();
+    bool isStarted() const;
 
-    bool isPaused();
+    bool isPaused() const;
 
-private:
-    //The clock time when the timer started
+   private:
+    // The clock time when the timer started
     Uint64 mStartTicks;
-    //The ticks stored when the timer was paused
+    // The ticks stored when the timer was paused
     Uint64 mPausedTicks;
 
     bool mPaused;
     bool mStarted;
 };
 
-#endif //MAIN_LTIMER_H
+#endif  // MAIN_LTIMER_H

@@ -4,7 +4,9 @@
 
 #include "game/ComponentTransform.h"
 
-ComponentTransform::ComponentTransform(Object *owner) : Component(owner), posX(0), posY(0){}
+#include "game/Component.h"
+
+ComponentTransform::ComponentTransform(Object *owner) : Component(owner), posX(0), posY(0) {}
 
 void ComponentTransform::SetPosition(int x, int y) {
     posX = x;
@@ -24,10 +26,10 @@ void ComponentTransform::SetY(int y) {
     posY = y;
 }
 
-const int ComponentTransform::GetPositionX() const {
+int ComponentTransform::GetPositionX() const {
     return posX;
 }
 
-const int ComponentTransform::GetPositionY() const {
+int ComponentTransform::GetPositionY() const {
     return posY;
 }

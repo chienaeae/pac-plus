@@ -2,16 +2,27 @@
 // Created by mac on 2024/4/10.
 //
 
-#include "game/Core.h"
 #include "game/LTexture.h"
+
+#include <SDL_blendmode.h>
+#include <SDL_error.h>
+#include <SDL_image.h>
+#include <SDL_pixels.h>
+#include <SDL_rect.h>
+#include <SDL_render.h>
+#include <SDL_stdinc.h>
+#include <SDL_surface.h>
+
+#include <cstdio>
+#include <string>
+
+#include "game/Core.h"
 
 LTexture::LTexture() {
     mTexture = nullptr;
     mWidth = 0;
     mHeight = 0;
 }
-
-LTexture::~LTexture() = default;
 
 bool LTexture::LoadFromFile(std::string path) {
     Free();
@@ -43,14 +54,14 @@ bool LTexture::LoadFromFile(std::string path) {
     return mTexture != nullptr;
 }
 
-bool LTexture::LoadFromRenderedText(const std::string text, const SDL_Color color) {
+bool LTexture::LoadFromRenderedText(const std::string &text, const SDL_Color color) {
     Free();
-    if(!gFont.isOn()){
+    if (!gFont.isOn()) {
         printf("gFont is NULL pointer! SDL_Error: %s\n", SDL_GetError());
         return false;
     }
 
-    SDL_Surface *textSurface = gFont.RenderTextSolid(text.c_str(), color);
+    SDL_Surface *textSurface = gFont.RenderTextSolid(text, color);
     if (textSurface == nullptr) {
         printf("SDL_Surface could not initialized! SDL_Error: %s\n", SDL_GetError());
         return false;
@@ -73,18 +84,18 @@ void LTexture::Render(int x, int y, SDL_Rect *clip, double angle, float scaleX, 
     SDL_Rect renderQuad = {x, y, mWidth, mHeight};
 
     if (clip != nullptr) {
-        renderQuad.w = clip->w * scaleX;
-        renderQuad.h = clip->h * scaleY;
+        renderQuad.w = (int)((float)clip->w * scaleX);
+        renderQuad.h = (int)((float)clip->h * scaleY);
     }
 
     SDL_RenderCopyEx(gRenderer, this->mTexture, clip, &renderQuad, angle, center, flip);
 }
 
-int LTexture::GetWidth() const{
+int LTexture::GetWidth() const {
     return mWidth;
 }
 
-int LTexture::GetHeight() const{
+int LTexture::GetHeight() const {
     return mHeight;
 }
 

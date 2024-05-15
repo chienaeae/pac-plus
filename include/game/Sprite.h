@@ -8,26 +8,26 @@
 #include "game/LTexture.h"
 
 class Sprite {
-public:
+   public:
     Sprite();
 
     const SDL_Rect& getTextureRect() const;
 
     const LTexture* getTexture() const;
 
-    const int getPositionX() const;
+    int getPositionX() const;
 
-    const int getPositionY() const;
+    int getPositionY() const;
 
-    const float getScaleX() const;
+    float getScaleX() const;
 
-    const float getScaleY() const;
+    float getScaleY() const;
 
-    const int getRotation() const;
+    int getRotation() const;
 
-    void setTextureRect(const SDL_Rect &tr);
+    void setTextureRect(const SDL_Rect& tr);
 
-    void setTexture(const LTexture &t, bool resetRect=false);
+    void setTexture(const LTexture& t, bool resetRect = false);
 
     void setPosition(int x, int y);
 
@@ -42,7 +42,8 @@ public:
     void rotate(int a);
 
     void render();
-private:
+
+   private:
     int posX;
     int posY;
 
@@ -56,4 +57,4 @@ private:
     LTexture texture;
 };
 
-#endif //MAIN_SPRITE_H
+#endif  // MAIN_SPRITE_H

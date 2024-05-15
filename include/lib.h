@@ -7,4 +7,4 @@
 
 int multiply(int x, int y);
 
-#endif //MAIN_LIB_H
+#endif  // MAIN_LIB_H
