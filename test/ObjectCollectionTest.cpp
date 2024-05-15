@@ -2,8 +2,8 @@
 
 #include <memory>
 
-#include "game/Object.h"
-#include "game/ObjectCollection.h"
+#include "game/object-collection.h"
+#include "game/object.h"
 
 class ObjectCollectionTest : public ::testing::Test {
    protected:
