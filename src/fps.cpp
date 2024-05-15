@@ -21,6 +21,7 @@ FPS::FPS() {
 
 void FPS::init() {
     mFPSTimer.start();
+    process();
 }
 
 void FPS::update() {
@@ -29,20 +30,7 @@ void FPS::update() {
 
     Uint64 const ticks = mFPSTimer.getTicks();
     if (ticks >= MILLISECOND) {
-        mRenderText.str("");
-        mRenderText << "Render FPS: " << mCountedRenderFrames;
-        mGameText.str("");
-        mGameText << "Game FPS: " << mCountedGameFrames;
-
-        if (!mGameRenderTexture.LoadFromRenderedText(mGameText.str(), mTextColor) ||
-            !mTextTexture.LoadFromRenderedText(mRenderText.str(), mTextColor)) {
-            std::cout << "Unable to render FPS texture!\n";
-        } else {
-        }
-
-        mCountedGameFrames = 0;
-        mCountedRenderFrames = 0;
-        mFPSTimer.start();
+        process();
     }
 }
 
@@ -57,4 +45,20 @@ void FPS::renderUpdate() {
     // 2. Render textures
     mGameRenderTexture.Render(SCREEN_WIDTH - mGameRenderTexture.GetWidth() - OFFSET_X, OFFSET_Y);
     mTextTexture.Render(SCREEN_WIDTH - mTextTexture.GetWidth() - OFFSET_X, OFFSET_Y * 3);
+}
+
+void FPS::process() {
+    mRenderText.str("");
+    mRenderText << "Render FPS: " << mCountedRenderFrames;
+    mGameText.str("");
+    mGameText << "Game FPS: " << mCountedGameFrames;
+
+    if (!mGameRenderTexture.LoadFromRenderedText(mGameText.str(), mTextColor) ||
+        !mTextTexture.LoadFromRenderedText(mRenderText.str(), mTextColor)) {
+        std::cout << "Unable to render FPS texture!\n";
+    }
+
+    mCountedGameFrames = 0;
+    mCountedRenderFrames = 0;
+    mFPSTimer.start();
 }

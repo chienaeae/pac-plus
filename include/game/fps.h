@@ -19,6 +19,8 @@ class FPS {
     void renderUpdate();
 
    private:
+    void process();
+
     Timer mFPSTimer;
 
     std::stringstream mRenderText;
