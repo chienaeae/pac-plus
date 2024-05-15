@@ -1,20 +1,26 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(template LANGUAGES CXX)
+project(pac-plus LANGUAGES CXX)
 
-# The CMAKE_EXPORT_COMPILE_COMMANDS option enables generation of a compile_commands.json file containing the exact
-# compiler calls for all translation units of the project in machine-readable form. This is useful for tools that need
-# to analyze or replicate the build.
+# Generate compile_commands.json for analysis tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-# GoogleTest requires at least C++14
+
+# Set C++ standard
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Enable testing
 enable_testing()
 
+# Include directories
 include_directories(include)
 
-add_executable(main src/main.cpp src/fps.cpp src/texture.cpp src/timer.cpp src/square.cpp
+# Add game library
+add_library(game STATIC
+        src/fps.cpp
+        src/texture.cpp
+        src/timer.cpp
+        src/square.cpp
         src/scene-state-machine.cpp
         src/scene-test.cpp
         src/game.cpp
@@ -25,52 +31,45 @@ add_executable(main src/main.cpp src/fps.cpp src/texture.cpp src/timer.cpp src/s
         src/component-sprite.cpp
         src/component-keyboard-movement.cpp
         src/object-collection.cpp)
+target_compile_features(game PRIVATE cxx_std_20)
 
-target_compile_features(main PRIVATE cxx_std_20)
+# Add main executable
+add_executable(pac-plus src/main.cpp)
+target_compile_features(pac-plus PRIVATE cxx_std_20)
 
-add_library(lib STATIC src/lib.cpp)
-
+# Add test executable
 file(GLOB TEST_SOURCES "test/*.cpp")
-add_executable(mainTests ${TEST_SOURCES}  src/fps.cpp src/texture.cpp src/timer.cpp src/square.cpp
-        src/scene-state-machine.cpp
-        src/scene-test.cpp
-        src/game.cpp
-        src/font.cpp
-        src/sprite.cpp
-        src/object.cpp
-        src/component-transform.cpp
-        src/component-sprite.cpp
-        src/component-keyboard-movement.cpp
-        src/object-collection.cpp)
+add_executable(mainTests ${TEST_SOURCES})
 
-# Here to find package
+# Find required packages
 find_package(GTest CONFIG REQUIRED)
 find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL2_image CONFIG REQUIRED)
 find_package(SDL2_ttf CONFIG REQUIRED)
 find_package(SDL2_mixer CONFIG REQUIRED)
 
-# Here to link libraries
-target_link_libraries(main PRIVATE lib)
-target_link_libraries(main PRIVATE SDL2::SDL2 SDL2::SDL2main)
-target_link_libraries(
-        main
-        PRIVATE
+# Link libraries to game
+target_link_libraries(game PRIVATE SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(game PRIVATE
         $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>
         $<IF:$<TARGET_EXISTS:SDL2_mixer::SDL2_mixer>,SDL2_mixer::SDL2_mixer,SDL2_mixer::SDL2_mixer-static>
-        $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
-)
+        $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>)
 
-target_link_libraries(mainTests PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main
-        lib)
-target_link_libraries(mainTests PRIVATE SDL2::SDL2 SDL2::SDL2main)
-target_link_libraries(
-        mainTests
-        PRIVATE
+# Link libraries to main
+target_link_libraries(pac-plus PRIVATE game SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(pac-plus PRIVATE
         $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>
         $<IF:$<TARGET_EXISTS:SDL2_mixer::SDL2_mixer>,SDL2_mixer::SDL2_mixer,SDL2_mixer::SDL2_mixer-static>
-        $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
-)
+        $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>)
 
+# Link libraries to mainTests
+target_link_libraries(mainTests PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+target_link_libraries(mainTests PRIVATE game SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(mainTests PRIVATE
+        $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>
+        $<IF:$<TARGET_EXISTS:SDL2_mixer::SDL2_mixer>,SDL2_mixer::SDL2_mixer,SDL2_mixer::SDL2_mixer-static>
+        $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>)
+
+# Discover tests
 include(GoogleTest)
 gtest_discover_tests(mainTests)
