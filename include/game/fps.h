@@ -20,12 +20,16 @@ class FPS {
 
    private:
     Timer mFPSTimer;
-    int mCountedFrames{0};
-    int mCountedFramesInSecond{0};
+
+    std::stringstream mRenderText;
+    int mCountedRenderFrames{0};
+
+    std::stringstream mGameText;
+    int mCountedGameFrames{0};
 
     SDL_Color mTextColor{};
     Texture mTextTexture;
-    std::stringstream mTimeText;
+    Texture mGameRenderTexture;
 };
 
 #endif  // MAIN_FPS_H
