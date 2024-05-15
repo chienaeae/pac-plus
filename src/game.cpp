@@ -96,6 +96,7 @@ void Game::Run() {
     Uint64 lag = 0;
     mFPS.init();
 
+    std::cout << TICKS_PER_GAME_FRAME << "\n";
     while (!mQuit) {
         current = mClock.getTicks();
         Uint64 const elapsed = current - previous;
@@ -125,6 +126,7 @@ void Game::Close() {
 }
 
 void Game::update() {
+    mFPS.update();
     mSceneStateMachine.Update(mDeltaTime);
 }
 
@@ -151,9 +153,8 @@ void Game::renderUpdate() {
     SDL_RenderClear(gRenderer);
 
     // FPS handle each render update
-    mFPS.update();
+    mFPS.renderUpdate();
 
-    // test object handle each render update
     mSceneStateMachine.RenderUpdate();
 
     SDL_RenderPresent(gRenderer);

@@ -16,6 +16,8 @@ class FPS {
 
     void update();
 
+    void renderUpdate();
+
    private:
     Timer mFPSTimer;
     int mCountedFrames{0};

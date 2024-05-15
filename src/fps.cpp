@@ -6,28 +6,36 @@
 
 #include <SDL_stdinc.h>
 
-#include <cstdio>
 #include <iostream>
 
 #include "game/game.h"
 
-FPS::FPS() : mCountedFrames(0), mCountedFramesInSecond(0), mTextColor(255, 255, 255, 255) {}
+FPS::FPS() {
+    const int COLOR_R = 0;
+    const int COLOR_G = 0;
+    const int COLOR_B = 0;
+    const int COLOR_A = 0xFF;
+
+    mTextColor = {COLOR_R, COLOR_G, COLOR_B, COLOR_A};
+}
 
 void FPS::init() {
     mFPSTimer.start();
 }
 
 void FPS::update() {
-    // update frame per second
-    mCountedFrames++;
     Uint64 const ticks = mFPSTimer.getTicks();
     if (ticks >= MILLISECOND) {
         mFPSTimer.start();
         mCountedFramesInSecond = mCountedFrames;
         mCountedFrames = 0;
     }
+}
 
-    // Render
+void FPS::renderUpdate() {
+    // increment count by 1 per render frame
+    mCountedFrames++;
+
     // 1. Prepare FPS text to be rendered
     mTimeText.str("");
     mTimeText << "FPS: " << mCountedFramesInSecond;
