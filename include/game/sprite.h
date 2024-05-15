@@ -15,15 +15,15 @@ class Sprite {
 
     [[nodiscard]] auto getTexture() const -> const Texture*;
 
-    [[nodiscard]] auto getPositionX() const -> int;
+    int getPositionX() const;
 
-    [[nodiscard]] auto getPositionY() const -> int;
+    int getPositionY() const;
 
-    [[nodiscard]] auto getScaleX() const -> float;
+    float getScaleX() const;
 
-    [[nodiscard]] auto getScaleY() const -> float;
+    float getScaleY() const;
 
-    [[nodiscard]] auto getRotation() const -> int;
+    int getRotation() const;
 
     void setTextureRect(const SDL_Rect& tTextureRect);
 

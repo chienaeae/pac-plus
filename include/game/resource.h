@@ -11,13 +11,13 @@ class Resource {
    public:
     Resource() : mIsOn(false) {}
 
-    virtual bool LoadFromFile(std::string) {
+    virtual auto LoadFromFile(std::string) -> bool {
         return true;
     };
 
     virtual void Free() {};
 
-    virtual bool isOn() {
+    virtual auto isOn() -> int {
         return mIsOn;
     };
 

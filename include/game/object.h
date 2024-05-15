@@ -31,10 +31,10 @@ class Object {
 
     void QueueForRemoval();
 
-    bool IsQueuedForRemoval() const;
+    [[nodiscard]] auto IsQueuedForRemoval() const -> bool;
 
     template <typename T>
-    std::shared_ptr<T> AddComponent() {
+    auto AddComponent() -> std::shared_ptr<T> {
         // This ensures that we only try to add a class the derives
         // from Component. This is tested at compile time.
         static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
@@ -53,7 +53,7 @@ class Object {
     }
 
     template <typename T>
-    std::shared_ptr<T> GetComponent() {
+    auto GetComponent() -> std::shared_ptr<T> {
         static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
         for (auto& existingComponent : mComponents) {

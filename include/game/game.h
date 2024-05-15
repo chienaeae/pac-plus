@@ -21,7 +21,7 @@ const int TICKS_PER_GAME_FRAME = SECOND * MILLISECOND / GAME_FRAME;
 
 class Game {
    public:
-    bool Init();
+    auto Init() -> bool;
 
     void Run();
 

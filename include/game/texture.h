@@ -22,11 +22,11 @@ class Texture : public Resource {
 
     ~Texture() = default;
 
-    bool LoadFromFile(std::string path) override;
+    auto LoadFromFile(std::string path) -> bool override;
 
 #if defined(SDL_TTF_MAJOR_VERSION)
 
-    bool LoadFromRenderedText(const std::string &tText, SDL_Color tColor);
+    auto LoadFromRenderedText(const std::string &tText, SDL_Color tColor) -> bool;
 
 #endif
 
@@ -42,9 +42,9 @@ class Texture : public Resource {
                 float tScaleX = 1.0f, float tScaleY = 1.0f, SDL_Point *tCenter = nullptr,
                 SDL_RendererFlip tFlip = SDL_FLIP_NONE);
 
-    int GetWidth() const;
+    auto GetWidth() const -> int;
 
-    int GetHeight() const;
+    auto GetHeight() const -> int;
 
    private:
     SDL_Texture *mTexture{nullptr};

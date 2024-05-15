@@ -14,7 +14,7 @@ class ResourceAllocator {
    public:
     ResourceAllocator() : mCurrentID(0) {};
 
-    int Add(const std::string& tFilePath) {
+    auto Add(const std::string& tFilePath) -> int {
         auto it = mResources.find(tFilePath);
         if (it != mResources.end()) {
             return it->second.first;
@@ -38,7 +38,7 @@ class ResourceAllocator {
         }
     }
 
-    std::shared_ptr<T> Get(int tID) {
+    auto Get(int tID) -> std::shared_ptr<T> {
         for (auto it = mResources.begin(); it != mResources.end(); it++) {
             if (it->second.first == tID) {
                 return it->second.second;
@@ -48,7 +48,7 @@ class ResourceAllocator {
         return nullptr;
     }
 
-    bool Has(int tID) {
+    auto Has(int tID) -> bool {
         return (Get(tID) != nullptr);
     }
 

@@ -18,8 +18,8 @@ class ComponentTransform : public Component {
     void SetX(int tX);
     void SetY(int tY);
 
-    int GetPositionX() const;
-    int GetPositionY() const;
+    [[nodiscard]] auto GetPositionX() const -> int;
+    [[nodiscard]] auto GetPositionY() const -> int;
 
    private:
     int mPosX;

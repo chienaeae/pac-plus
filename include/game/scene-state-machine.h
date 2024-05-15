@@ -23,7 +23,7 @@ class SceneStateMachine {
 
     void RenderUpdate();
 
-    unsigned int Add(const std::shared_ptr<Scene>& tScene);
+    auto Add(const std::shared_ptr<Scene>& tScene) -> unsigned int;
 
     void SwitchTo(unsigned int tID);
 

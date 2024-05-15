@@ -21,7 +21,7 @@ class ObjectCollection {
     void EventUpdate(SDL_Event* tEvent);
     void RenderUpdate();
 
-    int Size();
+    auto Size() -> int;
     void Clear();
 
     // ProcessNewObjects: It separates the processing of new objects into its own method,

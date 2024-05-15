@@ -26,11 +26,11 @@ class Timer {
 
     void unpause();
 
-    Uint64 getTicks() const;
+    [[nodiscard]] auto getTicks() const -> Uint64;
 
-    bool isStarted() const;
+    [[nodiscard]] auto isStarted() const -> bool;
 
-    bool isPaused() const;
+    [[nodiscard]] auto isPaused() const -> bool;
 
    private:
     // The clock time when the timer started

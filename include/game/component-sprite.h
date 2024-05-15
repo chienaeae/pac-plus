@@ -17,9 +17,9 @@ class ComponentSprite : public Component {
    public:
     explicit ComponentSprite(Object* tOwner);
 
-    Sprite& GetSprite();
+    auto GetSprite() -> Sprite&;
 
-    std::shared_ptr<Texture> GetTexture();
+    auto GetTexture() -> std::shared_ptr<Texture>;
 
     void Load(const std::string& tFilePath);
 
