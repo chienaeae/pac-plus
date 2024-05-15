@@ -71,6 +71,11 @@ Also, you can use the command below to check the whole project:
 python3 run-clang-tidy.py -p <build_folder_include_compile_commands.json>
 ```
 > To see more details about `run-clang-tidy.py`, https://clang.llvm.org/extra/doxygen/run-clang-tidy_8py.html
+>
+> You can apply `-f` as the command below to auto fix:
+> ```angular2html
+> python3 run-clang-tidy.py -fix -p <build_folder_include_compile_commands.json>
+> ```
 
 **Alternative Method:** If `compile_commands.json` is not available or cannot be generated, you can still
 use `clang-tidy` to check a specific file. Note that in this case, we are assuming that your `include` directory is in
