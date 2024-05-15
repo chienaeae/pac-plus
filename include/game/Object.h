@@ -21,13 +21,13 @@ class Object {
 
     void Start();
 
-    void Update(float deltaTime);
+    void Update(float tDeltaTime);
 
-    void LateUpdate(float deltaTime);
+    void LateUpdate(float tDeltaTime);
 
     void RenderUpdate();
 
-    void EventUpdate(SDL_Event* e);
+    void EventUpdate(SDL_Event* tEvent);
 
     void QueueForRemoval();
 
@@ -39,7 +39,7 @@ class Object {
         // from Component. This is tested at compile time.
         static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
-        for (auto& existingComponent : components) {
+        for (auto& existingComponent : mComponents) {
             // Currently we prevent adding the same component twice.
             // This may be something we will change in the future.
             if (std::dynamic_pointer_cast<T>(existingComponent)) {
@@ -48,7 +48,7 @@ class Object {
         }
 
         std::shared_ptr<T> newComponent = std::make_shared<T>(this);
-        components.push_back(newComponent);
+        mComponents.push_back(newComponent);
         return newComponent;
     }
 
@@ -56,7 +56,7 @@ class Object {
     std::shared_ptr<T> GetComponent() {
         static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
-        for (auto& existingComponent : components) {
+        for (auto& existingComponent : mComponents) {
             if (std::dynamic_pointer_cast<T>(existingComponent)) {
                 return std::dynamic_pointer_cast<T>(existingComponent);
             }
@@ -65,12 +65,12 @@ class Object {
         return nullptr;
     }
 
-    std::shared_ptr<ComponentTransform> transform;
+    std::shared_ptr<ComponentTransform> Transform;
 
    private:
-    std::vector<std::shared_ptr<Component>> components;
+    std::vector<std::shared_ptr<Component>> mComponents;
 
-    bool queuedForRemoval;
+    bool mQueuedForRemoval;
 };
 
 #endif  // MAIN_OBJECT_H

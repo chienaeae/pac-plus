@@ -13,45 +13,45 @@
 #include "game/ResourceAllocator.h"
 #include "game/Sprite.h"
 
-ComponentSprite::ComponentSprite(Object* owner)
-    : Component(owner), textureID(-1), allocator(nullptr) {}
+ComponentSprite::ComponentSprite(Object* tOwner)
+    : Component(tOwner), mTextureID(-1), mAllocator(nullptr) {}
 
-void ComponentSprite::SetTextureAllocator(ResourceAllocator<LTexture>* a) {
-    this->allocator = a;
+void ComponentSprite::SetTextureAllocator(ResourceAllocator<LTexture>* tAllocator) {
+    this->mAllocator = tAllocator;
 }
 
 auto ComponentSprite::GetSprite() -> Sprite& {
-    return sprite;
+    return mSprite;
 }
 
 auto ComponentSprite::GetTexture() -> std::shared_ptr<LTexture> {
-    return allocator->Get(textureID);
+    return mAllocator->Get(mTextureID);
 }
 
-void ComponentSprite::Load(int id) {
-    if (id >= 0) {
-        std::shared_ptr<LTexture> const texture = allocator->Get(id);
-        sprite.setTexture(*texture, true);
+void ComponentSprite::Load(int tID) {
+    if (tID >= 0) {
+        std::shared_ptr<LTexture> const texture = mAllocator->Get(tID);
+        mSprite.setTexture(*texture, true);
     }
 }
 
-void ComponentSprite::Load(const std::string& filePath) {
-    if (allocator) {
-        int const id = allocator->Add(filePath);
+void ComponentSprite::Load(const std::string& tFilePath) {
+    if (mAllocator) {
+        int const id = mAllocator->Add(tFilePath);
 
         if (id >= 0) {
             Load(id);
-            textureID = id;
+            mTextureID = id;
         }
     }
 }
 
 void ComponentSprite::RenderUpdate() {
-    sprite.render();
+    mSprite.render();
 }
 
 void ComponentSprite::LateUpdate(float /*deltaTime*/) {
-    int const newPosX = owner->transform->GetPositionX();
-    int const newPosY = owner->transform->GetPositionY();
-    sprite.setPosition(newPosX, newPosY);
+    int const newPosX = mOwner->Transform->GetPositionX();
+    int const newPosY = mOwner->Transform->GetPositionY();
+    mSprite.setPosition(newPosX, newPosY);
 }

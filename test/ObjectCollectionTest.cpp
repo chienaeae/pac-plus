@@ -9,17 +9,17 @@ class ObjectCollectionTest : public ::testing::Test {
    protected:
     // 如果确实需要在派生类中访问 collection，可以使用受保护的访问函数
     auto getCollectionProtected() -> ObjectCollection& {
-        return collection;
+        return mCollection;
     }
 
     void SetUp() override {}
 
     void TearDown() override {
-        collection.Clear();
+        mCollection.Clear();
     }
 
    private:
-    ObjectCollection collection;
+    ObjectCollection mCollection;
 };
 
 TEST_F(ObjectCollectionTest, TestObjectCollectionAddMethodNotProcessed) {

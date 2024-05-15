@@ -12,12 +12,12 @@
 
 class Square : public GameObject {
    public:
-    void init(int x, int y, int a, LTexture *texture, SDL_Rect *clip) override;
+    void init(int tX, int tY, int tA, LTexture *tTexture, SDL_Rect *tClip) override;
 
     void render() override;
 
-    void update(float deltaTime) override;
+    void update(float tDeltaTime) override;
 
-    void eventUpdate(SDL_Event *e) override;
+    void eventUpdate(SDL_Event *tEvent) override;
 };
 #endif  // MAIN_SQUARE_H

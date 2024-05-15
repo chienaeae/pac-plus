@@ -12,35 +12,35 @@
 template <typename T>
 class ResourceAllocator {
    public:
-    ResourceAllocator() : currentID(0) {};
+    ResourceAllocator() : mCurrentID(0) {};
 
-    int Add(const std::string& filePath) {
-        auto it = resources.find(filePath);
-        if (it != resources.end()) {
+    int Add(const std::string& tFilePath) {
+        auto it = mResources.find(tFilePath);
+        if (it != mResources.end()) {
             return it->second.first;
         }
 
         std::shared_ptr<T> resource = std::make_shared<T>();
-        if (!resource->LoadFromFile(filePath)) {
+        if (!resource->LoadFromFile(tFilePath)) {
             return -1;
         }
 
-        resources.insert(std::make_pair(filePath, std::make_pair(currentID, resource)));
+        mResources.insert(std::make_pair(tFilePath, std::make_pair(mCurrentID, resource)));
 
-        return currentID++;
+        return mCurrentID++;
     }
 
-    void Remove(int id) {
-        for (auto it = resources.begin(); it != resources.end(); it++) {
-            if (it->second.first == id) {
-                resources.erase(it->first);
+    void Remove(int tID) {
+        for (auto it = mResources.begin(); it != mResources.end(); it++) {
+            if (it->second.first == tID) {
+                mResources.erase(it->first);
             }
         }
     }
 
-    std::shared_ptr<T> Get(int id) {
-        for (auto it = resources.begin(); it != resources.end(); it++) {
-            if (it->second.first == id) {
+    std::shared_ptr<T> Get(int tID) {
+        for (auto it = mResources.begin(); it != mResources.end(); it++) {
+            if (it->second.first == tID) {
                 return it->second.second;
             }
         }
@@ -48,13 +48,13 @@ class ResourceAllocator {
         return nullptr;
     }
 
-    bool Has(int id) {
-        return (Get(id) != nullptr);
+    bool Has(int tID) {
+        return (Get(tID) != nullptr);
     }
 
    private:
-    int currentID;
-    std::map<std::string, std::pair<int, std::shared_ptr<T>>> resources;
+    int mCurrentID;
+    std::map<std::string, std::pair<int, std::shared_ptr<T>>> mResources;
 };
 
 #endif  // MAIN_RESOURCEALLOCATOR_H

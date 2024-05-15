@@ -21,7 +21,7 @@
 
 LTexture::LTexture() = default;
 
-auto LTexture::LoadFromFile(std::string path) -> bool {
+auto LTexture::LoadFromFile(std::string tPath) -> bool {
     Free();
 
     SDL_Texture *newTexture = nullptr;
@@ -32,9 +32,9 @@ auto LTexture::LoadFromFile(std::string path) -> bool {
     // Option2:
     // 1. Create Surface
     // 2. Create Texture from Surface
-    SDL_Surface *loadedSurface = IMG_Load(path.c_str());
+    SDL_Surface *loadedSurface = IMG_Load(tPath.c_str());
     if (loadedSurface == nullptr) {
-        std::cout << "Unable to load image " << path.c_str() << "! SDL_Error: " << SDL_GetError()
+        std::cout << "Unable to load image " << tPath.c_str() << "! SDL_Error: " << SDL_GetError()
                   << "\n";
     } else {
         const int PIXEL_COLOR_R = 0;
@@ -45,7 +45,7 @@ auto LTexture::LoadFromFile(std::string path) -> bool {
             SDL_MapRGB(loadedSurface->format, PIXEL_COLOR_R, PIXEL_COLOR_G, PIXEL_COLOR_B));
         newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
         if (newTexture == nullptr) {
-            std::cout << "Unable to create texture from " << path.c_str() << "!\n";
+            std::cout << "Unable to create texture from " << tPath.c_str() << "!\n";
         } else {
             mWidth = loadedSurface->w;
             mHeight = loadedSurface->h;
@@ -57,14 +57,14 @@ auto LTexture::LoadFromFile(std::string path) -> bool {
     return mTexture != nullptr;
 }
 
-auto LTexture::LoadFromRenderedText(const std::string &text, const SDL_Color color) -> bool {
+auto LTexture::LoadFromRenderedText(const std::string &tText, const SDL_Color tColor) -> bool {
     Free();
     if (!gFont.isOn()) {
         std::cout << "gFont is NULL pointer! SDL_Error: " << SDL_GetError() << "\n";
         return false;
     }
 
-    SDL_Surface *textSurface = gFont.RenderTextSolid(text, color);
+    SDL_Surface *textSurface = gFont.RenderTextSolid(tText, tColor);
     if (textSurface == nullptr) {
         std::cout << "SDL_Surface could not initialized! SDL_Error: " << SDL_GetError() << "\n";
         return false;
@@ -82,16 +82,16 @@ auto LTexture::LoadFromRenderedText(const std::string &text, const SDL_Color col
     return true;
 }
 
-void LTexture::Render(int x, int y, SDL_Rect *clip, double angle, float scaleX, float scaleY,
-                      SDL_Point *center, SDL_RendererFlip flip) {
-    SDL_Rect renderQuad = {x, y, mWidth, mHeight};
+void LTexture::Render(int tX, int tY, SDL_Rect *tClip, double tAngle, float tScaleX, float tScaleY,
+                      SDL_Point *tCenter, SDL_RendererFlip tFlip) {
+    SDL_Rect renderQuad = {tX, tY, mWidth, mHeight};
 
-    if (clip != nullptr) {
-        renderQuad.w = static_cast<int>(static_cast<float>(clip->w) * scaleX);
-        renderQuad.h = static_cast<int>(static_cast<float>(clip->h) * scaleY);
+    if (tClip != nullptr) {
+        renderQuad.w = static_cast<int>(static_cast<float>(tClip->w) * tScaleX);
+        renderQuad.h = static_cast<int>(static_cast<float>(tClip->h) * tScaleY);
     }
 
-    SDL_RenderCopyEx(gRenderer, this->mTexture, clip, &renderQuad, angle, center, flip);
+    SDL_RenderCopyEx(gRenderer, mTexture, tClip, &renderQuad, tAngle, tCenter, tFlip);
 }
 
 auto LTexture::GetWidth() const -> int {
@@ -106,14 +106,14 @@ void LTexture::Free() {
     SDL_DestroyTexture(mTexture);
 }
 
-void LTexture::SetColor(Uint8 red, Uint8 green, Uint8 blue) {
-    SDL_SetTextureColorMod(mTexture, red, green, blue);
+void LTexture::SetColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue) {
+    SDL_SetTextureColorMod(mTexture, tRed, tGreen, tBlue);
 }
 
-void LTexture::SetBlendMode(SDL_BlendMode blending) {
-    SDL_SetTextureBlendMode(mTexture, blending);
+void LTexture::SetBlendMode(SDL_BlendMode tBlending) {
+    SDL_SetTextureBlendMode(mTexture, tBlending);
 }
 
-void LTexture::SetAlpha(Uint8 alpha) {
-    SDL_SetTextureAlphaMod(mTexture, alpha);
+void LTexture::SetAlpha(Uint8 tAlpha) {
+    SDL_SetTextureAlphaMod(mTexture, tAlpha);
 }

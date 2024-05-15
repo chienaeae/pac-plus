@@ -6,75 +6,75 @@
 
 #include "game/LTexture.h"
 
-Sprite::Sprite() : posX(0), posY(0), angle(0), textureRect(), scaleX(1.0f), scaleY(1.0f) {}
+Sprite::Sprite() : mPosX(0), mPosY(0), mAngle(0), mTextureRect(), mScaleX(1.0f), mScaleY(1.0f) {}
 
 auto Sprite::getTextureRect() const -> const SDL_Rect& {
-    return textureRect;
+    return mTextureRect;
 }
 
 auto Sprite::getTexture() const -> const LTexture* {
-    return &texture;
+    return &mTexture;
 }
 
 auto Sprite::getPositionX() const -> int {
-    return posX;
+    return mPosX;
 }
 
 auto Sprite::getPositionY() const -> int {
-    return posY;
+    return mPosY;
 }
 
 auto Sprite::getScaleX() const -> float {
-    return scaleX;
+    return mScaleX;
 }
 
 auto Sprite::getScaleY() const -> float {
-    return scaleY;
+    return mScaleY;
 }
 
 auto Sprite::getRotation() const -> int {
-    return angle;
+    return mAngle;
 }
 
-void Sprite::setTextureRect(const SDL_Rect& tr) {
-    textureRect = tr;
+void Sprite::setTextureRect(const SDL_Rect& tTextureRect) {
+    mTextureRect = tTextureRect;
 }
 
-void Sprite::setTexture(const LTexture& t, bool resetRect) {
-    if (resetRect) {
-        setTextureRect(SDL_Rect{0, 0, t.GetWidth(), t.GetHeight()});
+void Sprite::setTexture(const LTexture& tTexture, bool tResetRect) {
+    if (tResetRect) {
+        setTextureRect(SDL_Rect{0, 0, tTexture.GetWidth(), tTexture.GetHeight()});
     }
-    texture = t;
+    mTexture = tTexture;
 }
 
-void Sprite::setPosition(int x, int y) {
-    posX = x;
-    posY = y;
+void Sprite::setPosition(int tX, int tY) {
+    mPosX = tX;
+    mPosY = tY;
 }
 
-void Sprite::move(int offsetX, int offsetY) {
-    posX += offsetX;
-    posY += offsetY;
+void Sprite::move(int tOffsetX, int tOffsetY) {
+    mPosX += tOffsetX;
+    mPosY += tOffsetY;
 }
 
-void Sprite::setScale(float x, float y) {
-    scaleX = x;
-    scaleY = y;
+void Sprite::setScale(float tX, float tY) {
+    mScaleX = tX;
+    mScaleY = tY;
 }
 
-void Sprite::scale(float factorX, float factorY) {
-    scaleX *= factorX;
-    scaleY *= factorY;
+void Sprite::scale(float tFactorX, float tFactorY) {
+    mScaleX *= tFactorX;
+    mScaleY *= tFactorY;
 }
 
-void Sprite::setRotation(int a) {
-    angle = a;
+void Sprite::setRotation(int tAngle) {
+    mAngle = tAngle;
 }
 
-void Sprite::rotate(int a) {
-    angle += a;
+void Sprite::rotate(int tAngle) {
+    mAngle += tAngle;
 }
 
 void Sprite::render() {
-    texture.Render(posX, posY, &textureRect, angle, scaleX, scaleY);
+    mTexture.Render(mPosX, mPosY, &mTextureRect, mAngle, mScaleX, mScaleY);
 }

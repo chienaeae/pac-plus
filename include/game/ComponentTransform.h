@@ -9,21 +9,21 @@
 
 class ComponentTransform : public Component {
    public:
-    ComponentTransform(Object* owner);
+    explicit ComponentTransform(Object* tOwner);
 
-    void SetPosition(int x, int y);
+    void SetPosition(int tX, int tY);
 
-    void AddPosition(int x, int y);
+    void AddPosition(int tX, int tY);
 
-    void SetX(int x);
-    void SetY(int y);
+    void SetX(int tX);
+    void SetY(int tY);
 
     int GetPositionX() const;
     int GetPositionY() const;
 
    private:
-    int posX;
-    int posY;
+    int mPosX;
+    int mPosY;
 };
 
 #endif  // MAIN_COMPONENTTRANSFORM_H

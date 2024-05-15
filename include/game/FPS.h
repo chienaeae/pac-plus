@@ -21,9 +21,9 @@ class FPS {
     int mCountedFrames{0};
     int mCountedFramesInSecond{0};
 
-    SDL_Color textColor{};
-    LTexture textTexture;
-    std::stringstream timeText;
+    SDL_Color mTextColor{};
+    LTexture mTextTexture;
+    std::stringstream mTimeText;
 };
 
 #endif  // MAIN_FPS_H

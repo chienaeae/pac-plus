@@ -10,21 +10,21 @@
 
 #include "game/Object.h"
 
-void ObjectCollection::Update(float deltaTime) {
+void ObjectCollection::Update(float tDeltaTime) {
     for (auto& o : mObjects) {
-        o->Update(deltaTime);
+        o->Update(tDeltaTime);
     }
 }
 
-void ObjectCollection::LateUpdate(float deltaTime) {
+void ObjectCollection::LateUpdate(float tDeltaTime) {
     for (auto& o : mObjects) {
-        o->LateUpdate(deltaTime);
+        o->LateUpdate(tDeltaTime);
     }
 }
 
-void ObjectCollection::EventUpdate(SDL_Event* e) {
+void ObjectCollection::EventUpdate(SDL_Event* tEvent) {
     for (auto& o : mObjects) {
-        o->EventUpdate(e);
+        o->EventUpdate(tEvent);
     }
 }
 
@@ -46,8 +46,8 @@ void ObjectCollection::Clear() {
     }
 }
 
-void ObjectCollection::Add(const std::shared_ptr<Object>& object) {
-    mNewObjects.push_back(object);
+void ObjectCollection::Add(const std::shared_ptr<Object>& tObject) {
+    mNewObjects.push_back(tObject);
 }
 
 void ObjectCollection::ProcessNewObjects() {

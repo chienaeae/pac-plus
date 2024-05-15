@@ -6,30 +6,30 @@
 
 #include "game/Component.h"
 
-ComponentTransform::ComponentTransform(Object *owner) : Component(owner), posX(0), posY(0) {}
+ComponentTransform::ComponentTransform(Object *tOwner) : Component(tOwner), mPosX(0), mPosY(0) {}
 
-void ComponentTransform::SetPosition(int x, int y) {
-    posX = x;
-    posY = y;
+void ComponentTransform::SetPosition(int tX, int tY) {
+    mPosX = tX;
+    mPosY = tY;
 }
 
-void ComponentTransform::AddPosition(int x, int y) {
-    posX += x;
-    posY += y;
+void ComponentTransform::AddPosition(int tX, int tY) {
+    mPosX += tX;
+    mPosY += tY;
 }
 
-void ComponentTransform::SetX(int x) {
-    posX = x;
+void ComponentTransform::SetX(int tX) {
+    mPosX = tX;
 }
 
-void ComponentTransform::SetY(int y) {
-    posY = y;
+void ComponentTransform::SetY(int tY) {
+    mPosY = tY;
 }
 
 auto ComponentTransform::GetPositionX() const -> int {
-    return posX;
+    return mPosX;
 }
 
 auto ComponentTransform::GetPositionY() const -> int {
-    return posY;
+    return mPosY;
 }

@@ -15,26 +15,26 @@ class SceneStateMachine {
    public:
     SceneStateMachine();
 
-    void EventUpdate(SDL_Event* e);
+    void EventUpdate(SDL_Event* tEvent);
 
-    void Update(float deltaTime);
+    void Update(float tDeltaTime);
 
-    void LateUpdate(float deltaTime);
+    void LateUpdate(float tDeltaTime);
 
     void RenderUpdate();
 
-    unsigned int Add(const std::shared_ptr<Scene>& scene);
+    unsigned int Add(const std::shared_ptr<Scene>& tScene);
 
-    void SwitchTo(unsigned int id);
+    void SwitchTo(unsigned int tID);
 
-    void Remove(unsigned int id);
+    void Remove(unsigned int tID);
 
    private:
-    std::unordered_map<unsigned int, std::shared_ptr<Scene>> scenes;
+    std::unordered_map<unsigned int, std::shared_ptr<Scene>> mScenes;
 
-    std::shared_ptr<Scene> currentScene;
+    std::shared_ptr<Scene> mCurrentScene;
 
-    unsigned int insertedSceneID;
+    unsigned int mInsertedSceneID;
 };
 
 #endif  // MAIN_SCENESTATEMACHINE_H

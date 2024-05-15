@@ -16,8 +16,8 @@
 const int DEFAULT_FONT_SIZE = 24;
 Font::Font() : mFont(nullptr), mFontSize(DEFAULT_FONT_SIZE), mFontStyle(FONT_STYLE::NORMAL) {}
 
-auto Font::RenderTextSolid(const std::string &text, SDL_Color fg) -> SDL_Surface * {
-    SDL_Surface *textSurface = TTF_RenderText_Solid(mFont, text.c_str(), fg);
+auto Font::RenderTextSolid(const std::string &tText, SDL_Color tFG) -> SDL_Surface * {
+    SDL_Surface *textSurface = TTF_RenderText_Solid(mFont, tText.c_str(), tFG);
     if (textSurface == nullptr) {
         std::cout << "SDL_Surface could not initialized! SDL_Error: " << SDL_GetError() << "\n";
         return nullptr;
@@ -26,11 +26,11 @@ auto Font::RenderTextSolid(const std::string &text, SDL_Color fg) -> SDL_Surface
     return textSurface;
 }
 
-auto Font::LoadFromFile(std::string path) -> bool {
+auto Font::LoadFromFile(std::string tPath) -> bool {
     Free();
 
     bool success = false;
-    mFont = TTF_OpenFont(path.c_str(), mFontSize);
+    mFont = TTF_OpenFont(tPath.c_str(), mFontSize);
     if (mFont == nullptr) {
         std::cout << "Global Font could not be created! SDL_Error: " << SDL_GetError() << "\n";
         return success;
@@ -41,17 +41,17 @@ auto Font::LoadFromFile(std::string path) -> bool {
     return success;
 }
 
-auto Font::SetFontSize(int size) -> bool {
-    bool const success = TTF_SetFontSize(mFont, size) != 0;
+auto Font::SetFontSize(int tSize) -> bool {
+    bool const success = TTF_SetFontSize(mFont, tSize) != 0;
     if (!success) {
         return success;
     }
-    mFontSize = size;
+    mFontSize = tSize;
     return success;
 }
 
-void Font::SetStyle(FONT_STYLE style) {
-    switch (style) {
+void Font::SetStyle(FONT_STYLE tStyle) {
+    switch (tStyle) {
         case NORMAL:
             TTF_SetFontStyle(mFont, TTF_STYLE_NORMAL);
             break;
@@ -68,7 +68,7 @@ void Font::SetStyle(FONT_STYLE style) {
             TTF_SetFontStyle(mFont, TTF_STYLE_STRIKETHROUGH);
             break;
     }
-    mFontStyle = style;
+    mFontStyle = tStyle;
 }
 
 void Font::Free() {

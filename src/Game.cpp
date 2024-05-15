@@ -78,28 +78,28 @@ auto Game::Init() -> bool {
     }
 
     std::shared_ptr<SceneTest> const testScene =
-        std::make_shared<SceneTest>(sceneStateMachine, textureAllocator);
+        std::make_shared<SceneTest>(mSceneStateMachine, mTextureAllocator);
 
-    unsigned int const testSceneID = sceneStateMachine.Add(testScene);
+    unsigned int const testSceneID = mSceneStateMachine.Add(testScene);
 
-    sceneStateMachine.SwitchTo(testSceneID);
+    mSceneStateMachine.SwitchTo(testSceneID);
 
-    clock.start();
+    mClock.start();
 
     return success;
 }
 
 void Game::Run() {
-    quit = false;
-    Uint64 current = clock.getTicks();
+    mQuit = false;
+    Uint64 current = mClock.getTicks();
     Uint64 previous = current;
     Uint64 lag = 0;
-    fps.init();
+    mFPS.init();
 
-    while (!quit) {
-        current = clock.getTicks();
+    while (!mQuit) {
+        current = mClock.getTicks();
         Uint64 const elapsed = current - previous;
-        deltaTime = static_cast<float>(elapsed) / MILLISECOND;
+        mDeltaTime = static_cast<float>(elapsed) / MILLISECOND;
 
         lag += elapsed;
         eventUpdate();
@@ -125,20 +125,20 @@ void Game::Close() {
 }
 
 void Game::update() {
-    sceneStateMachine.Update(deltaTime);
+    mSceneStateMachine.Update(mDeltaTime);
 }
 
 void Game::lateUpdate() {
-    sceneStateMachine.LateUpdate(deltaTime);
+    mSceneStateMachine.LateUpdate(mDeltaTime);
 }
 
 void Game::eventUpdate() {
     SDL_Event e;
     while (SDL_PollEvent(&e) != 0) {
         if (e.type == SDL_QUIT) {
-            quit = true;
+            mQuit = true;
         }
-        sceneStateMachine.EventUpdate(&e);
+        mSceneStateMachine.EventUpdate(&e);
     }
 }
 
@@ -151,10 +151,10 @@ void Game::renderUpdate() {
     SDL_RenderClear(gRenderer);
 
     // FPS handle each render update
-    fps.update();
+    mFPS.update();
 
     // test object handle each render update
-    sceneStateMachine.RenderUpdate();
+    mSceneStateMachine.RenderUpdate();
 
     SDL_RenderPresent(gRenderer);
 }

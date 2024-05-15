@@ -14,25 +14,26 @@
 
 class SceneTest : public Scene {
    public:
-    SceneTest(SceneStateMachine& sceneStateMachine, ResourceAllocator<LTexture>& textureAllocator);
+    SceneTest(SceneStateMachine& tSceneStateMachine,
+              ResourceAllocator<LTexture>& tTextureAllocator);
 
     void OnCreate() override;
     void OnDestroy() override;
     void OnActivate() override;
 
-    void Update(float deltaTime) override;
-    void LateUpdate(float deltaTime) override;
-    void EventUpdate(SDL_Event* e) override;
+    void Update(float tDeltaTime) override;
+    void LateUpdate(float tDeltaTime) override;
+    void EventUpdate(SDL_Event* tEvent) override;
     void RenderUpdate() override;
 
-    void SetSwitchToScene(unsigned int id);
+    void SetSwitchToScene(unsigned int tID);
 
    private:
-    SceneStateMachine& sceneStateMachine;
+    SceneStateMachine& mSceneStateMachine;
 
-    ResourceAllocator<LTexture>& textureAllocator;
+    ResourceAllocator<LTexture>& mTextureAllocator;
 
-    ObjectCollection objects;
+    ObjectCollection mObjects;
     // How long the scene has currently been visible
     float currentSeconds{};
 

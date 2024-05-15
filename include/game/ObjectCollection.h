@@ -14,11 +14,11 @@
 
 class ObjectCollection {
    public:
-    void Add(const std::shared_ptr<Object>& object);
+    void Add(const std::shared_ptr<Object>& tObject);
 
-    void Update(float deltaTime);
-    void LateUpdate(float deltaTime);
-    void EventUpdate(SDL_Event* e);
+    void Update(float tDeltaTime);
+    void LateUpdate(float tDeltaTime);
+    void EventUpdate(SDL_Event* tEvent);
     void RenderUpdate();
 
     int Size();

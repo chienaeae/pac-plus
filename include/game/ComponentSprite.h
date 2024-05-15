@@ -14,26 +14,26 @@
 
 class ComponentSprite : public Component {
    public:
-    ComponentSprite(Object* owner);
+    explicit ComponentSprite(Object* tOwner);
 
     Sprite& GetSprite();
 
     std::shared_ptr<LTexture> GetTexture();
 
-    void Load(const std::string& filePath);
+    void Load(const std::string& tFilePath);
 
     void RenderUpdate() override;
 
-    void LateUpdate(float deltaTime) override;
+    void LateUpdate(float tDeltaTime) override;
 
-    void Load(int id);
+    void Load(int tID);
 
-    void SetTextureAllocator(ResourceAllocator<LTexture>* a);
+    void SetTextureAllocator(ResourceAllocator<LTexture>* tAllocator);
 
    private:
-    ResourceAllocator<LTexture>* allocator;
-    int textureID;
-    Sprite sprite;
+    ResourceAllocator<LTexture>* mAllocator;
+    int mTextureID;
+    Sprite mSprite;
 };
 
 #endif  // MAIN_COMPONENTSPRITE_H

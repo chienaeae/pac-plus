@@ -10,66 +10,66 @@
 
 #include "game/LTexture.h"
 
-void Square::init(int x, int y, int a, LTexture *texture, SDL_Rect *clip) {
-    this->texture = texture;
-    this->clip = clip;
+void Square::init(int tX, int tY, int tAngle, LTexture *tTexture, SDL_Rect *tClip) {
+    mTexture = tTexture;
+    mClip = tClip;
 
-    this->posX = x;
-    this->posY = y;
-    this->angle = a;
+    mPosX = tX;
+    mPosY = tY;
+    mAngle = tAngle;
 
-    this->velX = 0;
-    this->velY = 0;
-    this->velA = 0;
+    mVelX = 0;
+    mVelY = 0;
+    mVelA = 0;
 }
 
 void Square::render() {
-    this->texture->Render(this->posX, this->posY, clip, this->angle, 1.0f, 1.0f);
+    mTexture->Render(mPosX, mPosY, mClip, mAngle, 1.0f, 1.0f);
 }
 
 void Square::update(float /*deltaTime*/) {
-    this->posX += this->velX;
-    this->posY += this->velY;
-    this->angle += this->velA;
+    mPosX += mVelX;
+    mPosY += mVelY;
+    mAngle += mVelA;
 }
 
-void Square::eventUpdate(SDL_Event *e) {
-    if (e->type == SDL_KEYDOWN) {
-        switch (e->key.keysym.sym) {
+void Square::eventUpdate(SDL_Event *tEvent) {
+    if (tEvent->type == SDL_KEYDOWN) {
+        switch (tEvent->key.keysym.sym) {
             case SDLK_RIGHT:
-                velX = 3;
+                mVelX = 3;
                 break;
             case SDLK_LEFT:
-                velX = -3;
+                mVelX = -3;
                 break;
             case SDLK_UP:
-                velY = -3;
+                mVelY = -3;
                 break;
             case SDLK_DOWN:
-                velY = 3;
+                mVelY = 3;
                 break;
             case SDLK_z:
-                velA = -3;
+                mVelA = -3;
                 break;
             case SDLK_x:
-                velA = 3;
+                mVelA = 3;
                 break;
             default:
                 break;
         }
-    } else if (e->type == SDL_KEYUP) {
-        switch (e->key.keysym.sym) {
+    } else if (tEvent->type == SDL_KEYUP) {
+        switch (tEvent->key.keysym.sym) {
             case SDLK_RIGHT:
             case SDLK_LEFT:
-                velX = 0;
+                mVelX = 0;
                 break;
             case SDLK_UP:
             case SDLK_DOWN:
-                velY = 0;
+                mVelY = 0;
                 break;
             case SDLK_z:
             case SDLK_x:
-                velA = 0;
+                mVelA = 0;
                 break;
             default:
                 break;

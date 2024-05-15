@@ -15,15 +15,15 @@
 #include "game/ResourceAllocator.h"
 #include "game/SceneStateMachine.h"
 
-SceneTest::SceneTest(SceneStateMachine &sceneStateMachine,
-                     ResourceAllocator<LTexture> &textureAllocator)
-    : sceneStateMachine(sceneStateMachine), textureAllocator(textureAllocator) {}
+SceneTest::SceneTest(SceneStateMachine &tSceneStateMachine,
+                     ResourceAllocator<LTexture> &tTextureAllocator)
+    : mSceneStateMachine(tSceneStateMachine), mTextureAllocator(tTextureAllocator) {}
 
 void SceneTest::OnCreate() {
     std::shared_ptr<Object> const square = std::make_shared<Object>();
 
     auto sprite = square->AddComponent<ComponentSprite>();
-    sprite->SetTextureAllocator(&textureAllocator);
+    sprite->SetTextureAllocator(&mTextureAllocator);
     sprite->Load("assets/square.png");
 
     const float SCALE_X = 5.0f;
@@ -37,7 +37,7 @@ void SceneTest::OnCreate() {
 
     auto movement = square->AddComponent<ComponentKeyboardMovement>();
 
-    objects.Add(square);
+    mObjects.Add(square);
 }
 
 void SceneTest::OnActivate() {
@@ -46,25 +46,25 @@ void SceneTest::OnActivate() {
 
 void SceneTest::OnDestroy() {}
 
-void SceneTest::SetSwitchToScene(unsigned int id) {
-    switchToState = id;
+void SceneTest::SetSwitchToScene(unsigned int tID) {
+    switchToState = tID;
 }
 
-void SceneTest::Update(float deltaTime) {
-    currentSeconds += deltaTime;
-    objects.ProcessRemovals();
-    objects.ProcessNewObjects();
-    objects.Update(deltaTime);
+void SceneTest::Update(float tDeltaTime) {
+    currentSeconds += tDeltaTime;
+    mObjects.ProcessRemovals();
+    mObjects.ProcessNewObjects();
+    mObjects.Update(tDeltaTime);
 }
 
 void SceneTest::LateUpdate(float deltaTime) {
-    objects.LateUpdate(deltaTime);
+    mObjects.LateUpdate(deltaTime);
 }
 
 void SceneTest::EventUpdate(SDL_Event *e) {
-    objects.EventUpdate(e);
+    mObjects.EventUpdate(e);
 }
 
 void SceneTest::RenderUpdate() {
-    objects.RenderUpdate();
+    mObjects.RenderUpdate();
 }

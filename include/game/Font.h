@@ -17,13 +17,13 @@ class Font : public Resource {
 
     ~Font() = default;
 
-    SDL_Surface* RenderTextSolid(const std::string& text, SDL_Color fg);
+    SDL_Surface* RenderTextSolid(const std::string& tText, SDL_Color tFG);
 
-    bool LoadFromFile(std::string path) override;
+    bool LoadFromFile(std::string tPath) override;
 
-    bool SetFontSize(int size);
+    bool SetFontSize(int tSize);
 
-    void SetStyle(FONT_STYLE style);
+    void SetStyle(FONT_STYLE tStyle);
 
     void Free() override;
 

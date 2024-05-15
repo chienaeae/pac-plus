@@ -13,22 +13,22 @@ class Object;
 
 class Component {
    public:
-    explicit Component(Object *owner) : owner(owner) {};
+    explicit Component(Object *tOwner) : mOwner(tOwner) {};
 
     virtual void Awake() {};
 
     virtual void Start() {};
 
-    virtual void Update(float deltaTime) {};
+    virtual void Update(float tDeltaTime) {};
 
-    virtual void LateUpdate(float deltaTime) {};
+    virtual void LateUpdate(float tDeltaTime) {};
 
     virtual void RenderUpdate() {};
 
-    virtual void EventUpdate(SDL_Event *e) {};
+    virtual void EventUpdate(SDL_Event *tEvent) {};
 
    protected:
-    Object *owner;
+    Object *mOwner;
 };
 
 #endif  // MAIN_COMPONENT_H

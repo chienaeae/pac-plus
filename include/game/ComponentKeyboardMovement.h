@@ -11,18 +11,18 @@
 
 class ComponentKeyboardMovement : public Component {
    public:
-    ComponentKeyboardMovement(Object *owner);
+    explicit ComponentKeyboardMovement(Object *tOwner);
 
-    void SetSpeed(int speed);
+    void SetSpeed(int tSpeed);
 
-    void Update(float deltaTime) override;
+    void Update(float tDeltaTime) override;
 
-    void EventUpdate(SDL_Event *e) override;
+    void EventUpdate(SDL_Event *tEvent) override;
 
    private:
-    int moveSpeed;
-    int velX;
-    int velY;
+    int mMoveSpeed;
+    int mVelX;
+    int mVelY;
 };
 
 #endif  // MAIN_COMPONENTKEYBOARDMOVEMENT_H

@@ -43,18 +43,18 @@ class Game {
 
     void renderUpdate();
 
-    FPS fps;
+    FPS mFPS;
 
-    SceneStateMachine sceneStateMachine;
+    SceneStateMachine mSceneStateMachine;
 
-    ResourceAllocator<LTexture> textureAllocator;
+    ResourceAllocator<LTexture> mTextureAllocator;
 
-    LTimer clock;
+    LTimer mClock;
 
     // deltaTime: It records the last game loop update as seconds
-    float deltaTime;
+    float mDeltaTime;
 
-    bool quit;
+    bool mQuit;
 };
 
 #endif  // MAIN_GAME_H

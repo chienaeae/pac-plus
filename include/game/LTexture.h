@@ -26,21 +26,21 @@ class LTexture : public Resource {
 
 #if defined(SDL_TTF_MAJOR_VERSION)
 
-    bool LoadFromRenderedText(const std::string &text, SDL_Color color);
+    bool LoadFromRenderedText(const std::string &tText, SDL_Color tColor);
 
 #endif
 
     void Free() override;
 
-    void SetColor(Uint8 red, Uint8 green, Uint8 blue);
+    void SetColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue);
 
     void SetBlendMode(SDL_BlendMode blending);
 
     void SetAlpha(Uint8 alpha);
 
-    void Render(int x, int y, SDL_Rect *clip = nullptr, double angle = 0.0, float scaleX = 1.0f,
-                float scaleY = 1.0f, SDL_Point *center = nullptr,
-                SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void Render(int tX, int tY, SDL_Rect *tClip = nullptr, double tAngle = 0.0,
+                float tScaleX = 1.0f, float tScaleY = 1.0f, SDL_Point *tCenter = nullptr,
+                SDL_RendererFlip tFlip = SDL_FLIP_NONE);
 
     int GetWidth() const;
 

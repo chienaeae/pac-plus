@@ -11,30 +11,37 @@
 
 class GameObject {
    protected:
-    int velX;
-    int velY;
-    int velA;
-    int posX;
-    int posY;
-    int angle;
+    int mVelX;
+    int mVelY;
+    int mVelA;
+    int mPosX;
+    int mPosY;
+    int mAngle;
 
-    SDL_Rect *clip;
+    SDL_Rect *mClip;
 
-    LTexture *texture;
+    LTexture *mTexture;
 
    public:
     GameObject()
-        : velX(), velY(), velA(), posX(), posY(), angle(), clip(nullptr), texture(nullptr) {}
+        : mVelX(),
+          mVelY(),
+          mVelA(),
+          mPosX(),
+          mPosY(),
+          mAngle(),
+          mClip(nullptr),
+          mTexture(nullptr) {}
 
-    virtual void init(int x, int y, int a, LTexture *t, SDL_Rect *c) {};
+    virtual void init(int tX, int tY, int tA, LTexture *tTexture, SDL_Rect *tClip) {};
 
     virtual void render() {};
 
-    virtual void update(float deltaTime) {};
+    virtual void update(float tDeltaTime) {};
 
-    virtual void lateUpdate(float deltaTime) {};
+    virtual void lateUpdate(float tDeltaTime) {};
 
-    virtual void eventUpdate(SDL_Event *e) {};
+    virtual void eventUpdate(SDL_Event *tEvent) {};
 };
 
 #endif  // MAIN_GAMEOBJECT_H

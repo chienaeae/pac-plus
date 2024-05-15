@@ -25,36 +25,36 @@ class Sprite {
 
     int getRotation() const;
 
-    void setTextureRect(const SDL_Rect& tr);
+    void setTextureRect(const SDL_Rect& tTextureRect);
 
-    void setTexture(const LTexture& t, bool resetRect = false);
+    void setTexture(const LTexture& tTexture, bool tResetRect = false);
 
-    void setPosition(int x, int y);
+    void setPosition(int tX, int tY);
 
-    void move(int offsetX, int offsetY);
+    void move(int tOffsetX, int tOffsetY);
 
-    void setScale(float x, float y);
+    void setScale(float tX, float tY);
 
-    void scale(float factorX, float factorY);
+    void scale(float tFactorX, float tFactorY);
 
-    void setRotation(int a);
+    void setRotation(int tAngle);
 
-    void rotate(int a);
+    void rotate(int tAngle);
 
     void render();
 
    private:
-    int posX;
-    int posY;
+    int mPosX;
+    int mPosY;
 
-    float scaleX;
-    float scaleY;
+    float mScaleX;
+    float mScaleY;
 
-    int angle;
+    int mAngle;
 
-    SDL_Rect textureRect;
+    SDL_Rect mTextureRect;
 
-    LTexture texture;
+    LTexture mTexture;
 };
 
 #endif  // MAIN_SPRITE_H
