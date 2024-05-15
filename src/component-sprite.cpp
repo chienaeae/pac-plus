@@ -13,14 +13,14 @@
 #include "game/sprite.h"
 #include "game/texture.h"
 
-ComponentSprite::ComponentSprite(Object* tOwner)
-    : Component(tOwner), mTextureID(-1), mAllocator(nullptr) {}
+ComponentSprite::ComponentSprite(Object *tOwner)
+    : Component(tOwner), mTextureID(-1), mAllocator(nullptr), mSprite() {}
 
-void ComponentSprite::SetTextureAllocator(ResourceAllocator<Texture>* tAllocator) {
-    this->mAllocator = tAllocator;
+void ComponentSprite::SetTextureAllocator(ResourceAllocator<Texture> *tAllocator) {
+    mAllocator = tAllocator;
 }
 
-auto ComponentSprite::GetSprite() -> Sprite& {
+auto ComponentSprite::GetSprite() -> Sprite & {
     return mSprite;
 }
 
@@ -35,7 +35,7 @@ void ComponentSprite::Load(int tID) {
     }
 }
 
-void ComponentSprite::Load(const std::string& tFilePath) {
+void ComponentSprite::Load(const std::string &tFilePath) {
     if (mAllocator) {
         int const id = mAllocator->Add(tFilePath);
 

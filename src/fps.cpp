@@ -11,14 +11,7 @@
 
 #include "game/game.h"
 
-FPS::FPS() {
-    const int COLOR_R = 255;
-    const int COLOR_G = 255;
-    const int COLOR_B = 255;
-    const int COLOR_A = 255;
-
-    mTextColor = {COLOR_R, COLOR_G, COLOR_B, COLOR_A};
-}
+FPS::FPS() : mCountedFrames(0), mCountedFramesInSecond(0), mTextColor(255, 255, 255, 255) {}
 
 void FPS::init() {
     mFPSTimer.start();

@@ -7,11 +7,8 @@
 #include <SDL_events.h>
 
 #include "game/component-transform.h"
-#include "game/object.h"
 
-Object::Object() : mQueuedForRemoval(false) {
-    Transform = AddComponent<ComponentTransform>();
-}
+Object::Object() : mQueuedForRemoval(false), Transform(AddComponent<ComponentTransform>()) {}
 
 void Object::Awake() {
     for (int i = static_cast<int>(mComponents.size()) - 1; i >= 0; i--) {

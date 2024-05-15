@@ -11,9 +11,9 @@ class Sprite {
    public:
     Sprite();
 
-    [[nodiscard]] auto getTextureRect() const -> const SDL_Rect&;
+    [[nodiscard]] auto getTextureRect() const -> const SDL_Rect &;
 
-    [[nodiscard]] auto getTexture() const -> const Texture*;
+    [[nodiscard]] auto getTexture() const -> const Texture *;
 
     int getPositionX() const;
 
@@ -25,9 +25,9 @@ class Sprite {
 
     int getRotation() const;
 
-    void setTextureRect(const SDL_Rect& tTextureRect);
+    void setTextureRect(const SDL_Rect &tTextureRect);
 
-    void setTexture(const Texture& tTexture, bool tResetRect = false);
+    void setTexture(const Texture &tTexture, bool tResetRect = false);
 
     void setPosition(int tX, int tY);
 
@@ -44,17 +44,17 @@ class Sprite {
     void render();
 
    private:
-    int mPosX;
-    int mPosY;
+    int mPosX{0};
+    int mPosY{0};
 
-    float mScaleX;
-    float mScaleY;
+    float mScaleX{1.0f};
+    float mScaleY{1.0f};
 
-    int mAngle;
+    int mAngle{0};
 
-    SDL_Rect mTextureRect;
+    SDL_Rect mTextureRect{};
 
-    Texture mTexture;
+    Texture mTexture{};
 };
 
 #endif  // MAIN_SPRITE_H
