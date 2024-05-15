@@ -9,6 +9,9 @@ Checks: >
   bugprone-*,
   cppcoreguidelines-*,
   google-*,
+  -misc-non-private-member-variables-in-classes,
+  -cppcoreguidelines-avoid-non-const-global-variables,
+  -bugprone-easily-swappable-parameters
 WarningsAsErrors: '*'
 HeaderFilterRegex: ''
 FormatStyle: none
