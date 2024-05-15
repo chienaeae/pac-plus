@@ -8,31 +8,31 @@
 
 Sprite::Sprite() : posX(0), posY(0), angle(0), textureRect(), scaleX(1.0f), scaleY(1.0f) {}
 
-const SDL_Rect& Sprite::getTextureRect() const {
+auto Sprite::getTextureRect() const -> const SDL_Rect& {
     return textureRect;
 }
 
-const LTexture* Sprite::getTexture() const {
+auto Sprite::getTexture() const -> const LTexture* {
     return &texture;
 }
 
-int Sprite::getPositionX() const {
+auto Sprite::getPositionX() const -> int {
     return posX;
 }
 
-int Sprite::getPositionY() const {
+auto Sprite::getPositionY() const -> int {
     return posY;
 }
 
-float Sprite::getScaleX() const {
+auto Sprite::getScaleX() const -> float {
     return scaleX;
 }
 
-float Sprite::getScaleY() const {
+auto Sprite::getScaleY() const -> float {
     return scaleY;
 }
 
-int Sprite::getRotation() const {
+auto Sprite::getRotation() const -> int {
     return angle;
 }
 

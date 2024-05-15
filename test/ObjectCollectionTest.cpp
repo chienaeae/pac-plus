@@ -8,7 +8,7 @@
 class ObjectCollectionTest : public ::testing::Test {
    protected:
     // 如果确实需要在派生类中访问 collection，可以使用受保护的访问函数
-    ObjectCollection& getCollectionProtected() {
+    auto getCollectionProtected() -> ObjectCollection& {
         return collection;
     }
 

@@ -14,7 +14,7 @@
 #include <SDL_ttf.h>
 #include <SDL_video.h>
 
-#include <cstdio>
+#include <iostream>
 #include <memory>
 
 #include "SceneTest.h"
@@ -26,36 +26,39 @@ SDL_Window *gWindow = nullptr;
 SDL_Renderer *gRenderer = nullptr;
 Font gFont = {};
 
-bool Game::Init() {
+auto Game::Init() -> bool {
     bool success = true;
 
     // Init SDL SubSystems (Video)
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
-        printf("SDL could not initialized! SDL_Error: %s\n", SDL_GetError());
+        std::cout << "SDL could not initialized! SDL_Error: " << SDL_GetError() << "\n";
         return false;
     }
 
     // Init SDL_image for PNG loading
     int const imgFlags = IMG_INIT_PNG;
     if ((IMG_Init(imgFlags) & imgFlags) == 0) {
-        printf("SDL_image count not initialize! SDL_image Error: %s\n", IMG_GetError());
+        std::cout << "SDL_image count not initialize! SDL_image Error: " << SDL_GetError() << "\n";
         return false;
     }
 
     // Init SDL_mixer
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-        printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+    const int FREQUENCY = 44100;
+    const int CHANNEL = 2;
+    const int CHUNK_SIZE = 2048;
+    if (Mix_OpenAudio(FREQUENCY, MIX_DEFAULT_FORMAT, CHANNEL, CHUNK_SIZE) < 0) {
+        std::cout << "SDL_mixer could not initialize! SDL_mixer Error: " << SDL_GetError() << "\n";
         return false;
     }
 
     // Init SDL_ttf
     if (TTF_Init() == -1) {
-        printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+        std::cout << "SDL_ttf could not initialize! SDL_ttf Error: " << SDL_GetError() << "\n";
         return false;
     }
     success = gFont.LoadFromFile("assets/font/RedditSans-Regular.ttf");
     if (!success) {
-        printf("Global Font could not be created! SDL_Error: %s\n", SDL_GetError());
+        std::cout << "Global Font could not be created! SDL_Error: " << SDL_GetError() << "\n";
         return false;
     }
 
@@ -63,14 +66,14 @@ bool Game::Init() {
     gWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (gWindow == nullptr) {
-        printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+        std::cout << "Window could not be created! SDL_Error: " << SDL_GetError() << "\n";
         return false;
     }
 
     // Init SDL Renderer
     gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
     if (gRenderer == nullptr) {
-        printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
+        std::cout << "Renderer could not be created! SDL_Error: " << SDL_GetError() << "\n";
         return false;
     }
 
@@ -96,7 +99,7 @@ void Game::Run() {
     while (!quit) {
         current = clock.getTicks();
         Uint64 const elapsed = current - previous;
-        deltaTime = (float)elapsed / MILLISECOND;
+        deltaTime = static_cast<float>(elapsed) / MILLISECOND;
 
         lag += elapsed;
         eventUpdate();
@@ -140,7 +143,11 @@ void Game::eventUpdate() {
 }
 
 void Game::renderUpdate() {
-    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    const int COLOR_R = 0xFF;
+    const int COLOR_G = 0xFF;
+    const int COLOR_B = 0xFF;
+    const int COLOR_A = 0xFF;
+    SDL_SetRenderDrawColor(gRenderer, COLOR_R, COLOR_G, COLOR_B, COLOR_A);
     SDL_RenderClear(gRenderer);
 
     // FPS handle each render update

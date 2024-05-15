@@ -34,12 +34,12 @@ class LTimer {
 
    private:
     // The clock time when the timer started
-    Uint64 mStartTicks;
+    Uint64 mStartTicks{0};
     // The ticks stored when the timer was paused
-    Uint64 mPausedTicks;
+    Uint64 mPausedTicks{0};
 
-    bool mPaused;
-    bool mStarted;
+    bool mPaused{false};
+    bool mStarted{false};
 };
 
 #endif  // MAIN_LTIMER_H

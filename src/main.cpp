@@ -1,16 +1,15 @@
-#include <cstdlib>
 #define SDL_MAIN_HANDLED
 
 #include <cstdio>
+#include <cstdlib>
+#include <iostream>
 
 #include "game/Game.h"
 
-using namespace std;
-
-int main(int /*argc*/, char* /*argv*/[]) {
+auto main(int /*argc*/, char* /*argv*/[]) -> int {
     Game game;
     if (!game.Init()) {
-        printf("Failed to initialize!\n");
+        std::cout << "Failed to initialize!\n";
         Game::Close();
         return EXIT_FAILURE;
     }

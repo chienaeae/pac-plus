@@ -35,7 +35,7 @@ void SceneStateMachine::RenderUpdate() {
     }
 }
 
-unsigned int SceneStateMachine::Add(const std::shared_ptr<Scene>& scene) {
+auto SceneStateMachine::Add(const std::shared_ptr<Scene>& scene) -> unsigned int {
     auto inserted = scenes.insert(std::make_pair(insertedSceneID, scene));
 
     insertedSceneID++;

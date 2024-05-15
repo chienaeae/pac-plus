@@ -47,10 +47,10 @@ class LTexture : public Resource {
     int GetHeight() const;
 
    private:
-    SDL_Texture *mTexture;
+    SDL_Texture *mTexture{nullptr};
 
-    int mWidth;
-    int mHeight;
+    int mWidth{0};
+    int mHeight{0};
 };
 
 #endif  // MAIN_LTEXTURE_H

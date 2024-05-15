@@ -7,14 +7,17 @@
 #include <SDL_stdinc.h>
 
 #include <cstdio>
+#include <iostream>
 
 #include "game/Game.h"
 
 FPS::FPS() {
-    mCountedFrames = 0;
-    mCountedFramesInSecond = 0;
+    const int COLOR_R = 255;
+    const int COLOR_G = 255;
+    const int COLOR_B = 255;
+    const int COLOR_A = 255;
 
-    textColor = {0, 0, 0, 255};
+    textColor = {COLOR_R, COLOR_G, COLOR_B, COLOR_A};
 }
 
 void FPS::init() {
@@ -25,7 +28,7 @@ void FPS::update() {
     // update frame per second
     mCountedFrames++;
     Uint64 const ticks = mFPSTimer.getTicks();
-    if (ticks >= 1000) {
+    if (ticks >= MILLISECOND) {
         mFPSTimer.start();
         mCountedFramesInSecond = mCountedFrames;
         mCountedFrames = 0;
@@ -36,8 +39,10 @@ void FPS::update() {
     timeText.str("");
     timeText << "FPS: " << mCountedFramesInSecond;
     if (!textTexture.LoadFromRenderedText(timeText.str(), textColor)) {
-        printf("Unable to render FPS texture!\n");
+        std::cout << "Unable to render FPS texture!\n";
     }
     // 2. Render textures
-    textTexture.Render(SCREEN_WIDTH - textTexture.GetWidth() - 20, 20);
+    const int OFFSET_X = 20;
+    const int OFFSET_Y = 20;
+    textTexture.Render(SCREEN_WIDTH - textTexture.GetWidth() - OFFSET_X, OFFSET_Y);
 }

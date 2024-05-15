@@ -10,27 +10,29 @@
 #include <SDL_ttf.h>
 
 #include <cstdio>
+#include <iostream>
 #include <string>
 
-Font::Font() : mFont(nullptr), mFontSize(24), mFontStyle(FONT_STYLE::NORMAL) {}
+const int DEFAULT_FONT_SIZE = 24;
+Font::Font() : mFont(nullptr), mFontSize(DEFAULT_FONT_SIZE), mFontStyle(FONT_STYLE::NORMAL) {}
 
-SDL_Surface *Font::RenderTextSolid(const std::string &text, SDL_Color fg) {
+auto Font::RenderTextSolid(const std::string &text, SDL_Color fg) -> SDL_Surface * {
     SDL_Surface *textSurface = TTF_RenderText_Solid(mFont, text.c_str(), fg);
     if (textSurface == nullptr) {
-        printf("SDL_Surface could not initialized! SDL_Error: %s\n", SDL_GetError());
+        std::cout << "SDL_Surface could not initialized! SDL_Error: " << SDL_GetError() << "\n";
         return nullptr;
     }
 
     return textSurface;
 }
 
-bool Font::LoadFromFile(std::string path) {
+auto Font::LoadFromFile(std::string path) -> bool {
     Free();
 
     bool success = false;
     mFont = TTF_OpenFont(path.c_str(), mFontSize);
     if (mFont == nullptr) {
-        printf("Global Font could not be created! SDL_Error: %s\n", SDL_GetError());
+        std::cout << "Global Font could not be created! SDL_Error: " << SDL_GetError() << "\n";
         return success;
     }
     mIsOn = 1;
@@ -39,7 +41,7 @@ bool Font::LoadFromFile(std::string path) {
     return success;
 }
 
-bool Font::SetFontSize(int size) {
+auto Font::SetFontSize(int size) -> bool {
     bool const success = TTF_SetFontSize(mFont, size) != 0;
     if (!success) {
         return success;

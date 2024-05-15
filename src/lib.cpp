@@ -4,6 +4,6 @@
 
 #include "lib.h"
 
-int multiply(int x, int y) {
+auto multiply(int x, int y) -> int {
     return x * y;
 }

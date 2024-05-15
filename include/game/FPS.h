@@ -18,10 +18,10 @@ class FPS {
 
    private:
     LTimer mFPSTimer;
-    int mCountedFrames;
-    int mCountedFramesInSecond;
+    int mCountedFrames{0};
+    int mCountedFramesInSecond{0};
 
-    SDL_Color textColor;
+    SDL_Color textColor{};
     LTexture textTexture;
     std::stringstream timeText;
 };

@@ -7,12 +7,7 @@
 #include <SDL_stdinc.h>
 #include <SDL_timer.h>
 
-LTimer::LTimer() {
-    mStartTicks = 0;
-    mPausedTicks = 0;
-    mStarted = false;
-    mPaused = false;
-}
+LTimer::LTimer() = default;
 
 void LTimer::start() {
     mStarted = true;
@@ -46,7 +41,7 @@ void LTimer::unpause() {
     }
 }
 
-Uint64 LTimer::getTicks() const {
+auto LTimer::getTicks() const -> Uint64 {
     Uint64 time = 0;
 
     if (mStarted) {
@@ -60,10 +55,10 @@ Uint64 LTimer::getTicks() const {
     return time;
 }
 
-bool LTimer::isStarted() const {
+auto LTimer::isStarted() const -> bool {
     return mStarted;
 }
 
-bool LTimer::isPaused() const {
+auto LTimer::isPaused() const -> bool {
     return mPaused && mStarted;
 }

@@ -34,8 +34,8 @@ void ObjectCollection::RenderUpdate() {
     }
 }
 
-int ObjectCollection::Size() {
-    return (int)mObjects.size();
+auto ObjectCollection::Size() -> int {
+    return static_cast<int>(mObjects.size());
 }
 
 void ObjectCollection::Clear() {

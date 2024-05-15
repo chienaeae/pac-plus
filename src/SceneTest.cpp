@@ -25,8 +25,15 @@ void SceneTest::OnCreate() {
     auto sprite = square->AddComponent<ComponentSprite>();
     sprite->SetTextureAllocator(&textureAllocator);
     sprite->Load("assets/square.png");
-    sprite->GetSprite().setScale(5.0f, 5.0f);
-    sprite->GetTexture()->SetColor(0, 140, 255);
+
+    const float SCALE_X = 5.0f;
+    const float SCALE_Y = 5.0f;
+    sprite->GetSprite().setScale(SCALE_X, SCALE_Y);
+
+    const int COLOR_R = 0;
+    const int COLOR_G = 140;
+    const int COLOR_B = 255;
+    sprite->GetTexture()->SetColor(COLOR_R, COLOR_G, COLOR_B);
 
     auto movement = square->AddComponent<ComponentKeyboardMovement>();
 

@@ -34,9 +34,9 @@ class SceneTest : public Scene {
 
     ObjectCollection objects;
     // How long the scene has currently been visible
-    float currentSeconds;
+    float currentSeconds{};
 
-    unsigned int switchToState;
+    unsigned int switchToState{};
 };
 
 #endif  // MAIN_SCENETEST_H

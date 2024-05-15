@@ -20,11 +20,11 @@ void ComponentSprite::SetTextureAllocator(ResourceAllocator<LTexture>* a) {
     this->allocator = a;
 }
 
-Sprite& ComponentSprite::GetSprite() {
+auto ComponentSprite::GetSprite() -> Sprite& {
     return sprite;
 }
 
-std::shared_ptr<LTexture> ComponentSprite::GetTexture() {
+auto ComponentSprite::GetTexture() -> std::shared_ptr<LTexture> {
     return allocator->Get(textureID);
 }
 

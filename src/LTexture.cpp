@@ -14,17 +14,14 @@
 #include <SDL_surface.h>
 
 #include <cstdio>
+#include <iostream>
 #include <string>
 
 #include "game/Core.h"
 
-LTexture::LTexture() {
-    mTexture = nullptr;
-    mWidth = 0;
-    mHeight = 0;
-}
+LTexture::LTexture() = default;
 
-bool LTexture::LoadFromFile(std::string path) {
+auto LTexture::LoadFromFile(std::string path) -> bool {
     Free();
 
     SDL_Texture *newTexture = nullptr;
@@ -37,12 +34,18 @@ bool LTexture::LoadFromFile(std::string path) {
     // 2. Create Texture from Surface
     SDL_Surface *loadedSurface = IMG_Load(path.c_str());
     if (loadedSurface == nullptr) {
-        printf("Unable to load image %s! SDL_Error: %s\n", path.c_str(), SDL_GetError());
+        std::cout << "Unable to load image " << path.c_str() << "! SDL_Error: " << SDL_GetError()
+                  << "\n";
     } else {
-        SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
+        const int PIXEL_COLOR_R = 0;
+        const int PIXEL_COLOR_G = 0xFF;
+        const int PIXEL_COLOR_B = 0xFF;
+        SDL_SetColorKey(
+            loadedSurface, SDL_TRUE,
+            SDL_MapRGB(loadedSurface->format, PIXEL_COLOR_R, PIXEL_COLOR_G, PIXEL_COLOR_B));
         newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
         if (newTexture == nullptr) {
-            printf("Unable to create texture from %s!", path.c_str());
+            std::cout << "Unable to create texture from " << path.c_str() << "!\n";
         } else {
             mWidth = loadedSurface->w;
             mHeight = loadedSurface->h;
@@ -54,22 +57,22 @@ bool LTexture::LoadFromFile(std::string path) {
     return mTexture != nullptr;
 }
 
-bool LTexture::LoadFromRenderedText(const std::string &text, const SDL_Color color) {
+auto LTexture::LoadFromRenderedText(const std::string &text, const SDL_Color color) -> bool {
     Free();
     if (!gFont.isOn()) {
-        printf("gFont is NULL pointer! SDL_Error: %s\n", SDL_GetError());
+        std::cout << "gFont is NULL pointer! SDL_Error: " << SDL_GetError() << "\n";
         return false;
     }
 
     SDL_Surface *textSurface = gFont.RenderTextSolid(text, color);
     if (textSurface == nullptr) {
-        printf("SDL_Surface could not initialized! SDL_Error: %s\n", SDL_GetError());
+        std::cout << "SDL_Surface could not initialized! SDL_Error: " << SDL_GetError() << "\n";
         return false;
     }
 
     mTexture = SDL_CreateTextureFromSurface(gRenderer, textSurface);
     if (mTexture == nullptr) {
-        printf("SDL_Texture could not initialized! SDL_Error: %s\n", SDL_GetError());
+        std::cout << "SDL_Texture could not initialized! SDL_Error: " << SDL_GetError() << "\n";
         return false;
     }
     mWidth = textSurface->w;
@@ -84,18 +87,18 @@ void LTexture::Render(int x, int y, SDL_Rect *clip, double angle, float scaleX, 
     SDL_Rect renderQuad = {x, y, mWidth, mHeight};
 
     if (clip != nullptr) {
-        renderQuad.w = (int)((float)clip->w * scaleX);
-        renderQuad.h = (int)((float)clip->h * scaleY);
+        renderQuad.w = static_cast<int>(static_cast<float>(clip->w) * scaleX);
+        renderQuad.h = static_cast<int>(static_cast<float>(clip->h) * scaleY);
     }
 
     SDL_RenderCopyEx(gRenderer, this->mTexture, clip, &renderQuad, angle, center, flip);
 }
 
-int LTexture::GetWidth() const {
+auto LTexture::GetWidth() const -> int {
     return mWidth;
 }
 
-int LTexture::GetHeight() const {
+auto LTexture::GetHeight() const -> int {
     return mHeight;
 }
 

@@ -26,10 +26,10 @@ void ComponentTransform::SetY(int y) {
     posY = y;
 }
 
-int ComponentTransform::GetPositionX() const {
+auto ComponentTransform::GetPositionX() const -> int {
     return posX;
 }
 
-int ComponentTransform::GetPositionY() const {
+auto ComponentTransform::GetPositionY() const -> int {
     return posY;
 }
