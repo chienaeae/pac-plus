@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "game/Game.h"
+#include "game/game.h"
 
 auto main(int /*argc*/, char* /*argv*/[]) -> int {
     Game game;

@@ -7,7 +7,8 @@
 
 #include <SDL.h>
 
-#include "game/Component.h"
+#include "game/component.h"
+#include "game/object.h"
 
 class ComponentKeyboardMovement : public Component {
    public:

@@ -2,14 +2,13 @@
 // Created by mac on 2024/5/12.
 //
 
-#include "game/Font.h"
+#include "game/font.h"
 
 #include <SDL_error.h>
 #include <SDL_pixels.h>
 #include <SDL_surface.h>
 #include <SDL_ttf.h>
 
-#include <cstdio>
 #include <iostream>
 #include <string>
 

@@ -2,28 +2,28 @@
 // Created by mac on 2024/4/10.
 //
 
-#include "game/LTimer.h"
+#include "game/timer.h"
 
 #include <SDL_stdinc.h>
 #include <SDL_timer.h>
 
-LTimer::LTimer() = default;
+Timer::Timer() = default;
 
-void LTimer::start() {
+void Timer::start() {
     mStarted = true;
     mPaused = false;
     mStartTicks = SDL_GetTicks64();
     mPausedTicks = 0;
 }
 
-void LTimer::stop() {
+void Timer::stop() {
     mStartTicks = 0;
     mPausedTicks = 0;
     mStarted = false;
     mPaused = false;
 }
 
-void LTimer::pause() {
+void Timer::pause() {
     if (mStarted && !mPaused) {
         mPaused = true;
 
@@ -32,7 +32,7 @@ void LTimer::pause() {
     }
 }
 
-void LTimer::unpause() {
+void Timer::unpause() {
     if (mStarted && mPaused) {
         mPaused = false;
 
@@ -41,7 +41,7 @@ void LTimer::unpause() {
     }
 }
 
-auto LTimer::getTicks() const -> Uint64 {
+auto Timer::getTicks() const -> Uint64 {
     Uint64 time = 0;
 
     if (mStarted) {
@@ -55,10 +55,10 @@ auto LTimer::getTicks() const -> Uint64 {
     return time;
 }
 
-auto LTimer::isStarted() const -> bool {
+auto Timer::isStarted() const -> bool {
     return mStarted;
 }
 
-auto LTimer::isPaused() const -> bool {
+auto Timer::isPaused() const -> bool {
     return mPaused && mStarted;
 }

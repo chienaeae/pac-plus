@@ -5,7 +5,7 @@
 #ifndef MAIN_COMPONENTTRANSFORM_H
 #define MAIN_COMPONENTTRANSFORM_H
 
-#include "Component.h"
+#include "game/component.h"
 
 class ComponentTransform : public Component {
    public:

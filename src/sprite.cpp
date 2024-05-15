@@ -2,9 +2,9 @@
 // Created by mac on 2024/5/11.
 //
 
-#include "game/Sprite.h"
+#include "game/sprite.h"
 
-#include "game/LTexture.h"
+#include "game/texture.h"
 
 Sprite::Sprite() : mPosX(0), mPosY(0), mAngle(0), mTextureRect(), mScaleX(1.0f), mScaleY(1.0f) {}
 
@@ -12,7 +12,7 @@ auto Sprite::getTextureRect() const -> const SDL_Rect& {
     return mTextureRect;
 }
 
-auto Sprite::getTexture() const -> const LTexture* {
+auto Sprite::getTexture() const -> const Texture* {
     return &mTexture;
 }
 
@@ -40,7 +40,7 @@ void Sprite::setTextureRect(const SDL_Rect& tTextureRect) {
     mTextureRect = tTextureRect;
 }
 
-void Sprite::setTexture(const LTexture& tTexture, bool tResetRect) {
+void Sprite::setTexture(const Texture& tTexture, bool tResetRect) {
     if (tResetRect) {
         setTextureRect(SDL_Rect{0, 0, tTexture.GetWidth(), tTexture.GetHeight()});
     }

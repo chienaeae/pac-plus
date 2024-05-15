@@ -5,17 +5,16 @@
 #ifndef MAIN_SCENETEST_H
 #define MAIN_SCENETEST_H
 
-#include "Square.h"
-#include "game/Object.h"
-#include "game/ObjectCollection.h"
-#include "game/ResourceAllocator.h"
-#include "game/Scene.h"
-#include "game/SceneStateMachine.h"
+#include "game/object-collection.h"
+#include "game/object.h"
+#include "game/resource-allocator.h"
+#include "game/scene-state-machine.h"
+#include "game/scene.h"
+#include "square.h"
 
 class SceneTest : public Scene {
    public:
-    SceneTest(SceneStateMachine& tSceneStateMachine,
-              ResourceAllocator<LTexture>& tTextureAllocator);
+    SceneTest(SceneStateMachine& tSceneStateMachine, ResourceAllocator<Texture>& tTextureAllocator);
 
     void OnCreate() override;
     void OnDestroy() override;
@@ -31,7 +30,7 @@ class SceneTest : public Scene {
    private:
     SceneStateMachine& mSceneStateMachine;
 
-    ResourceAllocator<LTexture>& mTextureAllocator;
+    ResourceAllocator<Texture>& mTextureAllocator;
 
     ObjectCollection mObjects;
     // How long the scene has currently been visible

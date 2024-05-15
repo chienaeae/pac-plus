@@ -6,7 +6,7 @@
 #define MAIN_SCENESTATEMACHINE_H
 
 #include <SDL.h>
-#include <game/Scene.h>
+#include <game/scene.h>
 
 #include <memory>
 #include <unordered_map>

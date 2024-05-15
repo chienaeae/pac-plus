@@ -7,12 +7,12 @@
 
 #include <SDL.h>
 
-#include "game/GameObject.h"
-#include "game/LTexture.h"
+#include "game/game-object.h"
+#include "game/texture.h"
 
 class Square : public GameObject {
    public:
-    void init(int tX, int tY, int tA, LTexture *tTexture, SDL_Rect *tClip) override;
+    void init(int tX, int tY, int tA, Texture *tTexture, SDL_Rect *tClip) override;
 
     void render() override;
 

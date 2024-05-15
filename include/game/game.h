@@ -7,11 +7,11 @@
 
 #include <SDL.h>
 
-#include "game/Core.h"
-#include "game/FPS.h"
-#include "game/LTimer.h"
-#include "game/ResourceAllocator.h"
-#include "game/SceneStateMachine.h"
+#include "game/core.h"
+#include "game/fps.h"
+#include "game/resource-allocator.h"
+#include "game/scene-state-machine.h"
+#include "game/timer.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 960;
@@ -47,9 +47,9 @@ class Game {
 
     SceneStateMachine mSceneStateMachine;
 
-    ResourceAllocator<LTexture> mTextureAllocator;
+    ResourceAllocator<Texture> mTextureAllocator;
 
-    LTimer mClock;
+    Timer mClock;
 
     // deltaTime: It records the last game loop update as seconds
     float mDeltaTime;

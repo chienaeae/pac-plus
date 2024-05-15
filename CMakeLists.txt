@@ -14,34 +14,34 @@ enable_testing()
 
 include_directories(include)
 
-add_executable(main src/main.cpp src/FPS.cpp src/LTexture.cpp src/LTimer.cpp src/Square.cpp
-        src/SceneStateMachine.cpp
-        src/SceneTest.cpp
-        src/Game.cpp
-        src/Font.cpp
-        src/Sprite.cpp
-        src/Object.cpp
-        src/ComponentTransform.cpp
-        src/ComponentSprite.cpp
-        src/ComponentKeyboardMovement.cpp
-        src/ObjectCollection.cpp)
+add_executable(main src/main.cpp src/fps.cpp src/texture.cpp src/timer.cpp src/square.cpp
+        src/scene-state-machine.cpp
+        src/scene-test.cpp
+        src/game.cpp
+        src/font.cpp
+        src/sprite.cpp
+        src/object.cpp
+        src/component-transform.cpp
+        src/component-sprite.cpp
+        src/component-keyboard-movement.cpp
+        src/object-collection.cpp)
 
 target_compile_features(main PRIVATE cxx_std_20)
 
 add_library(lib STATIC src/lib.cpp)
 
 file(GLOB TEST_SOURCES "test/*.cpp")
-add_executable(mainTests ${TEST_SOURCES}  src/FPS.cpp src/LTexture.cpp src/LTimer.cpp src/Square.cpp
-        src/SceneStateMachine.cpp
-        src/SceneTest.cpp
-        src/Game.cpp
-        src/Font.cpp
-        src/Sprite.cpp
-        src/Object.cpp
-        src/ComponentTransform.cpp
-        src/ComponentSprite.cpp
-        src/ComponentKeyboardMovement.cpp
-        src/ObjectCollection.cpp)
+add_executable(mainTests ${TEST_SOURCES}  src/fps.cpp src/texture.cpp src/timer.cpp src/square.cpp
+        src/scene-state-machine.cpp
+        src/scene-test.cpp
+        src/game.cpp
+        src/font.cpp
+        src/sprite.cpp
+        src/object.cpp
+        src/component-transform.cpp
+        src/component-sprite.cpp
+        src/component-keyboard-movement.cpp
+        src/object-collection.cpp)
 
 # Here to find package
 find_package(GTest CONFIG REQUIRED)

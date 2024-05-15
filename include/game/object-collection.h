@@ -10,7 +10,7 @@
 #include <memory>
 #include <vector>
 
-#include "game/Object.h"
+#include "game/object.h"
 
 class ObjectCollection {
    public:

@@ -5,29 +5,29 @@
 #ifndef MAIN_SPRITE_H
 #define MAIN_SPRITE_H
 
-#include "game/LTexture.h"
+#include "game/texture.h"
 
 class Sprite {
    public:
     Sprite();
 
-    const SDL_Rect& getTextureRect() const;
+    [[nodiscard]] auto getTextureRect() const -> const SDL_Rect&;
 
-    const LTexture* getTexture() const;
+    [[nodiscard]] auto getTexture() const -> const Texture*;
 
-    int getPositionX() const;
+    [[nodiscard]] auto getPositionX() const -> int;
 
-    int getPositionY() const;
+    [[nodiscard]] auto getPositionY() const -> int;
 
-    float getScaleX() const;
+    [[nodiscard]] auto getScaleX() const -> float;
 
-    float getScaleY() const;
+    [[nodiscard]] auto getScaleY() const -> float;
 
-    int getRotation() const;
+    [[nodiscard]] auto getRotation() const -> int;
 
     void setTextureRect(const SDL_Rect& tTextureRect);
 
-    void setTexture(const LTexture& tTexture, bool tResetRect = false);
+    void setTexture(const Texture& tTexture, bool tResetRect = false);
 
     void setPosition(int tX, int tY);
 
@@ -54,7 +54,7 @@ class Sprite {
 
     SDL_Rect mTextureRect;
 
-    LTexture mTexture;
+    Texture mTexture;
 };
 
 #endif  // MAIN_SPRITE_H

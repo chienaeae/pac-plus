@@ -2,7 +2,7 @@
 // Created by mac on 2024/5/11.
 //
 
-#include "game/Game.h"
+#include "game/game.h"
 
 #include <SDL.h>
 #include <SDL_error.h>
@@ -17,10 +17,10 @@
 #include <iostream>
 #include <memory>
 
-#include "SceneTest.h"
-#include "game/Core.h"
-#include "game/Font.h"
-#include "game/SceneStateMachine.h"
+#include "game/core.h"
+#include "game/font.h"
+#include "game/scene-state-machine.h"
+#include "scene-test.h"
 
 SDL_Window *gWindow = nullptr;
 SDL_Renderer *gRenderer = nullptr;

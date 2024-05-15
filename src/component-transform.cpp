@@ -2,9 +2,9 @@
 // Created by mac on 2024/5/11.
 //
 
-#include "game/ComponentTransform.h"
+#include "game/component-transform.h"
 
-#include "game/Component.h"
+#include "game/component.h"
 
 ComponentTransform::ComponentTransform(Object *tOwner) : Component(tOwner), mPosX(0), mPosY(0) {}
 

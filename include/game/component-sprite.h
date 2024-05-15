@@ -7,10 +7,11 @@
 
 #include <string>
 
-#include "game/Component.h"
-#include "game/LTexture.h"
-#include "game/ResourceAllocator.h"
-#include "game/Sprite.h"
+#include "game/component.h"
+#include "game/object.h"
+#include "game/resource-allocator.h"
+#include "game/sprite.h"
+#include "game/texture.h"
 
 class ComponentSprite : public Component {
    public:
@@ -18,7 +19,7 @@ class ComponentSprite : public Component {
 
     Sprite& GetSprite();
 
-    std::shared_ptr<LTexture> GetTexture();
+    std::shared_ptr<Texture> GetTexture();
 
     void Load(const std::string& tFilePath);
 
@@ -28,10 +29,10 @@ class ComponentSprite : public Component {
 
     void Load(int tID);
 
-    void SetTextureAllocator(ResourceAllocator<LTexture>* tAllocator);
+    void SetTextureAllocator(ResourceAllocator<Texture>* tAllocator);
 
    private:
-    ResourceAllocator<LTexture>* mAllocator;
+    ResourceAllocator<Texture>* mAllocator;
     int mTextureID;
     Sprite mSprite;
 };

@@ -2,11 +2,12 @@
 // Created by mac on 2024/5/11.
 //
 
-#include "game/Object.h"
+#include "game/object.h"
 
 #include <SDL_events.h>
 
-#include "game/ComponentTransform.h"
+#include "game/component-transform.h"
+#include "game/object.h"
 
 Object::Object() : mQueuedForRemoval(false) {
     Transform = AddComponent<ComponentTransform>();

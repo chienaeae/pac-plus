@@ -7,7 +7,7 @@
 
 #include <SDL.h>
 
-#include "game/LTexture.h"
+#include "game/texture.h"
 
 class GameObject {
    protected:
@@ -20,7 +20,7 @@ class GameObject {
 
     SDL_Rect *mClip;
 
-    LTexture *mTexture;
+    Texture *mTexture;
 
    public:
     GameObject()
@@ -33,7 +33,7 @@ class GameObject {
           mClip(nullptr),
           mTexture(nullptr) {}
 
-    virtual void init(int tX, int tY, int tA, LTexture *tTexture, SDL_Rect *tClip) {};
+    virtual void init(int tX, int tY, int tA, Texture *tTexture, SDL_Rect *tClip) {};
 
     virtual void render() {};
 

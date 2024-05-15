@@ -2,12 +2,11 @@
 // Created by mac on 2024/5/10.
 //
 #include <SDL_events.h>
-#include <game/SceneStateMachine.h>
+#include <game/scene-state-machine.h>
 
 #include <memory>
-#include <utility>
 
-#include "game/Scene.h"
+#include "game/scene.h"
 
 SceneStateMachine::SceneStateMachine() : mCurrentScene(nullptr), mInsertedSceneID() {}
 

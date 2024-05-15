@@ -14,9 +14,9 @@
 #include <sstream>
 #include <string>
 
-class LTimer {
+class Timer {
    public:
-    LTimer();
+    Timer();
 
     void start();
 

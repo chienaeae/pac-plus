@@ -10,8 +10,8 @@
 #include <memory>
 #include <vector>
 
-#include "game/Component.h"
-#include "game/ComponentTransform.h"
+#include "game/component-transform.h"
+#include "game/component.h"
 
 class Object {
    public:

@@ -2,13 +2,12 @@
 // Created by mac on 2024/5/11.
 //
 
-#include "game/ComponentKeyboardMovement.h"
+#include "game/component-keyboard-movement.h"
 
 #include <SDL_events.h>
 #include <SDL_keycode.h>
 
-#include "game/Component.h"
-#include "game/Object.h"
+#include "game/component.h"
 
 ComponentKeyboardMovement::ComponentKeyboardMovement(Object *tOwner)
     : Component(tOwner), mMoveSpeed(3), mVelX(0), mVelY(0) {}

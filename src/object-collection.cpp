@@ -2,13 +2,13 @@
 // Created by mac on 2024/5/12.
 //
 
-#include "game/ObjectCollection.h"
+#include "game/object-collection.h"
 
 #include <SDL_events.h>
 
 #include <memory>
 
-#include "game/Object.h"
+#include "game/object.h"
 
 void ObjectCollection::Update(float tDeltaTime) {
     for (auto& o : mObjects) {

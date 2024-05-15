@@ -2,15 +2,15 @@
 // Created by mac on 2024/5/9.
 //
 
-#include "Square.h"
+#include "square.h"
 
 #include <SDL_events.h>
 #include <SDL_keycode.h>
 #include <SDL_rect.h>
 
-#include "game/LTexture.h"
+#include "game/texture.h"
 
-void Square::init(int tX, int tY, int tAngle, LTexture *tTexture, SDL_Rect *tClip) {
+void Square::init(int tX, int tY, int tAngle, Texture *tTexture, SDL_Rect *tClip) {
     mTexture = tTexture;
     mClip = tClip;
 

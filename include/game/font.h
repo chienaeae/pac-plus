@@ -7,7 +7,7 @@
 
 #include <SDL_ttf.h>
 
-#include "game/Resource.h"
+#include "game/resource.h"
 
 enum FONT_STYLE { NORMAL, BOLD, ITALIC, UNDERLINE, STRIKETHROUGH };
 

@@ -2,7 +2,7 @@
 // Created by mac on 2024/4/10.
 //
 
-#include "game/LTexture.h"
+#include "game/texture.h"
 
 #include <SDL_blendmode.h>
 #include <SDL_error.h>
@@ -17,11 +17,11 @@
 #include <iostream>
 #include <string>
 
-#include "game/Core.h"
+#include "game/core.h"
 
-LTexture::LTexture() = default;
+Texture::Texture() = default;
 
-auto LTexture::LoadFromFile(std::string tPath) -> bool {
+auto Texture::LoadFromFile(std::string tPath) -> bool {
     Free();
 
     SDL_Texture *newTexture = nullptr;
@@ -57,7 +57,7 @@ auto LTexture::LoadFromFile(std::string tPath) -> bool {
     return mTexture != nullptr;
 }
 
-auto LTexture::LoadFromRenderedText(const std::string &tText, const SDL_Color tColor) -> bool {
+auto Texture::LoadFromRenderedText(const std::string &tText, const SDL_Color tColor) -> bool {
     Free();
     if (!gFont.isOn()) {
         std::cout << "gFont is NULL pointer! SDL_Error: " << SDL_GetError() << "\n";
@@ -82,8 +82,8 @@ auto LTexture::LoadFromRenderedText(const std::string &tText, const SDL_Color tC
     return true;
 }
 
-void LTexture::Render(int tX, int tY, SDL_Rect *tClip, double tAngle, float tScaleX, float tScaleY,
-                      SDL_Point *tCenter, SDL_RendererFlip tFlip) {
+void Texture::Render(int tX, int tY, SDL_Rect *tClip, double tAngle, float tScaleX, float tScaleY,
+                     SDL_Point *tCenter, SDL_RendererFlip tFlip) {
     SDL_Rect renderQuad = {tX, tY, mWidth, mHeight};
 
     if (tClip != nullptr) {
@@ -94,26 +94,26 @@ void LTexture::Render(int tX, int tY, SDL_Rect *tClip, double tAngle, float tSca
     SDL_RenderCopyEx(gRenderer, mTexture, tClip, &renderQuad, tAngle, tCenter, tFlip);
 }
 
-auto LTexture::GetWidth() const -> int {
+auto Texture::GetWidth() const -> int {
     return mWidth;
 }
 
-auto LTexture::GetHeight() const -> int {
+auto Texture::GetHeight() const -> int {
     return mHeight;
 }
 
-void LTexture::Free() {
+void Texture::Free() {
     SDL_DestroyTexture(mTexture);
 }
 
-void LTexture::SetColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue) {
+void Texture::SetColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue) {
     SDL_SetTextureColorMod(mTexture, tRed, tGreen, tBlue);
 }
 
-void LTexture::SetBlendMode(SDL_BlendMode tBlending) {
+void Texture::SetBlendMode(SDL_BlendMode tBlending) {
     SDL_SetTextureBlendMode(mTexture, tBlending);
 }
 
-void LTexture::SetAlpha(Uint8 tAlpha) {
+void Texture::SetAlpha(Uint8 tAlpha) {
     SDL_SetTextureAlphaMod(mTexture, tAlpha);
 }

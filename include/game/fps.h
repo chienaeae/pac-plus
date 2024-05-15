@@ -5,8 +5,8 @@
 #ifndef MAIN_FPS_H
 #define MAIN_FPS_H
 
-#include "LTexture.h"
-#include "LTimer.h"
+#include "texture.h"
+#include "timer.h"
 
 class FPS {
    public:
@@ -17,12 +17,12 @@ class FPS {
     void update();
 
    private:
-    LTimer mFPSTimer;
+    Timer mFPSTimer;
     int mCountedFrames{0};
     int mCountedFramesInSecond{0};
 
     SDL_Color mTextColor{};
-    LTexture mTextTexture;
+    Texture mTextTexture;
     std::stringstream mTimeText;
 };
 

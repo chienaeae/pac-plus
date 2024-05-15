@@ -14,13 +14,13 @@
 #include <sstream>
 #include <string>
 
-#include "game/Resource.h"
+#include "game/resource.h"
 
-class LTexture : public Resource {
+class Texture : public Resource {
    public:
-    LTexture();
+    Texture();
 
-    ~LTexture() = default;
+    ~Texture() = default;
 
     bool LoadFromFile(std::string path) override;
 

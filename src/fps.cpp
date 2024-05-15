@@ -2,14 +2,14 @@
 // Created by mac on 2024/4/10.
 //
 
-#include "game/FPS.h"
+#include "game/fps.h"
 
 #include <SDL_stdinc.h>
 
 #include <cstdio>
 #include <iostream>
 
-#include "game/Game.h"
+#include "game/game.h"
 
 FPS::FPS() {
     const int COLOR_R = 255;

@@ -13,7 +13,7 @@
 #include <sstream>
 #include <string>
 
-#include "game/Font.h"
+#include "game/font.h"
 
 const int MILLISECOND = 1000;
 const int SECOND = 1;

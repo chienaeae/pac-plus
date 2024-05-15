@@ -2,21 +2,21 @@
 // Created by mac on 2024/5/11.
 //
 
-#include "SceneTest.h"
+#include "scene-test.h"
 
 #include <SDL_events.h>
 
 #include <memory>
 
-#include "game/ComponentKeyboardMovement.h"
-#include "game/ComponentSprite.h"
-#include "game/LTexture.h"
-#include "game/Object.h"
-#include "game/ResourceAllocator.h"
-#include "game/SceneStateMachine.h"
+#include "game/component-keyboard-movement.h"
+#include "game/component-sprite.h"
+#include "game/object.h"
+#include "game/resource-allocator.h"
+#include "game/scene-state-machine.h"
+#include "game/texture.h"
 
 SceneTest::SceneTest(SceneStateMachine &tSceneStateMachine,
-                     ResourceAllocator<LTexture> &tTextureAllocator)
+                     ResourceAllocator<Texture> &tTextureAllocator)
     : mSceneStateMachine(tSceneStateMachine), mTextureAllocator(tTextureAllocator) {}
 
 void SceneTest::OnCreate() {
