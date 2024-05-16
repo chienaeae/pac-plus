@@ -9,6 +9,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# The CMAKE_CXX_FLAGS_DEBUG is a string that holds the flags for the c++ compiler when the system is in debug mode.
+# The -fsanitize=address flag enables AddressSanitizer, it is a memory error detector for C++
+# The -fno-omit-frame-pointer flag disables omission of the frame pointer (sometimes needed for debugging)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit-frame-pointer")
+
+# CMAKE_LINKER_FLAGS_DEBUG is a string to hold the flags for the linker when the system is in debug mode.
+# The -fsanitize=address flag for the linker again, enables the AddressSanitizer
+set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=address")
+
 # Enable testing
 enable_testing()
 

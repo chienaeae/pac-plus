@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  BUILD_TYPE: Release
+  BUILD_TYPE: Debug
   C_COMPILER: gcc
   CXX_COMPILER: g++
   CFLAGS: "--coverage"
@@ -33,7 +33,7 @@ jobs:
         id: strings
         shell: bash
         run: |
-          echo "build-output-dir=${{ github.workspace }}/release" >> "$GITHUB_OUTPUT"
+          echo "build-output-dir=${{ github.workspace }}/deug" >> "$GITHUB_OUTPUT"
 
       - uses: actions/cache@v4
         id: cache-vcpkg
@@ -64,7 +64,7 @@ jobs:
         # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
         # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
         run: >
-          cmake --preset=release
+          cmake --preset=debug
           -B ${{ steps.strings.outputs.build-output-dir }}
           -DCMAKE_CXX_COMPILER=${{ env.CXX_COMPILER }}
           -DCMAKE_C_COMPILER=${{ env.C_COMPILER }}
