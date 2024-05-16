@@ -6,7 +6,7 @@
 
 #include "game/texture.h"
 
-Sprite::Sprite() : mPosX(0), mPosY(0), mAngle(0), mTextureRect(), mScaleX(1.0f), mScaleY(1.0f) {}
+Sprite::Sprite() = default;
 
 auto Sprite::getTextureRect() const -> const SDL_Rect& {
     return mTextureRect;
@@ -75,6 +75,6 @@ void Sprite::rotate(int tAngle) {
     mAngle += tAngle;
 }
 
-void Sprite::render() {
-    mTexture.Render(mPosX, mPosY, &mTextureRect, mAngle, mScaleX, mScaleY);
+void Sprite::render(SDL_Renderer* tRenderer) {
+    mTexture.Render(tRenderer, mPosX, mPosY, &mTextureRect, mAngle, mScaleX, mScaleY);
 }

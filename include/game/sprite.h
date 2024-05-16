@@ -41,7 +41,7 @@ class Sprite {
 
     void rotate(int tAngle);
 
-    void render();
+    void render(SDL_Renderer *tRenderer);
 
    private:
     int mPosX{0};

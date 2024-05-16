@@ -21,7 +21,7 @@ class SceneStateMachine {
 
     void LateUpdate(float tDeltaTime);
 
-    void RenderUpdate();
+    void RenderUpdate(SDL_Renderer* tRenderer);
 
     auto Add(const std::shared_ptr<Scene>& tScene) -> unsigned int;
 

@@ -14,7 +14,7 @@ class Square : public GameObject {
    public:
     void init(int tX, int tY, int tA, Texture *tTexture, SDL_Rect *tClip) override;
 
-    void render() override;
+    void render(SDL_Renderer *tRenderer) override;
 
     void update(float tDeltaTime) override;
 

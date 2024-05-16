@@ -26,6 +26,7 @@ include_directories(include)
 
 # Add game library
 add_library(game STATIC
+        src/window.cpp
         src/fps.cpp
         src/texture.cpp
         src/timer.cpp
@@ -43,7 +44,7 @@ add_library(game STATIC
 target_compile_features(game PRIVATE cxx_std_20)
 
 # Add main executable
-add_executable(pac-plus src/main.cpp)
+add_executable(pac-plus src/main.cpp src/pac-plus.cpp)
 target_compile_features(pac-plus PRIVATE cxx_std_20)
 
 # Add test executable

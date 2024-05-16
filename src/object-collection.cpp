@@ -6,6 +6,7 @@
 
 #include <SDL_events.h>
 
+#include <iostream>
 #include <memory>
 
 #include "game/object.h"
@@ -28,9 +29,9 @@ void ObjectCollection::EventUpdate(SDL_Event* tEvent) {
     }
 }
 
-void ObjectCollection::RenderUpdate() {
+void ObjectCollection::RenderUpdate(SDL_Renderer* tRenderer) {
     for (auto& o : mObjects) {
-        o->RenderUpdate();
+        o->RenderUpdate(tRenderer);
     }
 }
 

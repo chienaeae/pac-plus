@@ -24,13 +24,13 @@ class Scene {
     // Can be called many times in a typical game cycle.
     virtual void OnDeactivate() {};
 
-    virtual void EventUpdate(SDL_Event *e) {};
+    virtual void EventUpdate(SDL_Event* e) {};
 
     virtual void Update(float deltaTime) {};
 
     virtual void LateUpdate(float deltaTime) {};
 
-    virtual void RenderUpdate() {};
+    virtual void RenderUpdate(SDL_Renderer* tRenderer) {};
 };
 
 #endif  // MAIN_SCENE_H

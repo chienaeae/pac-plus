@@ -23,8 +23,8 @@ void Square::init(int tX, int tY, int tAngle, Texture *tTexture, SDL_Rect *tClip
     mVelA = 0;
 }
 
-void Square::render() {
-    mTexture->Render(mPosX, mPosY, mClip, mAngle, 1.0f, 1.0f);
+void Square::render(SDL_Renderer *tRenderer) {
+    mTexture->Render(tRenderer, mPosX, mPosY, mClip, mAngle, 1.0f, 1.0f);
 }
 
 void Square::update(float /*deltaTime*/) {
