@@ -2,24 +2,24 @@
 
 #include <memory>
 
-#include "game/Object.h"
-#include "game/ObjectCollection.h"
+#include "game/object-collection.h"
+#include "game/object.h"
 
 class ObjectCollectionTest : public ::testing::Test {
    protected:
     // 如果确实需要在派生类中访问 collection，可以使用受保护的访问函数
-    ObjectCollection& getCollectionProtected() {
-        return collection;
+    auto getCollectionProtected() -> ObjectCollection& {
+        return mCollection;
     }
 
     void SetUp() override {}
 
     void TearDown() override {
-        collection.Clear();
+        mCollection.Clear();
     }
 
    private:
-    ObjectCollection collection;
+    ObjectCollection mCollection;
 };
 
 TEST_F(ObjectCollectionTest, TestObjectCollectionAddMethodNotProcessed) {
