@@ -38,9 +38,9 @@ class Texture : public Resource {
 
     void SetAlpha(Uint8 alpha);
 
-    void Render(int tX, int tY, SDL_Rect *tClip = nullptr, double tAngle = 0.0,
-                float tScaleX = 1.0f, float tScaleY = 1.0f, SDL_Point *tCenter = nullptr,
-                SDL_RendererFlip tFlip = SDL_FLIP_NONE);
+    void Render(SDL_Renderer *tRenderer, int tX, int tY, SDL_Rect *tClip = nullptr,
+                double tAngle = 0.0, float tScaleX = 1.0f, float tScaleY = 1.0f,
+                SDL_Point *tCenter = nullptr, SDL_RendererFlip tFlip = SDL_FLIP_NONE);
 
     auto GetWidth() const -> int;
 

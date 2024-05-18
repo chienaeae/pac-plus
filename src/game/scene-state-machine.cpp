@@ -28,9 +28,9 @@ void SceneStateMachine::LateUpdate(float tDeltaTime) {
     }
 }
 
-void SceneStateMachine::RenderUpdate() {
+void SceneStateMachine::RenderUpdate(SDL_Renderer* tRenderer) {
     if (mCurrentScene) {
-        mCurrentScene->RenderUpdate();
+        mCurrentScene->RenderUpdate(tRenderer);
     }
 }
 

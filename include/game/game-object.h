@@ -35,7 +35,7 @@ class GameObject {
 
     virtual void init(int tX, int tY, int tA, Texture *tTexture, SDL_Rect *tClip) {};
 
-    virtual void render() {};
+    virtual void render(SDL_Renderer *tRenderer) {};
 
     virtual void update(float tDeltaTime) {};
 

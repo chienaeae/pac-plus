@@ -16,7 +16,7 @@ class FPS {
 
     void update();
 
-    void renderUpdate();
+    void renderUpdate(SDL_Renderer* tRenderer);
 
    private:
     void process();

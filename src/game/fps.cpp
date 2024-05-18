@@ -34,7 +34,7 @@ void FPS::update() {
     }
 }
 
-void FPS::renderUpdate() {
+void FPS::renderUpdate(SDL_Renderer* tRenderer) {
     // increment count by 1 per render frame
     mCountedRenderFrames++;
 
@@ -43,8 +43,9 @@ void FPS::renderUpdate() {
     const int OFFSET_Y = 20;
 
     // 2. Render textures
-    mGameRenderTexture.Render(SCREEN_WIDTH - mGameRenderTexture.GetWidth() - OFFSET_X, OFFSET_Y);
-    mTextTexture.Render(SCREEN_WIDTH - mTextTexture.GetWidth() - OFFSET_X, OFFSET_Y * 3);
+    mGameRenderTexture.Render(tRenderer, SCREEN_WIDTH - mGameRenderTexture.GetWidth() - OFFSET_X,
+                              OFFSET_Y);
+    mTextTexture.Render(tRenderer, SCREEN_WIDTH - mTextTexture.GetWidth() - OFFSET_X, OFFSET_Y * 3);
 }
 
 void FPS::process() {

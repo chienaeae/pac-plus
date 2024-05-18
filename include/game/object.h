@@ -25,7 +25,7 @@ class Object {
 
     void LateUpdate(float tDeltaTime);
 
-    void RenderUpdate();
+    void RenderUpdate(SDL_Renderer* tRenderer);
 
     void EventUpdate(SDL_Event* tEvent);
 

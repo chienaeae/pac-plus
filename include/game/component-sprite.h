@@ -23,7 +23,7 @@ class ComponentSprite : public Component {
 
     void Load(const std::string& tFilePath);
 
-    void RenderUpdate() override;
+    void RenderUpdate(SDL_Renderer* tRenderer) override;
 
     void LateUpdate(float tDeltaTime) override;
 

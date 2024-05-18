@@ -46,8 +46,8 @@ void ComponentSprite::Load(const std::string &tFilePath) {
     }
 }
 
-void ComponentSprite::RenderUpdate() {
-    mSprite.render();
+void ComponentSprite::RenderUpdate(SDL_Renderer *tRenderer) {
+    mSprite.render(tRenderer);
 }
 
 void ComponentSprite::LateUpdate(float /*deltaTime*/) {

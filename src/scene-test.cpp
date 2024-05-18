@@ -6,6 +6,7 @@
 
 #include <SDL_events.h>
 
+#include <iostream>
 #include <memory>
 
 #include "game/component-keyboard-movement.h"
@@ -65,6 +66,6 @@ void SceneTest::EventUpdate(SDL_Event *e) {
     mObjects.EventUpdate(e);
 }
 
-void SceneTest::RenderUpdate() {
-    mObjects.RenderUpdate();
+void SceneTest::RenderUpdate(SDL_Renderer *tRenderer) {
+    mObjects.RenderUpdate(tRenderer);
 }

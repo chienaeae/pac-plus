@@ -7,11 +7,14 @@
 
 #include <SDL.h>
 
+#include <memory>
+
 #include "game/core.h"
 #include "game/fps.h"
 #include "game/resource-allocator.h"
 #include "game/scene-state-machine.h"
 #include "game/timer.h"
+#include "game/window.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 960;
@@ -25,7 +28,17 @@ class Game {
 
     void Run();
 
-    static void Close();
+    auto IsRunning() const -> bool;
+
+    virtual void OnCreate() {}
+
+    virtual void Update(float deltaTime) {};
+
+    virtual void LateUpdate(float deltaTime) {};
+
+    virtual void RenderUpdate(SDL_Renderer* tRenderer) {};
+
+    virtual void EventUpdate(SDL_Event* tEvent) {};
 
    private:
     // update: This is where most of the game logic will go;
@@ -43,18 +56,17 @@ class Game {
 
     void renderUpdate();
 
-    FPS mFPS;
+    void close();
 
-    SceneStateMachine mSceneStateMachine;
-
-    ResourceAllocator<Texture> mTextureAllocator;
+    Window mWindow;
 
     Timer mClock;
-
     // deltaTime: It records the last game loop update as seconds
-    float mDeltaTime;
+    float mDeltaTime{};
 
-    bool mQuit;
+    FPS mFPS;
+
+    bool mQuit{};
 };
 
 #endif  // MAIN_GAME_H

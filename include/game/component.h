@@ -23,7 +23,7 @@ class Component {
 
     virtual void LateUpdate(float tDeltaTime) {};
 
-    virtual void RenderUpdate() {};
+    virtual void RenderUpdate(SDL_Renderer *tRenderer) {};
 
     virtual void EventUpdate(SDL_Event *tEvent) {};
 

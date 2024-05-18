@@ -19,7 +19,7 @@ class ObjectCollection {
     void Update(float tDeltaTime);
     void LateUpdate(float tDeltaTime);
     void EventUpdate(SDL_Event* tEvent);
-    void RenderUpdate();
+    void RenderUpdate(SDL_Renderer* tRenderer);
 
     auto Size() -> int;
     void Clear();

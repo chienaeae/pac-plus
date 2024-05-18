@@ -36,15 +36,15 @@ void Object::LateUpdate(float tDeltaTime) {
     }
 }
 
-void Object::EventUpdate(SDL_Event *tEvent) {
+void Object::EventUpdate(SDL_Event* tEvent) {
     for (int i = static_cast<int>(mComponents.size()) - 1; i >= 0; i--) {
         mComponents[i]->EventUpdate(tEvent);
     }
 }
 
-void Object::RenderUpdate() {
+void Object::RenderUpdate(SDL_Renderer* tRenderer) {
     for (int i = static_cast<int>(mComponents.size()) - 1; i >= 0; i--) {
-        mComponents[i]->RenderUpdate();
+        mComponents[i]->RenderUpdate(tRenderer);
     }
 }
 

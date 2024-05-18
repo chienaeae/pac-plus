@@ -82,8 +82,8 @@ auto Texture::LoadFromRenderedText(const std::string &tText, const SDL_Color tCo
     return true;
 }
 
-void Texture::Render(int tX, int tY, SDL_Rect *tClip, double tAngle, float tScaleX, float tScaleY,
-                     SDL_Point *tCenter, SDL_RendererFlip tFlip) {
+void Texture::Render(SDL_Renderer *tRenderer, int tX, int tY, SDL_Rect *tClip, double tAngle,
+                     float tScaleX, float tScaleY, SDL_Point *tCenter, SDL_RendererFlip tFlip) {
     SDL_Rect renderQuad = {tX, tY, mWidth, mHeight};
 
     if (tClip != nullptr) {
@@ -91,7 +91,7 @@ void Texture::Render(int tX, int tY, SDL_Rect *tClip, double tAngle, float tScal
         renderQuad.h = static_cast<int>(static_cast<float>(tClip->h) * tScaleY);
     }
 
-    SDL_RenderCopyEx(gRenderer, mTexture, tClip, &renderQuad, tAngle, tCenter, tFlip);
+    SDL_RenderCopyEx(tRenderer, mTexture, tClip, &renderQuad, tAngle, tCenter, tFlip);
 }
 
 auto Texture::GetWidth() const -> int {

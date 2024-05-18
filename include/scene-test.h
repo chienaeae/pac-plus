@@ -23,7 +23,7 @@ class SceneTest : public Scene {
     void Update(float tDeltaTime) override;
     void LateUpdate(float tDeltaTime) override;
     void EventUpdate(SDL_Event* tEvent) override;
-    void RenderUpdate() override;
+    void RenderUpdate(SDL_Renderer* tRenderer) override;
 
     void SetSwitchToScene(unsigned int tID);
 
