@@ -26,25 +26,23 @@ include_directories(include)
 
 # Add game library
 add_library(game STATIC
-        src/window.cpp
-        src/fps.cpp
-        src/texture.cpp
-        src/timer.cpp
-        src/square.cpp
-        src/scene-state-machine.cpp
-        src/scene-test.cpp
-        src/game.cpp
-        src/font.cpp
-        src/sprite.cpp
-        src/object.cpp
-        src/component-transform.cpp
-        src/component-sprite.cpp
-        src/component-keyboard-movement.cpp
-        src/object-collection.cpp)
+        src/game/window.cpp
+        src/game/fps.cpp
+        src/game/texture.cpp
+        src/game/timer.cpp
+        src/game/scene-state-machine.cpp
+        src/game/game.cpp
+        src/game/font.cpp
+        src/game/sprite.cpp
+        src/game/object.cpp
+        src/game/component-transform.cpp
+        src/game/component-sprite.cpp
+        src/game/component-keyboard-movement.cpp
+        src/game/object-collection.cpp)
 target_compile_features(game PRIVATE cxx_std_20)
 
 # Add main executable
-add_executable(pac-plus src/main.cpp src/pac-plus.cpp)
+add_executable(pac-plus src/main.cpp src/pac-plus.cpp src/scene-test.cpp src/square.cpp)
 target_compile_features(pac-plus PRIVATE cxx_std_20)
 
 # Add test executable
