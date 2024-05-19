@@ -28,8 +28,17 @@ auto ComponentSprite::GetTexture() -> std::shared_ptr<Texture> {
     return mAllocator->Get(mTextureID);
 }
 
+void ComponentSprite::setTextureRect(int x, int y, int width, int height) {
+    mSprite.setTextureRect(SDL_Rect{x, y, width, height});
+}
+
+void ComponentSprite::setTextureRect(const SDL_Rect &rect) {
+    mSprite.setTextureRect(rect);
+}
+
 void ComponentSprite::Load(int tID) {
-    if (tID >= 0) {
+    if (tID >= 0 && tID != mTextureID) {
+        mTextureID = tID;
         std::shared_ptr<Texture> const texture = mAllocator->Get(tID);
         mSprite.setTexture(*texture, true);
     }
@@ -41,7 +50,6 @@ void ComponentSprite::Load(const std::string &tFilePath) {
 
         if (id >= 0) {
             Load(id);
-            mTextureID = id;
         }
     }
 }
