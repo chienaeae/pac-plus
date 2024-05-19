@@ -9,6 +9,7 @@
 #include <iostream>
 #include <memory>
 
+#include "game/component-animation.h"
 #include "game/component-keyboard-movement.h"
 #include "game/component-sprite.h"
 #include "game/object.h"
@@ -21,24 +22,27 @@ SceneTest::SceneTest(SceneStateMachine &tSceneStateMachine,
     : mSceneStateMachine(tSceneStateMachine), mTextureAllocator(tTextureAllocator) {}
 
 void SceneTest::OnCreate() {
-    std::shared_ptr<Object> const square = std::make_shared<Object>();
+    std::shared_ptr<Object> const player = std::make_shared<Object>();
 
-    auto sprite = square->AddComponent<ComponentSprite>();
+    auto sprite = player->AddComponent<ComponentSprite>();
     sprite->SetTextureAllocator(&mTextureAllocator);
-    sprite->Load("assets/square.png");
+    int actorTextureID = mTextureAllocator.Add("assets/example.png");
 
-    const float SCALE_X = 5.0f;
-    const float SCALE_Y = 5.0f;
-    sprite->Scale(SCALE_X, SCALE_Y);
+    auto animation = player->AddComponent<ComponentAnimation>();
+    const int frameWidth = 32;
+    const int frameHeight = 32;
+    std::shared_ptr<Animation> idleAnimation = std::make_shared<Animation>();
+    const float idleAnimFrameSeconds = 0.2f;
+    idleAnimation->AddFrame(actorTextureID, 0, 0, frameWidth, frameHeight, idleAnimFrameSeconds);
+    idleAnimation->AddFrame(actorTextureID, frameWidth * 1, 0, frameWidth, frameHeight,
+                            idleAnimFrameSeconds);
+    idleAnimation->AddFrame(actorTextureID, frameWidth * 2, 0, frameWidth, frameHeight,
+                            idleAnimFrameSeconds);
+    animation->AddAnimation(AnimationState::Idle, idleAnimation);
 
-    const int COLOR_R = 0;
-    const int COLOR_G = 140;
-    const int COLOR_B = 255;
-    sprite->SetTextureColor(COLOR_R, COLOR_G, COLOR_B);
+    auto movement = player->AddComponent<ComponentKeyboardMovement>();
 
-    auto movement = square->AddComponent<ComponentKeyboardMovement>();
-
-    mObjects.Add(square);
+    mObjects.Add(player);
 }
 
 void SceneTest::OnActivate() {
