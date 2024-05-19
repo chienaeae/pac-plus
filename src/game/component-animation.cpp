@@ -22,7 +22,7 @@ void ComponentAnimation::Update(float tDeltaTime) {
 
             mSprite->Load(data.id);
 
-            mSprite->setTextureRect(data.x, data.y, data.width, data.height);
+            mSprite->SetTextureRect(data.x, data.y, data.width, data.height);
         }
     }
 }

@@ -21,9 +21,9 @@ class ComponentSprite : public Component {
 
     auto GetTexture() -> std::shared_ptr<Texture>;
 
-    void setTextureRect(int x, int y, int width, int height);
+    void SetTextureRect(int x, int y, int width, int height);
 
-    void setTextureRect(const SDL_Rect& rect);
+    void SetTextureRect(const SDL_Rect& rect);
 
     void Load(const std::string& tFilePath);
 

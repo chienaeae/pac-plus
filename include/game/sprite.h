@@ -11,37 +11,37 @@ class Sprite {
    public:
     Sprite();
 
-    [[nodiscard]] auto getTextureRect() const -> const SDL_Rect &;
+    [[nodiscard]] auto GetTextureRect() const -> const SDL_Rect &;
 
-    [[nodiscard]] auto getTexture() const -> const Texture *;
+    [[nodiscard]] auto GetTexture() const -> const Texture *;
 
-    int getPositionX() const;
+    int GetPositionX() const;
 
-    int getPositionY() const;
+    int GetPositionY() const;
 
-    float getScaleX() const;
+    float GetScaleX() const;
 
-    float getScaleY() const;
+    float GetScaleY() const;
 
-    int getRotation() const;
+    int GetRotation() const;
 
-    void setTextureRect(const SDL_Rect &tTextureRect);
+    void SetTextureRect(const SDL_Rect &tTextureRect);
 
-    void setTexture(const Texture &tTexture, bool tResetRect = false);
+    void SetTexture(const Texture &tTexture, bool tResetRect = false);
 
-    void setPosition(int tX, int tY);
+    void SetPosition(int tX, int tY);
 
-    void move(int tOffsetX, int tOffsetY);
+    void Move(int tOffsetX, int tOffsetY);
 
-    void setScale(float tX, float tY);
+    void SetScale(float tX, float tY);
 
-    void scale(float tFactorX, float tFactorY);
+    void Scale(float tFactorX, float tFactorY);
 
-    void setRotation(int tAngle);
+    void SetRotation(int tAngle);
 
-    void rotate(int tAngle);
+    void Rotate(int tAngle);
 
-    void render(SDL_Renderer *tRenderer);
+    void Render(SDL_Renderer *tRenderer);
 
    private:
     int mPosX{0};

@@ -29,7 +29,7 @@ void SceneTest::OnCreate() {
 
     const float SCALE_X = 5.0f;
     const float SCALE_Y = 5.0f;
-    sprite->GetSprite().setScale(SCALE_X, SCALE_Y);
+    sprite->GetSprite().SetScale(SCALE_X, SCALE_Y);
 
     const int COLOR_R = 0;
     const int COLOR_G = 140;
