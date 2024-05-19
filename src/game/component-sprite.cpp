@@ -20,12 +20,12 @@ void ComponentSprite::SetTextureAllocator(ResourceAllocator<Texture> *tAllocator
     mAllocator = tAllocator;
 }
 
-auto ComponentSprite::GetSprite() -> Sprite & {
-    return mSprite;
+void ComponentSprite::Scale(float tFactorX, float tFactorY) {
+    mSprite.Scale(tFactorX, tFactorY);
 }
 
-auto ComponentSprite::GetTexture() -> std::shared_ptr<Texture> {
-    return mAllocator->Get(mTextureID);
+void ComponentSprite::SetTextureColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue) {
+    mSprite.SetTextureColor(tRed, tGreen, tBlue);
 }
 
 void ComponentSprite::SetTextureRect(int x, int y, int width, int height) {

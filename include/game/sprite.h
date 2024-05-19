@@ -41,6 +41,8 @@ class Sprite {
 
     void Rotate(int tAngle);
 
+    void SetTextureColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue);
+
     void Render(SDL_Renderer *tRenderer);
 
    private:

@@ -75,6 +75,10 @@ void Sprite::Rotate(int tAngle) {
     mAngle += tAngle;
 }
 
+void Sprite::SetTextureColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue) {
+    mTexture.SetColor(tRed, tGreen, tBlue);
+}
+
 void Sprite::Render(SDL_Renderer* tRenderer) {
     mTexture.Render(tRenderer, mPosX, mPosY, &mTextureRect, mAngle, mScaleX, mScaleY);
 }
