@@ -17,9 +17,17 @@ class ComponentSprite : public Component {
    public:
     explicit ComponentSprite(Object* tOwner);
 
-    auto GetSprite() -> Sprite&;
+    void Scale(float tFactorX, float tFactorY);
 
-    auto GetTexture() -> std::shared_ptr<Texture>;
+    void SetFlip(FLIP tFlip);
+
+    void SetRotation(int tAngle);
+
+    void SetTextureColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue);
+
+    void SetTextureRect(int x, int y, int width, int height);
+
+    void SetTextureRect(const SDL_Rect& rect);
 
     void Load(const std::string& tFilePath);
 

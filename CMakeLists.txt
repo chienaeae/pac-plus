@@ -29,6 +29,7 @@ add_library(game STATIC
         src/game/window.cpp
         src/game/fps.cpp
         src/game/texture.cpp
+        src/game/animation.cpp
         src/game/timer.cpp
         src/game/scene-state-machine.cpp
         src/game/game.cpp
@@ -37,6 +38,7 @@ add_library(game STATIC
         src/game/object.cpp
         src/game/component-transform.cpp
         src/game/component-sprite.cpp
+        src/game/component-animation.cpp
         src/game/component-keyboard-movement.cpp
         src/game/object-collection.cpp)
 target_compile_features(game PRIVATE cxx_std_20)

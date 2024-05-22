@@ -8,73 +8,82 @@
 
 Sprite::Sprite() = default;
 
-auto Sprite::getTextureRect() const -> const SDL_Rect& {
+auto Sprite::GetTextureRect() const -> const SDL_Rect& {
     return mTextureRect;
 }
 
-auto Sprite::getTexture() const -> const Texture* {
+auto Sprite::GetTexture() const -> const Texture* {
     return &mTexture;
 }
 
-auto Sprite::getPositionX() const -> int {
+auto Sprite::GetPositionX() const -> int {
     return mPosX;
 }
 
-auto Sprite::getPositionY() const -> int {
+auto Sprite::GetPositionY() const -> int {
     return mPosY;
 }
 
-auto Sprite::getScaleX() const -> float {
+auto Sprite::GetScaleX() const -> float {
     return mScaleX;
 }
 
-auto Sprite::getScaleY() const -> float {
+auto Sprite::GetScaleY() const -> float {
     return mScaleY;
 }
 
-auto Sprite::getRotation() const -> int {
+auto Sprite::GetRotation() const -> int {
     return mAngle;
 }
 
-void Sprite::setTextureRect(const SDL_Rect& tTextureRect) {
+void Sprite::SetTextureRect(const SDL_Rect& tTextureRect) {
     mTextureRect = tTextureRect;
 }
 
-void Sprite::setTexture(const Texture& tTexture, bool tResetRect) {
+void Sprite::SetTexture(const Texture& tTexture, bool tResetRect) {
     if (tResetRect) {
-        setTextureRect(SDL_Rect{0, 0, tTexture.GetWidth(), tTexture.GetHeight()});
+        SetTextureRect(SDL_Rect{0, 0, tTexture.GetWidth(), tTexture.GetHeight()});
     }
     mTexture = tTexture;
 }
 
-void Sprite::setPosition(int tX, int tY) {
+void Sprite::SetPosition(int tX, int tY) {
     mPosX = tX;
     mPosY = tY;
 }
 
-void Sprite::move(int tOffsetX, int tOffsetY) {
+void Sprite::Move(int tOffsetX, int tOffsetY) {
     mPosX += tOffsetX;
     mPosY += tOffsetY;
 }
 
-void Sprite::setScale(float tX, float tY) {
+void Sprite::SetScale(float tX, float tY) {
     mScaleX = tX;
     mScaleY = tY;
 }
 
-void Sprite::scale(float tFactorX, float tFactorY) {
+void Sprite::Scale(float tFactorX, float tFactorY) {
     mScaleX *= tFactorX;
     mScaleY *= tFactorY;
 }
 
-void Sprite::setRotation(int tAngle) {
+void Sprite::SetRotation(int tAngle) {
     mAngle = tAngle;
 }
 
-void Sprite::rotate(int tAngle) {
+void Sprite::Rotate(int tAngle) {
     mAngle += tAngle;
 }
 
-void Sprite::render(SDL_Renderer* tRenderer) {
-    mTexture.Render(tRenderer, mPosX, mPosY, &mTextureRect, mAngle, mScaleX, mScaleY);
+void Sprite::SetFlip(FLIP tFlip) {
+    mFlip = tFlip;
+}
+
+void Sprite::SetTextureColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue) {
+    mTexture.SetColor(tRed, tGreen, tBlue);
+}
+
+void Sprite::Render(SDL_Renderer* tRenderer) {
+    mTexture.Render(tRenderer, mPosX, mPosY, &mTextureRect, mAngle, mScaleX, mScaleY, nullptr,
+                    SDL_RendererFlip(mFlip));
 }
