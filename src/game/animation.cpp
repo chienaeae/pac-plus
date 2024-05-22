@@ -4,7 +4,8 @@
 
 #include "game/animation.h"
 
-Animation::Animation() : mFrames(0), mCurrentFrameIndex(0), mCurrentFrameTime(0) {}
+Animation::Animation(FacingDirection tDirection)
+    : mFrames(0), mCurrentFrameIndex(0), mCurrentFrameTime(0), mDirection(tDirection) {}
 
 void Animation::AddFrame(int tTextureID, int tX, int tY, int tWidth, int tHeight,
                          float tFrameTime) {
@@ -37,6 +38,16 @@ auto Animation::UpdateFrame(float tDeltaTime) -> bool {
     }
 
     return false;
+}
+
+void Animation::SetDirection(FacingDirection dir) {
+    if (mDirection != dir) {
+        mDirection = dir;
+    }
+}
+
+auto Animation::GetDirection() const -> FacingDirection {
+    return mDirection;
 }
 
 void Animation::Reset() {

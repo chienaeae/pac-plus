@@ -7,6 +7,15 @@
 
 #include <vector>
 
+enum class FacingDirection {
+    None,
+    Left,
+    Right,
+    Down,
+    Up,
+
+};
+
 struct FrameData {
     int id;                    // Texture id (retrieved from our texture allocator
     int x;                     // x position of sprite in the texture
@@ -18,7 +27,7 @@ struct FrameData {
 
 class Animation {
    public:
-    Animation();
+    Animation(FacingDirection tDirection);
 
     void AddFrame(int tTextureID, int tX, int tY, int tWidth, int tHeight, float tFrameTime);
 
@@ -26,10 +35,16 @@ class Animation {
 
     bool UpdateFrame(float tDeltaTime);
 
+    void SetDirection(FacingDirection dir);
+
+    FacingDirection GetDirection() const;
+
     void Reset();
 
    private:
     void incrementFrame();
+
+    FacingDirection mDirection;
 
     // mFrames stores all frames for our animation
     std::vector<FrameData> mFrames;

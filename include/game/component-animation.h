@@ -23,7 +23,11 @@ class ComponentAnimation : public Component {
 
     void SetAnimationState(AnimationState tState);
 
-    const AnimationState &GetAnimationState() const;
+    void SetAnimationDirection(FacingDirection dir);
+
+    [[nodiscard]] auto GetAnimationState() const -> const AnimationState &;
+
+    [[nodiscard]] auto GetAnimationDirection() const -> const FacingDirection;
 
    private:
     std::shared_ptr<ComponentSprite> mSprite;

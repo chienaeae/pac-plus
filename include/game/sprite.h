@@ -7,6 +7,8 @@
 
 #include "game/texture.h"
 
+enum FLIP { NONE = 0x00000000, HORIZONTAL = 0x00000001, VERTICAL = 0x00000002 };
+
 class Sprite {
    public:
     Sprite();
@@ -41,6 +43,8 @@ class Sprite {
 
     void Rotate(int tAngle);
 
+    void SetFlip(FLIP tFlip);
+
     void SetTextureColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue);
 
     void Render(SDL_Renderer *tRenderer);
@@ -53,6 +57,8 @@ class Sprite {
     float mScaleY{1.0f};
 
     int mAngle{0};
+
+    FLIP mFlip{FLIP::NONE};
 
     SDL_Rect mTextureRect{};
 

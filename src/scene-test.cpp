@@ -31,14 +31,22 @@ void SceneTest::OnCreate() {
     auto animation = player->AddComponent<ComponentAnimation>();
     const int frameWidth = 32;
     const int frameHeight = 32;
-    std::shared_ptr<Animation> idleAnimation = std::make_shared<Animation>();
-    const float idleAnimFrameSeconds = 0.2f;
-    idleAnimation->AddFrame(actorTextureID, 0, 0, frameWidth, frameHeight, idleAnimFrameSeconds);
-    idleAnimation->AddFrame(actorTextureID, frameWidth * 1, 0, frameWidth, frameHeight,
-                            idleAnimFrameSeconds);
-    idleAnimation->AddFrame(actorTextureID, frameWidth * 2, 0, frameWidth, frameHeight,
-                            idleAnimFrameSeconds);
+    const float frameSeconds = 0.05f;
+
+    // idle
+    std::shared_ptr<Animation> idleAnimation = std::make_shared<Animation>(FacingDirection::Right);
+    idleAnimation->AddFrame(actorTextureID, 0, 0, frameWidth, frameHeight, frameSeconds);
+
+    // walk
+    std::shared_ptr<Animation> walkAnimation = std::make_shared<Animation>(FacingDirection::Right);
+    walkAnimation->AddFrame(actorTextureID, 0, 0, frameWidth, frameHeight, frameSeconds);
+    walkAnimation->AddFrame(actorTextureID, frameWidth * 1, 0, frameWidth, frameHeight,
+                            frameSeconds);
+    walkAnimation->AddFrame(actorTextureID, frameWidth * 2, 0, frameWidth, frameHeight,
+                            frameSeconds);
+
     animation->AddAnimation(AnimationState::Idle, idleAnimation);
+    animation->AddAnimation(AnimationState::Walk, walkAnimation);
 
     auto movement = player->AddComponent<ComponentKeyboardMovement>();
 

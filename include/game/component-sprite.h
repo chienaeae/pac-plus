@@ -19,6 +19,10 @@ class ComponentSprite : public Component {
 
     void Scale(float tFactorX, float tFactorY);
 
+    void SetFlip(FLIP tFlip);
+
+    void SetRotation(int tAngle);
+
     void SetTextureColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue);
 
     void SetTextureRect(int x, int y, int width, int height);

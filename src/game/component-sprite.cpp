@@ -24,6 +24,14 @@ void ComponentSprite::Scale(float tFactorX, float tFactorY) {
     mSprite.Scale(tFactorX, tFactorY);
 }
 
+void ComponentSprite::SetFlip(FLIP tFlip) {
+    mSprite.SetFlip(tFlip);
+}
+
+void ComponentSprite::SetRotation(int tAngle) {
+    mSprite.SetRotation(tAngle);
+}
+
 void ComponentSprite::SetTextureColor(Uint8 tRed, Uint8 tGreen, Uint8 tBlue) {
     mSprite.SetTextureColor(tRed, tGreen, tBlue);
 }

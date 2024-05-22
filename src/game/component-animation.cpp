@@ -50,8 +50,30 @@ void ComponentAnimation::SetAnimationState(AnimationState tState) {
     }
 }
 
+void ComponentAnimation::SetAnimationDirection(FacingDirection dir) {
+    if (mCurrentAnimation.first != AnimationState::None) {
+        mCurrentAnimation.second->SetDirection(dir);
+    }
+    if (dir == FacingDirection::Right) {
+        mSprite->SetRotation(0);
+    } else if (dir == FacingDirection::Left) {
+        const int SEMICIRCLE_ANGLE_DEGREE = 180;
+        mSprite->SetRotation(SEMICIRCLE_ANGLE_DEGREE);
+    } else if (dir == FacingDirection::Down) {
+        const int RIGHT_ANGLE_DEGREE = 90;
+        mSprite->SetRotation(RIGHT_ANGLE_DEGREE);
+    } else if (dir == FacingDirection::Up) {
+        const int RIGHT_ANGLE_DEGREE = 90;
+        mSprite->SetRotation(-RIGHT_ANGLE_DEGREE);
+    }
+}
+
 auto ComponentAnimation::GetAnimationState() const -> const AnimationState & {
     // Returns out current animation state. We can use this to compare the objects current state to
     // a desired state.
     return mCurrentAnimation.first;
+}
+
+auto ComponentAnimation::GetAnimationDirection() const -> const FacingDirection {
+    return mCurrentAnimation.second->GetDirection();
 }

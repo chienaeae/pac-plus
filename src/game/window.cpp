@@ -78,9 +78,9 @@ auto Window::Init(const std::string& tName, int tWidth, int tHeight) -> int {
 }
 
 void Window::BeginDraw() {
-    const int COLOR_R = 0xFF;
-    const int COLOR_G = 0xFF;
-    const int COLOR_B = 0xFF;
+    const int COLOR_R = 160;
+    const int COLOR_G = 160;
+    const int COLOR_B = 160;
     const int COLOR_A = 0xFF;
     SDL_SetRenderDrawColor(gRenderer, COLOR_R, COLOR_G, COLOR_B, COLOR_A);
     SDL_RenderClear(gRenderer);
