@@ -51,6 +51,10 @@ void ObjectCollection::Add(const std::shared_ptr<Object>& tObject) {
     mNewObjects.push_back(tObject);
 }
 
+void ObjectCollection::Add(std::vector<std::shared_ptr<Object>>& tObjects) {
+    mNewObjects.insert(mNewObjects.end(), tObjects.begin(), tObjects.end());
+}
+
 void ObjectCollection::ProcessNewObjects() {
     if (!mNewObjects.empty()) {
         for (const auto& o : mNewObjects) {
@@ -61,7 +65,7 @@ void ObjectCollection::ProcessNewObjects() {
             o->Start();
         }
 
-        mObjects.assign(mNewObjects.begin(), mNewObjects.end());
+        mObjects.insert(mObjects.end(), mNewObjects.begin(), mNewObjects.end());
 
         mNewObjects.clear();
     }

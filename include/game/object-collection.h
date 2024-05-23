@@ -15,6 +15,7 @@
 class ObjectCollection {
    public:
     void Add(const std::shared_ptr<Object>& tObject);
+    void Add(std::vector<std::shared_ptr<Object>>& objects);
 
     void Update(float tDeltaTime);
     void LateUpdate(float tDeltaTime);
