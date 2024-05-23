@@ -47,7 +47,8 @@ add_library(game STATIC
         src/game/component-sprite.cpp
         src/game/component-animation.cpp
         src/game/component-keyboard-movement.cpp
-        src/game/object-collection.cpp)
+        src/game/object-collection.cpp
+        src/game/tile-map-parser.cpp)
 target_compile_features(game PRIVATE cxx_std_20)
 
 # Add main executable
