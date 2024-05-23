@@ -21,8 +21,9 @@ set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=address")
 # Enable testing
 enable_testing()
 
-# Include directories
-include_directories(include)
+# Include headers directories
+include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR}/external/rapidxml)
 
 # Add game library
 add_library(game STATIC
