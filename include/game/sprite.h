@@ -29,7 +29,7 @@ class Sprite {
 
     void SetTextureRect(const SDL_Rect &tTextureRect);
 
-    void SetTexture(const Texture &tTexture, bool tResetRect = false);
+    void SetTexture(const Texture &tTexture);
 
     void SetPosition(int tX, int tY);
 

@@ -48,7 +48,7 @@ void ComponentSprite::Load(int tID) {
     if (tID >= 0 && tID != mTextureID) {
         mTextureID = tID;
         std::shared_ptr<Texture> const texture = mAllocator->Get(tID);
-        mSprite.SetTexture(*texture, true);
+        mSprite.SetTexture(*texture);
     }
 }
 
