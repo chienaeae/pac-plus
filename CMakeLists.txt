@@ -18,6 +18,12 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit
 # The -fsanitize=address flag for the linker again, enables the AddressSanitizer
 set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=address")
 
+if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    add_definitions(-DMACOS)
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+endif()
+
 # Enable testing
 enable_testing()
 
