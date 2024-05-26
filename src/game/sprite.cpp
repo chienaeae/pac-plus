@@ -40,10 +40,7 @@ void Sprite::SetTextureRect(const SDL_Rect& tTextureRect) {
     mTextureRect = tTextureRect;
 }
 
-void Sprite::SetTexture(const Texture& tTexture, bool tResetRect) {
-    if (tResetRect) {
-        SetTextureRect(SDL_Rect{0, 0, tTexture.GetWidth(), tTexture.GetHeight()});
-    }
+void Sprite::SetTexture(const Texture& tTexture) {
     mTexture = tTexture;
 }
 

@@ -18,11 +18,18 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit
 # The -fsanitize=address flag for the linker again, enables the AddressSanitizer
 set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=address")
 
+if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    add_definitions(-DMACOS)
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+endif()
+
 # Enable testing
 enable_testing()
 
-# Include directories
-include_directories(include)
+# Include headers directories
+include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR}/external/rapidxml)
 
 # Add game library
 add_library(game STATIC
@@ -40,7 +47,8 @@ add_library(game STATIC
         src/game/component-sprite.cpp
         src/game/component-animation.cpp
         src/game/component-keyboard-movement.cpp
-        src/game/object-collection.cpp)
+        src/game/object-collection.cpp
+        src/game/tile-map-parser.cpp)
 target_compile_features(game PRIVATE cxx_std_20)
 
 # Add main executable

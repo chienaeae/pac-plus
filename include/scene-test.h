@@ -10,6 +10,7 @@
 #include "game/resource-allocator.h"
 #include "game/scene-state-machine.h"
 #include "game/scene.h"
+#include "game/tile-map-parser.h"
 #include "square.h"
 
 class SceneTest : public Scene {
@@ -31,6 +32,8 @@ class SceneTest : public Scene {
     SceneStateMachine& mSceneStateMachine;
 
     ResourceAllocator<Texture>& mTextureAllocator;
+
+    TileMapParser mapParser;
 
     ObjectCollection mObjects;
     // How long the scene has currently been visible
