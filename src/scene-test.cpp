@@ -6,7 +6,6 @@
 
 #include <SDL_events.h>
 
-#include <iostream>
 #include <memory>
 
 #include "game/component-animation.h"
@@ -16,12 +15,19 @@
 #include "game/resource-allocator.h"
 #include "game/scene-state-machine.h"
 #include "game/texture.h"
+#include "game/vector2.h"
 
 SceneTest::SceneTest(SceneStateMachine &tSceneStateMachine,
                      ResourceAllocator<Texture> &tTextureAllocator)
-    : mSceneStateMachine(tSceneStateMachine), mTextureAllocator(tTextureAllocator) {}
+    : mSceneStateMachine(tSceneStateMachine),
+      mTextureAllocator(tTextureAllocator),
+      mapParser(tTextureAllocator) {}
 
 void SceneTest::OnCreate() {
+    Vector2<int> tOffset(0, 0);
+    std::vector<std::shared_ptr<Object>> levelTiles = mapParser.Parse(
+        "assets/map/map.tmx", "assets/map/tileset.tsx", "assets/map/tile.png", tOffset);
+
     std::shared_ptr<Object> const player = std::make_shared<Object>();
 
     auto sprite = player->AddComponent<ComponentSprite>();
@@ -50,6 +56,7 @@ void SceneTest::OnCreate() {
 
     auto movement = player->AddComponent<ComponentKeyboardMovement>();
 
+    mObjects.Add(levelTiles);
     mObjects.Add(player);
 }
 
